@@ -1,0 +1,26 @@
+Scripts by TeeTime
+Balancing by garisat
+AI Scripts Cthulhu
+
+Translations:
+German and English: DorsalRegen
+French: Mariodu62
+
+
+
+
+Here we want to thank everybody who supported us.
+
+Special thanks to NijayStyle and all others from rp-mods.com who spended already unknown hours with beta-testing this mission.
+
+Tanks to the German Ballerbude and the Bieraig for hosting and testing this mission on their servers.
+
+Thanks to BIS for creating such a stable Alpha version.
+
+-----Blue1 Version 5 ----
+KKZ V3 by Team KKZ
+Retranslated, changed and additional stuff from Blue1
+Thanks to:
+"JW Custom" for the help with the undestroyable Bases
+"Bake" &  "Rarek" for the GrenadeStop-Script
+"JoSchaap" for allowing and helping me to use his Wasteland-Shopscript
