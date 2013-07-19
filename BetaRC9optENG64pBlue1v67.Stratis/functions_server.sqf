@@ -136,11 +136,9 @@ Tee_Server_Base_Build_East = {
 //********************************************
 
 Tee_Server_CreateTownMarker = {
-	private ["_object","_markername","_text","_marker"];
+	private ["_h","_object","_markername","_text","_marker"];
 	{
 		_object 	= _x select 0;
-		_markername = _x select 1;
-		_text		= _x select 2;
 		
 		//Make Object undestroyable
 		["{this allowDamage false;}","BIS_fnc_spawn",_object,true] spawn BIS_fnc_MP;///////changement dernier maj
@@ -153,14 +151,21 @@ Tee_Server_CreateTownMarker = {
 		_object setVariable ["TownDetected", [], true];	//Side who deteced the town
 		//_object setVariable ["TownMarker", _marker, true];
 		
-		//Init Def
-		if(!TW_HC_Activ) then {
-			[_object] spawn Tee_Server_Town_InitAIDef;
-			sleep 1;
-			diag_log format ["Report: HC Defense created for %1",_text];
-			if(debug) then {player groupChat "AI Def Server Spawn";};
-		};
 	} forEach TW_TownArray;
+
+	[] spawn {
+		//Init Def
+		{
+			_object 	= _x select 0;
+			_text		= _x select 2;
+			if(!TW_HC_Activ) then {
+				_h = [_object] spawn Tee_Server_Town_InitAIDef;
+				waitUntil{scriptDone _h};
+				diag_log format ["Report: HC Defense created for %1",_text];
+				if(debug) then {player groupChat "AI Def Server Spawn";};
+			};
+		} forEach TW_TownArray;
+	};
 };
 
 
@@ -169,18 +174,18 @@ Tee_Server_Town_InitAIDef = {
 	private ["_i","_object","_group","_unitarray","_unit","_numUnit"];	
 
 	_object = _this select 0;
-	_numUnit = 0 ;
 	_pos 	= getPos _object;
 	
 	//All Units in this array will be in the same group!
-	_unitarray	= [
-		9005,9006,9007
-	];
+	_unitarray	= [ 9005, 9006, 9007 ];
 	
 	//Create Unit
 	for [{_i=0},{_i<TW_AI_Def_lvl},{_i=_i+1}] do {
-		//create civilian group
+
+	//create civilian group
 		_group	= createGroup civilian;
+
+		_numUnit = 0 ;
 		
 		{
 			_unit = [_group,_x call Tee_GetUnit_Class,_pos] call Tee_CreateUnit;
@@ -191,41 +196,27 @@ Tee_Server_Town_InitAIDef = {
 			//_unit setskill ["general",TW_Skill_AICiv];
 			_unit setskill ["endurance",1];
 			_unit setskill ["spotDistance",0.95];
-		_unit setskill ["aimingAccuracy",0.15];
-		_unit setskill ["spotTime",0.85];
-		_unit setskill ["courage",0.80];
-		_unit setskill ["commanding",1];
-		_unit setskill ["aimingShake",0.15];
-		_unit setskill ["aimingSpeed",0.65];
-		//_unit setskill ["aimingShake",TW_Skill_AIOff];
-//		_skill = [
-//			"aimingAccuracy",
-//		"aimingShake",
-//			"aimingSpeed",
-			//"endurance",
-			//"spotDistance",
-//			"spotTime",
-//			"courage",
-//			"reloadSpeed",
-//			"commanding"
-			//"general"
-//			];
-				{
-				_level = (TW_Skill_AICiv + random 0.15);
-				_unit setskill [_x, _level];
-				sleep 0.05;
-				//if(isDedicated) then {diag_log format["Report: type skill %1 - value %2",_x, _level];};
-				}foreach _skill;
-			sleep 0.15;
+			_unit setskill ["aimingAccuracy",0.15];
+			_unit setskill ["spotTime",0.85];
+			_unit setskill ["courage",0.80];
+			_unit setskill ["commanding",1];
+			_unit setskill ["aimingShake",0.15];
+			_unit setskill ["aimingSpeed",0.65];
+			//_unit setskill ["aimingShake",TW_Skill_AIOff];
+
+			sleep 0.1;
+
 			if (_numUnit == 0) then {_unit setskill ["commanding",1];};
+		
 			_numUnit = _numUnit + 1 ;
+
 		} forEach _unitarray;
-		_numUnit = 0 ;
+
 		//Patrols
 		if(TW_AI_Patrols && _i != 0) then {
-		[_group,_pos] call CT_AI_Addwaypoints;
+			[_group,_pos] call CT_AI_Addwaypoints;
 		};
-		sleep 4;
+
 	};
 };
 

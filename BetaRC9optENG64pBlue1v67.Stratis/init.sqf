@@ -142,22 +142,15 @@ TW_Skill_AICiv		= (paramsArray select 19) /100; 	//Skill Civil
 TW_Skill_AIDef		= (paramsArray select 20) /100;		//Skill Army Defense
 TW_Skill_AIOff		= (paramsArray select 21) /100;		//Skill Army offense
 //Functions and Variables
-_h = [] execVM "variablen.sqf";
-waitUntil{(scriptDone _h)};
-_h = [] execVM "functions.sqf";
-waitUntil{(scriptDone _h)};
-_h = [] execVM "functions_action.sqf";
-waitUntil{(scriptDone _h)};
-_h = [] execVM "functions_ai.sqf";
-waitUntil{(scriptDone _h)};
-_h = [] execVM "functions_group.sqf";
-waitUntil{(scriptDone _h)};
+[] call compile preprocessFileLineNumbers "variablen.sqf";
+[] call compile preprocessFileLineNumbers "functions.sqf";
+[] call compile preprocessFileLineNumbers "functions_action.sqf";
+[] call compile preprocessFileLineNumbers "functions_ai.sqf";
+[] call compile preprocessFileLineNumbers "functions_group.sqf";
 
 if((isServer && !TW_ServerStarted) || (TW_HC_Client && TW_HC_Activ)) then {	//Nur zum Test !TW_Server ... kann eigentlich raus
-	_h = [] execVM "functions_server.sqf";
-	waitUntil{(scriptDone _h)};
-	_h = [] execVM "functions_HC.sqf";
-	waitUntil{(scriptDone _h)};
+	[] call compile preprocessFileLineNumbers "functions_server.sqf";
+	[] call compile preprocessFileLineNumbers "functions_HC.sqf";
 };
 
 
@@ -166,7 +159,7 @@ getLoadout = compile preprocessFileLineNumbers 'loadout\fnc_get_loadout.sqf';
 setLoadout = compile preprocessFileLineNumbers 'loadout\fnc_set_loadout.sqf';
 
 // init revive
-if((paramsArray select 22) == 1) then {call compile preprocessFile "=BTC=_revive\=BTC=_revive_init.sqf";};
+//if((paramsArray select 22) == 1) then {call compile preprocessFile "=BTC=_revive\=BTC=_revive_init.sqf";}; // disabled fred41 (uninitialized variable _obj ???)
 
 // init suppress
 if((paramsArray select 23) == 1) then {_h = [2] execvm "tpwcas\tpwcas_script_init.sqf";waitUntil{(scriptDone _h)};};
@@ -174,13 +167,13 @@ if((paramsArray select 23) == 1) then {_h = [2] execvm "tpwcas\tpwcas_script_ini
 //mission message
 [TW_welcome_message,"Blue1s Teetime Warfare",nil,true] spawn BIS_fnc_guiMessage;
 
+if(isServer) then { X_Server = true;} else { X_Server = false;};
+if(!isDedicated) then { X_Client = true;} else { X_Client = false;};
 
 //Init
 "BIS_fnc_MP_packet" addPublicVariableEventHandler {};
-[] execVM "server\init.sqf";
 
-if(isServer) then { X_Server = true;};
-if(!isDedicated) then { X_Client = true;};
+if(X_Server) then {[] execVM "server\init.sqf";};
 
 if(X_Client) then {
 	waitUntil {player == player};
@@ -200,16 +193,13 @@ if(X_Client) then {
 execVM "briefing.sqf";
 execVM "grenadeStop.sqf";
 //execvm "Tee_Server_Town_CreateAIDefBUYexec.sqf";
-call compile preprocessFile "=BTC=_TK_punishment\=BTC=_tk_init.sqf";
+//call compile preprocessFile "=BTC=_TK_punishment\=BTC=_tk_init.sqf";
 [] execVM "INSLimitedAdmin\initAH.sqf";
 //[player] execVM "spawnProtectionO.sqf";
 //[player] execVM "spawnProtectionB.sqf";
 //[player] execVM "protectionzones.sqf";
-[] execVM "protectionzones.sqf";
+//[] execVM "protectionzones.sqf"; // disabled (reason for heli crash and performance probs), fred41
 
-
-[trigclean1,4000] execVM "clearItems.sqf";
-[trigclean2,4000] execVM "clearBodies.sqf";
 
 
 //Server
@@ -224,9 +214,11 @@ if(isServer && !TW_ServerStarted) then {
 	if(!TW_HC_Activ) then {
 		[] spawn Tee_Server_CleanUp;
 	};
+	
+	[] execVM "cleanUp.sqf"; // optimized cleanUp, replacing clearItem&clearBody, fred41
 
 	//Towns
-	[] spawn Tee_Server_CreateTownMarker;
+	[] call Tee_Server_CreateTownMarker;
 
 	//Base
 	//[] call Tee_Server_Base_Set_Base;
@@ -291,8 +283,6 @@ if(! isDedicated) then {
 if(isDedicated || debug) then {diag_log "Report: Init Done";};
 
 
-if(isServer) then { X_Server = true;};
-if(!isDedicated) then { X_Client = true;};
 [] execVM "client\init.sqf";
 [] execVM "config.sqf";
 

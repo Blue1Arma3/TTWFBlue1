@@ -21,8 +21,8 @@ TW_Player_Killed 	= "";
 TW_Player_Kick 		= "";
 TW_AI_Killed 		= "";
 
-TW_westplayer_array = [wp_1,wp_2,wp_3,wp_4,wp_5,wp_6,wp_7,wp_8,wp_9,wp_10,wp_11,wp_12,wp_13,wp_14];	//Not used
-TW_eastplayer_array = [ep_1,ep_2,ep_3,ep_4,ep_5,ep_6,ep_7,ep_8,ep_9,ep_10,ep_11,ep_12,ep_13,ep_14];	//Not used
+//TW_westplayer_array = [wp_1,wp_2,wp_3,wp_4,wp_5,wp_6,wp_7,wp_8,wp_9,wp_10,wp_11,wp_12,wp_13,wp_14];	//Not used
+//TW_eastplayer_array = [ep_1,ep_2,ep_3,ep_4,ep_5,ep_6,ep_7,ep_8,ep_9,ep_10,ep_11,ep_12,ep_13,ep_14];	//Not used
 
 TW_Vehicle_Client 	= [];	//List with player vehicle
 

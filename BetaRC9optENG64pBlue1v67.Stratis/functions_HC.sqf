@@ -14,7 +14,7 @@ Tee_HC_Init = {
 	publicVariable "TW_HC_ClientSlot";
 	
 	//Stellt den HC kalt
-	player setVehicleInit "this allowDamage false;";
+//	player setVehicleInit "this allowDamage false;";
 	["{this allowDamage false;}","BIS_fnc_spawn",player,true] spawn BIS_fnc_MP;
 	player attachTo [base,[0,0,-10]];
 

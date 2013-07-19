@@ -36,6 +36,7 @@ Tee_ActionLoop = {
 	_grp_actionarray1 	= [];
 	_grp_actionarray2 	= [];
 	
+	_lock_actionarray	= [];
 	
 	//Loop
 	while{true} do {
@@ -83,15 +84,16 @@ Tee_ActionLoop = {
 		
 		
 		///////////////test siskojay test plus rien afficher au milieu//////////////////////
-				//Lock Unlock Vehicle
+		//Lock Unlock Vehicle
 		if(!_invehicle && (_cursertarget in TW_Vehicle_Client) && (player distance _cursertarget < 5) && !_lock_action3) then {
 			_text		= localize "STRS_action_lock";
 			_actioncode	= format ["[%1] call Tee_Vehicle_Lock;",_cursertarget];
 			_action 	= player addAction [_text, AddActionCode,_actioncode];
-			_lock_actionarray = _lock_actionarray + [_action];
+			_lock_actionarray set [count _lock_actionarray, _action];
 			
 			_lock_action3 = true;
 		};
+
 		if(!_lock_action && ((player distance _cursertarget > 5) || !(_cursertarget in TW_Vehicle_Client) || _invehicle)) then {
 				{
 					player removeAction _x;
@@ -122,7 +124,7 @@ Tee_ActionLoop = {
 			_text 			= format [localize "STRS_action_savegear"];
 			_actioncode		= format ["loadout = [player] call getLoadout;"];
 			_action = player addAction [_text, AddActionCode,_actioncode];
-			_savegear_actionarray = _savegear_actionarray + [_action];
+			_savegear_actionarray set [count _savegear_actionarray, _action];
 				
 			_savegear_action	= true;
 		} else {
@@ -149,7 +151,7 @@ Tee_ActionLoop = {
 							_text 			= format [localize "STRS_action_buy",_x call Tee_GetVeh_Name,_x call Tee_GetVeh_Price];
 							_actioncode		= format ["[%1] call Tee_CreateVehicle;",_x];
 							_action = player addAction [_text, AddActionCode,_actioncode];
-							_town_actionarray = _town_actionarray + [_action];
+							_town_actionarray set [count _town_actionarray, _action];
 						} forEach TW_Vehicle_Shop_Town;
 					} else {
 						//Repair
@@ -162,7 +164,7 @@ Tee_ActionLoop = {
 						_text 			= format [localize "STRS_action_refuel",TW_Sup_Fuel_Cost];
 						_actioncode		= format ["[] spawn Tee_Sup_Refuel;"];
 						_action 		= player addAction [_text, AddActionCode,_actioncode];
-						_town_actionarray = _town_actionarray + [_action];
+						_town_actionarray set [count _town_actionarray, _action];
 					};
 					
 					_townaction = true;
@@ -204,7 +206,7 @@ Tee_ActionLoop = {
 				_text 			= format [localize "STRS_action_grp_leave"];
 				_actioncode		= format ["[player] call Tee_Grp_Leave;"];
 				_action			= player addAction [_text, AddActionCode,_actioncode];
-				_grp_actionarray1 	= _grp_actionarray1 + [_action];
+				_grp_actionarray1 set [count _grp_actionarray1, _action];
 				
 				_grp_leaveaction	= true;
 			};
@@ -226,7 +228,7 @@ Tee_ActionLoop = {
 				_text 			= format [localize "STRS_action_grp_join"];
 				_actioncode		= format ["[cursorTarget] call Tee_Grp_Join;"];
 				_action			= player addAction [_text, AddActionCode,_actioncode];
-				_grp_actionarray2 	= _grp_actionarray2 + [_action];
+				_grp_actionarray2 set [count _grp_actionarray2, _action];
 				
 				_grp_joinaction	= true;
 			};
@@ -255,7 +257,7 @@ Tee_ActionLoop = {
 				_text 			= format [localize "STRS_action_mobilzehq"];
 				_actioncode		= format ["[%1] spawn Tee_Client_Base_DeMobHQ;"];
 				_action = player addAction [_text, AddActionCode,_actioncode];
-				_hq_actionarray = _hq_actionarray + [_action];
+				_hq_actionarray set [count _hq_actionarray, _action];
 				
 				_hq_action		= true;
 			};
@@ -282,7 +284,7 @@ Tee_ActionLoop = {
 				_text 			= format [localize "STRS_action_buildhq"];
 				_actioncode		= format ["[%1] call Tee_Client_Base_HQ_setUp;"];
 				_action = player addAction [_text, AddActionCode,_actioncode];
-				_hq_actionarray = _hq_actionarray + [_action];
+				_hq_actionarray set [count _hq_actionarray, _action];
 				
 				_hq_action		= true;
 		};
@@ -299,7 +301,7 @@ Tee_ActionLoop = {
 					_text 			= format [localize "STRS_action_buy",_x call Tee_GetVeh_Name,_x call Tee_GetVeh_Price];
 					_actioncode		= format ["[%1] call Tee_CreateVehicle;",_x];
 					_action = player addAction [_text, AddActionCode,_actioncode];
-					_veh_s_actionarray = _veh_s_actionarray + [_action];
+					_veh_s_actionarray set [count _veh_s_actionarray, _action];
 				} forEach TW_Vehicle_Shop_West;
 				
 				_veh_s_action		= true;
@@ -343,7 +345,7 @@ Tee_ActionLoop = {
 					};
 					
 					_action 	= player addAction [_text, AddActionCode,_actioncode];
-					_weap_actionarray = _weap_actionarray + [_action];
+					_weap_actionarray set [count _weap_actionarray, _action];
 				} forEach TW_Weapon_Shop_West;
 				
 				_weap_action = true;
@@ -373,7 +375,7 @@ Tee_ActionLoop = {
 					_text 		= format [localize "STRS_action_buy",_x call Tee_GetUnit_Name,_x call Tee_GetUnit_Price];
 					_actioncode	= format ["[%1] call Tee_BuyUnit;",_x];
 					_action 	= player addAction [_text, AddActionCode,_actioncode];
-					_ai_actionarray = _ai_actionarray + [_action];
+					_ai_actionarray set [count _ai_actionarray, _action];
 				} forEach TW_AI_Shop_West;
 				
 				_ai_action = true;
@@ -401,19 +403,19 @@ Tee_ActionLoop = {
 				_text 			= format [localize "STRS_action_repair",TW_Repair_Cost];
 				_actioncode		= format ["[] spawn Tee_Sup_Repair;"];
 				_action 		= player addAction [_text, AddActionCode,_actioncode];
-				_repairactionarray = _repairactionarray + [_action];
+				_repairactionarray set [count _repairactionarray, _action];
 				
 				//Refuel
 				_text 			= format [localize "STRS_action_refuel",TW_Sup_Fuel_Cost];
 				_actioncode		= format ["[] spawn Tee_Sup_Refuel;"];
 				_action 		= player addAction [_text, AddActionCode,_actioncode];
-				_repairactionarray = _repairactionarray + [_action];
+				_repairactionarray set [count _repairactionarray, _action];
 				
 				//Reammo
 				_text 			= format [localize "STRS_action_reammo",TW_Sup_Reammo_Cost];
 				_actioncode		= format ["[] spawn Tee_Sup_Reammo;"];
 				_action 		= player addAction [_text, AddActionCode,_actioncode];
-				_repairactionarray = _repairactionarray + [_action];
+				_repairactionarray set [count _repairactionarray, _action];
 				
 				
 				_repairaction		= true;
@@ -441,7 +443,7 @@ Tee_ActionLoop = {
 				_text 			= format [localize "STRS_action_mobilzehq"];
 				_actioncode		= format ["[%1] spawn Tee_Client_Base_DeMobHQ;"];
 				_action = player addAction [_text, AddActionCode,_actioncode];
-				_hq_actionarray = _hq_actionarray + [_action];
+				_hq_actionarray set [count _hq_actionarray, _action];
 				
 				_hq_action		= true;
 			};
@@ -468,7 +470,7 @@ Tee_ActionLoop = {
 				_text 			= format [localize "STRS_action_buildhq"];
 				_actioncode		= format ["[%1] call Tee_Client_Base_HQ_setUp;"];
 				_action = player addAction [_text, AddActionCode,_actioncode];
-				_hq_actionarray = _hq_actionarray + [_action];
+				_hq_actionarray set [count _hq_actionarray, _action];
 				
 				_hq_action		= true;
 		};
@@ -485,8 +487,7 @@ Tee_ActionLoop = {
 					_text 			= format [localize "STRS_action_buy",_x call Tee_GetVeh_Name,_x call Tee_GetVeh_Price];
 					_actioncode		= format ["[%1] call Tee_CreateVehicle;",_x];
 					_action = player addAction [_text, AddActionCode,_actioncode];
-				
-					_veh_s_actionarray = _veh_s_actionarray + [_action];
+					_veh_s_actionarray set [count _veh_s_actionarray, _action];
 				} forEach TW_Vehicle_Shop_East;
 				
 				_veh_s_action		= true;
@@ -522,7 +523,7 @@ Tee_ActionLoop = {
 					};
 					
 					_action 	= player addAction [_text, AddActionCode,_actioncode];
-					_weap_actionarray = _weap_actionarray + [_action];
+					_weap_actionarray set [count _weap_actionarray, _action];
 				} forEach TW_Weapon_Shop_East;
 				
 				_weap_action = true;
@@ -551,7 +552,7 @@ Tee_ActionLoop = {
 					_text 		= format [localize "STRS_action_buy",_x call Tee_GetUnit_Name,_x call Tee_GetUnit_Price];
 					_actioncode	= format ["[%1] call Tee_BuyUnit;",_x];
 					_action 	= player addAction [_text, AddActionCode,_actioncode];
-					_ai_actionarray = _ai_actionarray + [_action];
+					_ai_actionarray set [count _ai_actionarray, _action];
 				} forEach TW_AI_Shop_East;
 				
 				_ai_action = true;
@@ -579,19 +580,19 @@ Tee_ActionLoop = {
 				_text 			= format [localize "STRS_action_repair",TW_Repair_Cost];
 				_actioncode		= format ["[] spawn Tee_Sup_Repair;"];
 				_action 		= player addAction [_text, AddActionCode,_actioncode];
-				_repairactionarray = _repairactionarray + [_action];
+				_repairactionarray set [count _repairactionarray, _action];
 				
 				//Refuel
 				_text 			= format [localize "STRS_action_refuel",TW_Sup_Fuel_Cost];
 				_actioncode		= format ["[] spawn Tee_Sup_Refuel;"];
 				_action 		= player addAction [_text, AddActionCode,_actioncode];
-				_repairactionarray = _repairactionarray + [_action];
+				_repairactionarray set [count _repairactionarray, _action];
 				
 				//Reammo
 				_text 			= format [localize "STRS_action_reammo",TW_Sup_Reammo_Cost];
 				_actioncode		= format ["[] spawn Tee_Sup_Reammo;"];
 				_action 		= player addAction [_text, AddActionCode,_actioncode];
-				_repairactionarray = _repairactionarray + [_action];
+				_repairactionarray set [count _repairactionarray, _action];
 				
 				
 				_repairaction		= true;

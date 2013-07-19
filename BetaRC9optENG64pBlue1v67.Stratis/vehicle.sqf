@@ -50,9 +50,8 @@
 Contact & Bugreport: cwadensten@gmail.com
 Ported for new update "call compile" by SPJESTER: mhowell34@gmail.com
 ================================================================================================================== */
-  
 if (!isServer) exitWith {};
-
+diag_log "vehicle.sqf running ...";
 // Define variables
 _unit = _this select 0;
 _delay = if (count _this > 1) then {_this select 1} else {30};
