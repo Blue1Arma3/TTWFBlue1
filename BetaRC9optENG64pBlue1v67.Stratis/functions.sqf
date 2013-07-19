@@ -684,7 +684,7 @@ Tee_MoneyLoop = {
 	private ["_i","_count","_enemycount"];
 	while{true} do {
 		sleep 60;
-		
+		_i			= 0;
 		_count 		= 0;
 		_enemycount	= 0;
 		
@@ -1292,6 +1292,7 @@ Tee_PlayerMarker_Loop = {
 			deleteMarkerLocal _x;
 		} forEach _markerarray;
 		
+		_markerarray = []; // dringend notwendig, sonst platzt das array irgendwann :)
 		
 		//Create PlayerMarker
 		{
@@ -1310,7 +1311,7 @@ Tee_PlayerMarker_Loop = {
 				_marker setMarkerTypeLocal _type;
 				_marker setMarkerTextLocal name _x;
 				
-				_markerarray = _markerarray + [_marker];
+				_markerarray set [count _markerarray, _marker];
 			};
 		} forEach playableUnits;
 		

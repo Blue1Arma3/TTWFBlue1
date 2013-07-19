@@ -7581,7 +7581,7 @@ class Mission
 	};
 	class Sensors
 	{
-		items=18;
+		items=17;
 		class Item0
 		{
 			position[]={2115.3708,4.1847186,5912.8491};
@@ -7716,34 +7716,16 @@ class Mission
 		class Item8
 		{
 			position[]={3903.1226,167.29016,4789.3384};
-			a=4000;
-			b=4000;
-			rectangular=1;
-			activationBy="ANY";
-			repeating=1;
+			a=1;
+			b=1;
 			interruptable=1;
 			age="UNKNOWN";
-			name="trigclean1";
+			name="trigclean";
 			class Effects
 			{
 			};
 		};
 		class Item9
-		{
-			position[]={3921.8696,163.11215,4784.3589};
-			a=4000;
-			b=4000;
-			rectangular=1;
-			activationBy="ANY";
-			repeating=1;
-			interruptable=1;
-			age="UNKNOWN";
-			name="trigclean2";
-			class Effects
-			{
-			};
-		};
-		class Item10
 		{
 			position[]={6321.7554,8.8662233,5346.0234};
 			a=100;
@@ -7757,7 +7739,7 @@ class Mission
 			{
 			};
 		};
-		class Item11
+		class Item10
 		{
 			position[]={1982.405,5.8553424,5817.3018};
 			a=100;
@@ -7771,7 +7753,7 @@ class Mission
 			{
 			};
 		};
-		class Item12
+		class Item11
 		{
 			position[]={6344.0117,3.1247718,5452.3267};
 			angle=24.660448;
@@ -7785,7 +7767,7 @@ class Mission
 			{
 			};
 		};
-		class Item13
+		class Item12
 		{
 			position[]={6342.7944,2.9436486,5454.6626};
 			angle=24.660448;
@@ -7799,7 +7781,7 @@ class Mission
 			{
 			};
 		};
-		class Item14
+		class Item13
 		{
 			position[]={2018.6643,5.8448529,5862.7925};
 			repeating=1;
@@ -7812,7 +7794,7 @@ class Mission
 			{
 			};
 		};
-		class Item15
+		class Item14
 		{
 			position[]={2018.2135,5.8220739,5861.7783};
 			repeating=1;
@@ -7825,7 +7807,7 @@ class Mission
 			{
 			};
 		};
-		class Item16
+		class Item15
 		{
 			position[]={6317.1167,10.36395,5321.7168};
 			a=400;
@@ -7840,7 +7822,7 @@ class Mission
 			{
 			};
 		};
-		class Item17
+		class Item16
 		{
 			position[]={6316.5244,13.15416,5312.8223};
 			a=400;
