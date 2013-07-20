@@ -1,3 +1,3 @@
 if(count _this >= 4) exitWith {
-call compileFinal ((_this select 3));
+call compile (_this select 3);
 };

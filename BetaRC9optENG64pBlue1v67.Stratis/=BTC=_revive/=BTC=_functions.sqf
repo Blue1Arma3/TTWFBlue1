@@ -321,7 +321,7 @@ BTC_player_respawn =
 		deTach player;
 		player setVelocity [0,0,0];
 		player setPos getMarkerPos BTC_respawn_marker;
-		deleteVehicle _obj;
+//		deleteVehicle _obj;
 	};
 	if (BTC_black_screen == 0 || BTC_respawn_time > 0) then 
 	{	
