@@ -7,9 +7,9 @@ _count = count _clearTypes;
 _delay = CLEANUP_INTERVAL / _count;
 
 while{true} do { 
-	for "_i" from 0 to _count do {
+	for "_i" from 0 to _count - 1 do {
+		sleep _delay;	
 		{
-			sleep _delay;	
 			deleteVehicle _x;
 			sleep 0.5;
 		} foreach allMissionObjects (_clearTypes select _i);
