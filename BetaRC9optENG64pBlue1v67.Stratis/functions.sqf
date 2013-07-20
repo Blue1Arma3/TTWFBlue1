@@ -64,8 +64,12 @@ Tee_Debug_Teleport = {
 Tee_Init_Client = {
 
 	//Variables
-	if(playerside == west) 	then { TW_playerside = "west"; TW_playerside_colour = "ColorBlue";};
-	if(playerside == east) 	then { TW_playerside = "east"; TW_playerside_colour = "ColorRed";};
+	if(playerside == west) 	then { 
+		TW_playerside = "west"; TW_playerside_colour = "ColorBlue";
+	};
+	if(playerside == east) 	then { 
+		TW_playerside = "east"; TW_playerside_colour = "ColorRed";
+	};
 
 	//if(player in TW_westplayer_array) then { TW_playerside = "west"; TW_playerside_colour = "ColorBlue";};		//For Later
 	//if(player in TW_eastplayer_array) then { TW_playerside = "east"; TW_playerside_colour = "ColorRed";};			//For Later
@@ -1494,7 +1498,7 @@ Tee_CreateVehicle = {
 	
 		//Action
 		_text		= "Lock/Unlock";
-		_actioncode	= format ["[%1] call Tee_Vehicle_Lock;",_veh];
+		_actioncode	= format ["[objectFromNetId ""%1""] call Tee_Vehicle_Lock;",netid _veh];
 		//_action 	= _veh addAction [_text, AddActionCode,_actioncode];
 	} else {
 		//Action
@@ -1512,20 +1516,9 @@ Tee_CreateVehicle = {
 	Lock Unlock given Vehicle
 */
 Tee_Vehicle_Lock = {
-	private ["_veh","_locked","_dis","_dis2"];
+	private ["_veh","_locked"];
 	
 	_veh 	= _this select 0;
-	
-	//Work Arround
-	_dis2 	= 999;
-	{
-		_dis = player distance _x;
-		if(alive _x && _dis < _dis2) then {
-			_dis2 = _dis;
-			_veh = _x;
-		};
-	} forEach TW_Vehicle_Client;
-	//Work Arround
 
 	_locked	= locked _veh;
 

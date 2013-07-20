@@ -390,7 +390,7 @@ Tee_Server_CleanUp = {
 	if(isDedicated) then {diag_log "Report: CleanUp Started";};
 	if(TW_HC_Client) then {diag_log "Report: HC Server Loop Started";};
 	
-	_i = 0;
+	_i 					= 0;
 	_basicvehicles 		= vehicles;	//List of all Vehicles at Missionstart
 	_shops 				= [hq_west,west_shop_veh,west_shop_heli1,west_shop_weapons,west_shop_ai,hq_east,east_shop_veh,east_shop_weapons,east_shop_ai];
 	_shoploc 			= [];
@@ -404,49 +404,6 @@ Tee_Server_CleanUp = {
 		_shoploc = _shoploc + [[_x,getPos _x]];
 	} forEach _shops;
 
-	//Clean
-		if(_i >= 10) then {
-			_i = 0;
-			
-			//Bodies
-			{
-				deleteVehicle _x;
-			} forEach allDead;
-	
-			//Groups
-			{
-				if(count units _x == 0) then {
-					deleteGroup _x;
-				};
-			} forEach allGroups;
-	
-			//Vehicles
-			{
-				if(! alive _x && !(_x in _basicvehicles)) then {deleteVehicle _x;};
-			} forEach vehicles;
-			
-			//Inaktiv Vehicles
-			_vehiclearray 		= _vehiclearraynew;
-			_vehiclearraynew 	= [];
-			{
-				if(alive _x && count (crew _x) == 0 && !(_x in _basicvehicles)) then {
-					_found = false;
-					for [{_w=0},{_w<= count _vehiclearray},{_w=_w+1}] do {
-						if(_x == ((_vehiclearray select _w) select 0)) then {
-							if((getPos _x) distance ((_vehiclearray select _w) select 1) < 1) then {
-								deleteVehicle _x;
-							} else {
-									_vehiclearraynew = _vehiclearraynew + [[_x,getPos _x]];
-							};
-							_found = true;	
-						};
-					};
-					if(!_found) then {
-						_vehiclearraynew = _vehiclearraynew + [[_x,getPos _x]];
-					};
-				};
-			} forEach vehicles;
-		};
 		
 	while {true} do {
 	
@@ -463,7 +420,7 @@ Tee_Server_CleanUp = {
 			TW_Mission_End = true;
 			publicVariable "TW_Mission_End";
 			if(TW_restart) then {
-				TW_roundtime = TW_roundtime + TW_roundtime;
+				TW_roundtime = TW_roundtime + TW_roundtime; // TW_roundtime wird jedes mal verdoppelt ????, fred41
 				[] spawn Tee_Server_Restart;
 			} else {
 				endMission "END1";
@@ -510,18 +467,20 @@ Tee_Server_CleanUp = {
 			//Bodies
 			{
 				deleteVehicle _x;
+				sleep 0.1;
 			} forEach allDead;
 	
 			//Groups
 			{
 				if(count units _x == 0) then {
 					deleteGroup _x;
+					sleep 0.1;
 				};
 			} forEach allGroups;
 	
 			//Vehicles
 			{
-				if(! alive _x && !(_x in _basicvehicles)) then {deleteVehicle _x;};
+				if(!alive _x && !(_x in _basicvehicles)) then {deleteVehicle _x; sleep 0.1};
 			} forEach vehicles;
 			
 			//Inaktiv Vehicles
@@ -534,6 +493,7 @@ Tee_Server_CleanUp = {
 						if(_x == ((_vehiclearray select _w) select 0)) then {
 							if((getPos _x) distance ((_vehiclearray select _w) select 1) < 1) then {
 								deleteVehicle _x;
+								sleep 0.1;
 							} else {
 									_vehiclearraynew = _vehiclearraynew + [[_x,getPos _x]];
 							};
@@ -551,7 +511,7 @@ Tee_Server_CleanUp = {
 		//Report
 		if(isDedicated) then {diag_log format ["Report: Server FPS %1",diag_fps];};
 		if(TW_HC_Client) then {diag_log format ["Report: HC FPS %1",diag_fps];};
-		
+
 		
 		//End
 		_i = _i + 1;
