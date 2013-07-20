@@ -11,7 +11,7 @@
 //Basic
 //***********************************************************************
 
-AddActionCode 	= "test.sqf";
+AddActionCode 	= compile preprocessFileLineNumbers "test.sqf";
 if(isNil "HQ_placed") 			then {HQ_placed = false;};
 TW_HQ_Placed_Client = false;
 if(isNil "TW_ServerStarted") 	then {TW_ServerStarted = false;};

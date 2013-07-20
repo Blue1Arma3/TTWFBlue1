@@ -159,7 +159,7 @@ getLoadout = compile preprocessFileLineNumbers 'loadout\fnc_get_loadout.sqf';
 setLoadout = compile preprocessFileLineNumbers 'loadout\fnc_set_loadout.sqf';
 
 // init revive
-//if((paramsArray select 22) == 1) then {call compile preprocessFile "=BTC=_revive\=BTC=_revive_init.sqf";}; // disabled fred41 (uninitialized variable _obj ???)
+if((paramsArray select 22) == 1) then {call compile preprocessFile "=BTC=_revive\=BTC=_revive_init.sqf";}; // disabled fred41 (uninitialized variable _obj ???)
 
 // init suppress
 if((paramsArray select 23) == 1) then {_h = [2] execvm "tpwcas\tpwcas_script_init.sqf";waitUntil{(scriptDone _h)};};

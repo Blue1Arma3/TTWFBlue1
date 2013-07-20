@@ -4,22 +4,22 @@
 	All Functions linked to player actions
 */
 
-///modif siskojay team kkz//
+
+//modif siskojay team kkz// optimized by fred41
 Tee_ActionLoop = {
-	private ["_cursertarget","_veh","_invehicle","_action","_money_action","_lock_action","_lock_action2","_lock_action3","_lock_actionarray","_savegear_action","_sagegear_actionarray","_townaction","_money_action2","_town_actionarray","_neartown","_hq_action","_hq_actionarray","_veh_s_action","_veh_s_actionarray","_weap_action","_weap_actionarray","_ai_action","_ai_actionarray","_repairaction","_repairactionarray","_count","_object","_weap_typ","_text","_actioncode"];
+	private ["_side","_hq_side","_side_shop_veh","_side_shop_weapons","_side_shop_ai","_Vehicle_Shop_side","_Weapon_Shop_side","_AI_Shop_side","_invehicle","_action","_lock_action","_is_lock_action","_savegear_action","_is_savegear_action","_grp_leaveaction","_is_grp_leaveaction","_grp_joinaction","_is_grp_joinaction","_townaction","_town_actionarray","_neartown","_nearowntown","_hq_action","_hq_actionarray","_veh_s_action","_veh_s_actionarray","_weap_action","_weap_actionarray","_ai_action","_ai_actionarray","_repairaction","_repairactionarray","_count","_object","_weap_typ","_text","_actioncode"];
 	
-	_money_action 		= false;
-	_lock_action 		= false;
-	_lock_action3 		= false;
+	_is_lock_action 	= false;
 	_townaction			= false;
 	_neartown			= false;
+	_nearowntown		= false;
 	
 	_hq_action			= false;
 	_veh_s_action		= false;
 	_weap_action 		= false;
 	_ai_action 			= false;
 	_repairaction		= false;
-	_savegear_action	= false;
+	_is_savegear_action	= false;
 	
 	_town_actionarray 	= [];
 	_hq_actionarray		= [];
@@ -27,20 +27,19 @@ Tee_ActionLoop = {
 	_weap_actionarray 	= [];
 	_ai_actionarray 	= [];
 	_repairactionarray	= [];
-	_savegear_actionarray = [];
 	
 	//Group
-	_grp_leaveaction	= false;
-	_grp_joinaction		= false;
-		
-	_grp_actionarray1 	= [];
-	_grp_actionarray2 	= [];
+	_is_grp_leaveaction	= false;
+	_is_grp_joinaction	= false;
 	
-	_lock_actionarray	= [];
 	
+	if (playerSide == west) then { _hq_side = hq_west; _side_shop_veh = west_shop_veh; _side_shop_weapons = west_shop_weapons; _side_shop_ai = west_shop_ai; _Vehicle_Shop_side = TW_Vehicle_Shop_West; _Weapon_Shop_side = TW_Weapon_Shop_West; _AI_Shop_side = TW_AI_Shop_West}; 
+	if (playerSide == east) then { _hq_side = hq_east; _side_shop_veh = east_shop_veh; _side_shop_weapons = east_shop_weapons; _side_shop_ai = east_shop_ai; _Vehicle_Shop_side = TW_Vehicle_Shop_East; _Weapon_Shop_side = TW_Weapon_Shop_East; _AI_Shop_side = TW_AI_Shop_East};
+	_side = str(playerSide);
+
 	//Loop
 	while{true} do {
-		
+
 		//check if is a teammember
 		if((getplayeruid player) in TW_Teammembers) then {Team_Member = true;} else {Team_Member = false;};		
 		
@@ -49,24 +48,25 @@ Tee_ActionLoop = {
 		
 			titleText[localize "STRS_died", "PLAIN DOWN"];	//Msg
 			
-			//_money_action 	= false;
 			TW_Voting		= false;
-			//player removeAction _money_action2;
 
 			waitUntil{alive player};
 			if((paramsArray select 22) == 0) then {[] call Tee_Player_Respawn;};
 		};
-		
+
+		// check if side has changed and if yes adjust side related stuff	
+		if (_side != str(playerSide)) then {
+			if (playerSide == west) then { _hq_side = hq_west; _side_shop_veh = west_shop_veh; _side_shop_weapons = west_shop_weapons; _side_shop_ai = west_shop_ai; _Vehicle_Shop_side = TW_Vehicle_Shop_West; _Weapon_Shop_side = TW_Weapon_Shop_West; _AI_Shop_side = TW_AI_Shop_West}; 
+			if (playerSide == east) then { _hq_side = hq_east; _side_shop_veh = east_shop_veh; _side_shop_weapons = east_shop_weapons; _side_shop_ai = east_shop_ai; _Vehicle_Shop_side = TW_Vehicle_Shop_East; _Weapon_Shop_side = TW_Weapon_Shop_East; _AI_Shop_side = TW_AI_Shop_East};
+			_side = str(playerSide);
+		};
 		
 		//Check Vehicle
 		if(player == vehicle player) then {
-			_invehicle 		= false;
-			_cursertarget 	= cursorTarget;
+			_invehicle 	= false;
 		} else {
-			_veh		= vehicle player;
 			_invehicle 	= true;
 		};
-		
 		
 			
 			//Debug
@@ -77,110 +77,91 @@ Tee_ActionLoop = {
 			};
 
 		
-		
-		
 		//Money//////////////modifier 10 par 5000 siskojay, marche niquel afficher tjr en haut a droite///
-		if ((((player distance hq_west) < 5000 && TW_playerside == "west") || ((player distance hq_east) < 5000 && TW_playerside == "east"))) then {[] call Tee_ShowMoney;};
+		// if ((player distance _hq_side) < 5000 ) then {[] call Tee_ShowMoney;};
+		[] call Tee_ShowMoney;
 		
-		
-		///////////////test siskojay test plus rien afficher au milieu//////////////////////
-		//Lock Unlock Vehicle
-		if(!_invehicle && (_cursertarget in TW_Vehicle_Client) && (player distance _cursertarget < 5) && !_lock_action3) then {
-			_text		= localize "STRS_action_lock";
-			_actioncode	= format ["[%1] call Tee_Vehicle_Lock;",_cursertarget];
-			_action 	= player addAction [_text, AddActionCode,_actioncode];
-			_lock_actionarray set [count _lock_actionarray, _action];
-			
-			_lock_action3 = true;
-		};
 
-		if(!_lock_action && ((player distance _cursertarget > 5) || !(_cursertarget in TW_Vehicle_Client) || _invehicle)) then {
-				{
-					player removeAction _x;
-				} forEach _lock_actionarray;
-				
-				_lock_actionarray 	= [];
-				_lock_action3 		= false;
+
+		//Lock Unlock Vehicle
+		if (!_invehicle)	then {
+			if (!_is_lock_action) then {
+				if ((cursorTarget in TW_Vehicle_Client)&&(player distance cursorTarget < 5)) then {
+					_text			= localize "STRS_action_lock";
+					_actioncode		= "[cursorTarget] call Tee_Vehicle_Lock;";
+					_lock_action 	= player addAction [_text, AddActionCode,_actioncode];
+					_is_lock_action = true;
+				};
+			} else {
+				if (!(cursorTarget in TW_Vehicle_Client)||(player distance cursorTarget > 5)) then {
+					player removeAction _lock_action;
+					_is_lock_action = false;
+				};
+			};
+		} else {
+			if (!_is_lock_action) then {
+				_text			= localize "STRS_action_lock";
+				_actioncode		= format ["[objectFromNetId ""%1""] call Tee_Vehicle_Lock;", netid vehicle player];
+				_lock_action 	= player addAction [_text, AddActionCode,_actioncode];
+				_is_lock_action = true;
+			};
 		};
-		
-		
-		//Unlock Action for Player in Vehicles
-		if(_invehicle && !_lock_action) then {
-			 //Action
-			_text			= localize "STRS_action_lock";
-			_actioncode		= format ["[%1] call Tee_Vehicle_Lock;",_veh];
-			_lock_action2 	= player addAction [_text, AddActionCode,_actioncode];
-			_lock_action = true;
-		};
-		if(!_invehicle && _lock_action) then {
-			 player removeAction _lock_action2;
-			_lock_action = false;
-		};
-		
 		
 		//Save Gear
-		if((((player distance hq_west) < 4 && TW_playerside == "west") || ((player distance hq_east) < 4 && TW_playerside == "east")) && !_invehicle && !_savegear_action) then {
-			//Actions
-			_text 			= format [localize "STRS_action_savegear"];
-			_actioncode		= format ["loadout = [player] call getLoadout;"];
-			_action = player addAction [_text, AddActionCode,_actioncode];
-			_savegear_actionarray set [count _savegear_actionarray, _action];
-				
-			_savegear_action	= true;
+		if(((player distance _hq_side) < 4) && !_invehicle ) then {
+			if (!_is_savegear_action) then {
+				//Actions
+				_text 			= format [localize "STRS_action_savegear"];
+				_actioncode		= "loadout = [player] call getLoadout;";
+				_savegear_action = player addAction [_text, AddActionCode,_actioncode];
+				_is_savegear_action	= true;
+			};
 		} else {
-				{
-					player removeAction _x;
-				} forEach _savegear_actionarray;
-				
-				_savegear_actionarray 	= [];
-				_savegear_action 		= false;
+			if (_is_savegear_action) then {
+				player removeAction _savegear_action;
+				_is_savegear_action = false;
+			};	
 		};
 		
-		
-		
-		
 		//Townshops
+		_neartown = false;
+		_nearowntown = false;
+		{
+			scopeName "loop";
+			if(player distance (_x select 0) < 5) then {_neartown = true; if (_side == (_x select 0) getVariable "TownSide") then {_nearowntown = true; breakOut "loop"}; };
+		} forEach TW_TownArray;
+
 		if(!_townaction) then {
-			{
-				_object = _x select 0;
-				
-				if(player distance _object < 5 && TW_playerside == _object getVariable "TownSide") then {
-					[] call Tee_ShowMoney;
-					if(!_invehicle) then {
-						{
-							_text 			= format [localize "STRS_action_buy",_x call Tee_GetVeh_Name,_x call Tee_GetVeh_Price];
-							_actioncode		= format ["[%1] call Tee_CreateVehicle;",_x];
-							_action = player addAction [_text, AddActionCode,_actioncode];
-							_town_actionarray set [count _town_actionarray, _action];
-						} forEach TW_Vehicle_Shop_Town;
-					} else {
-						//Repair
-						_text 			= format [localize "STRS_action_repair",TW_Repair_Cost];
-						_actioncode		= format ["[] spawn Tee_Sup_Repair;"];
-						_action 		= player addAction [_text, AddActionCode,_actioncode];
-						_town_actionarray = _town_actionarray + [_action];
-				
-						//Refuel
-						_text 			= format [localize "STRS_action_refuel",TW_Sup_Fuel_Cost];
-						_actioncode		= format ["[] spawn Tee_Sup_Refuel;"];
-						_action 		= player addAction [_text, AddActionCode,_actioncode];
+		
+			if(_nearowntown) then {
+				[] call Tee_ShowMoney;
+				if(!_invehicle) then {
+					{
+						_text 			= format [localize "STRS_action_buy",_x call Tee_GetVeh_Name,_x call Tee_GetVeh_Price];
+						_actioncode		= format ["[%1] call Tee_CreateVehicle;",_x];
+						_action = player addAction [_text, AddActionCode,_actioncode];
 						_town_actionarray set [count _town_actionarray, _action];
-					};
-					
-					_townaction = true;
-				};		
-			} forEach TW_TownArray;
-		} else {
-			{
-				_object = _x select 0;
-				if(player distance _object < 5) then {
-					_neartown = true;
+					} forEach TW_Vehicle_Shop_Town;
+
 				} else {
-					_neartown = false;
+					//Repair
+					_text 			= format [localize "STRS_action_repair",TW_Repair_Cost];
+					_actioncode		= "[] spawn Tee_Sup_Repair;";
+					_action 		= player addAction [_text, AddActionCode,_actioncode];
+					_town_actionarray = _town_actionarray + [_action];
+				
+					//Refuel
+					_text 			= format [localize "STRS_action_refuel",TW_Sup_Fuel_Cost];
+					_actioncode		= "[] spawn Tee_Sup_Refuel;";
+					_action 		= player addAction [_text, AddActionCode,_actioncode];
+					_town_actionarray set [count _town_actionarray, _action];
 				};
-			} forEach TW_TownArray;
-			
-			if(!_neartown && _townaction) then {
+			};		
+			_townaction = true;
+
+		} else {
+
+			if(!_nearowntown) then {
 				{
 					player removeAction _x;
 				} forEach _town_actionarray;
@@ -190,9 +171,6 @@ Tee_ActionLoop = {
 			};
 		};
 		
-		
-
-
 
 		//*******************
 		//GROUPS
@@ -200,336 +178,155 @@ Tee_ActionLoop = {
 		
 		
 		//Leave Group
-		if(((player distance hq_west) < 20 || (player distance hq_east) < 20) && (player != leader (group player))) then {
-		//if((player distance hq_west) < 4 || (player distance hq_east) < 4 ) then {	//TeeTimeTest
-			if(!_grp_leaveaction) then {
-				_text 			= format [localize "STRS_action_grp_leave"];
-				_actioncode		= format ["[player] call Tee_Grp_Leave;"];
-				_action			= player addAction [_text, AddActionCode,_actioncode];
-				_grp_actionarray1 set [count _grp_actionarray1, _action];
+		if((player distance _hq_side) < 20 ) then { 
+			if (player != leader (group player)) then {
+				if(!_is_grp_leaveaction) then {
+					_text 			= format [localize "STRS_action_grp_leave"];
+					_actioncode		= "[player] call Tee_Grp_Leave;";
+					_grp_leaveaction= player addAction [_text, AddActionCode,_actioncode];
 				
-				_grp_leaveaction	= true;
+					_is_grp_leaveaction	= true;
+				};
 			};
 		} else {
-			if(_grp_leaveaction) then {
-				{
-					player removeAction _x;
-				} forEach _grp_actionarray1;
+			if(_is_grp_leaveaction) then {
+				player removeAction _grp_leaveaction;
 				
-				_grp_actionarray1 = [];
-				_grp_leaveaction = false;
+				_is_grp_leaveaction = false;
 			};
 		};
 		
 		
 		//Join Player Group
-		if(isPlayer _cursertarget && !_invehicle && player == (leader group player) && playerSide == side _cursertarget) then {
-			if(!_grp_joinaction) then {
-				_text 			= format [localize "STRS_action_grp_join"];
-				_actioncode		= format ["[cursorTarget] call Tee_Grp_Join;"];
-				_action			= player addAction [_text, AddActionCode,_actioncode];
-				_grp_actionarray2 set [count _grp_actionarray2, _action];
+		if(isPlayer cursortarget) then {
+			if (!_invehicle && player == (leader group player) && playerSide == side cursorTarget) then {
+				if(!_is_grp_joinaction) then {
+					_text 			= format [localize "STRS_action_grp_join"];
+					_actioncode		= "[cursorTarget] call Tee_Grp_Join;";
+					_grp_joinaction	= player addAction [_text, AddActionCode,_actioncode];
 				
-				_grp_joinaction	= true;
+					_is_grp_joinaction	= true;
+				};
 			};
 		} else {
-			if(_grp_joinaction) then {
-				{
-					player removeAction _x;
-				} forEach _grp_actionarray2;
+			if(_is_grp_joinaction) then {
+				player removeAction _grp_joinaction;
 				
-				_grp_actionarray2 = [];
-				_grp_joinaction = false;
+				_is_grp_joinaction = false;
 			};
 		};
 
 		
 		//*******************
-		//WEST
+		//WEST & EAST
 		//*******************
 		
 		
-		//West HQ
-		if((player distance hq_west) < 10 && !_invehicle && !(alive driver hq_west) && TW_Para_MobilBase) then {
-			if(TW_playerside == "west" && !_hq_action) then {
+		//HQ
+		if (TW_Para_MobilBase) then {
 			
-				//Actions
-				_text 			= format [localize "STRS_action_mobilzehq"];
-				_actioncode		= format ["[%1] spawn Tee_Client_Base_DeMobHQ;"];
-				_action = player addAction [_text, AddActionCode,_actioncode];
-				_hq_actionarray set [count _hq_actionarray, _action];
+			if((player distance _hq_side) < 4) then {
+				if (!_invehicle && !(alive driver _hq_side) && TW_Para_MobilBase) then {
+					if(!_hq_action) then {
+			
+						//Actions
+						_text 			= format [localize "STRS_action_mobilzehq"];
+						_actioncode		= "[] spawn Tee_Client_Base_DeMobHQ;";
+						_action = player addAction [_text, AddActionCode,_actioncode];
+						_hq_actionarray set [count _hq_actionarray, _action];
 				
-				_hq_action		= true;
-			};
-		} else {
-			if(_hq_action && TW_playerside == "west") then {
-				{
-					player removeAction _x;
-				} forEach _hq_actionarray;
-				
-				_hq_actionarray = [];
-				_hq_action = false;
-			};
-		};
-		
-		
-		//WestHQ SetUp
-		if(player == (driver hq_west)) then {
-				//Check Side
-				if(TW_playerside != "west") then {
-					moveOut player;
+						_hq_action		= true;
+					};
 				};
+			} else {
+				if(_hq_action ) then {
+					{
+						player removeAction _x;
+					} forEach _hq_actionarray;
+				
+					_hq_actionarray = [];
+					_hq_action = false;
+				};
+			};
+		
+		
+			//HQ SetUp
+			if(player == (driver _hq_side)) then {
 				
 				//Actions
 				_text 			= format [localize "STRS_action_buildhq"];
-				_actioncode		= format ["[%1] call Tee_Client_Base_HQ_setUp;"];
+				_actioncode		= "[] call Tee_Client_Base_HQ_setUp;";
 				_action = player addAction [_text, AddActionCode,_actioncode];
 				_hq_actionarray set [count _hq_actionarray, _action];
 				
 				_hq_action		= true;
-		};
-
-
-		//West Vehicle
-		if((player distance west_shop_veh) < 3 && !_invehicle) then {
-			if(TW_playerside == "west" && !_veh_s_action) then {
-			
-				titleText[localize "STRS_action_vehicelshop", "PLAIN DOWN"];	//Msg
-			
-				//Actions
-				{
-					_text 			= format [localize "STRS_action_buy",_x call Tee_GetVeh_Name,_x call Tee_GetVeh_Price];
-					_actioncode		= format ["[%1] call Tee_CreateVehicle;",_x];
-					_action = player addAction [_text, AddActionCode,_actioncode];
-					_veh_s_actionarray set [count _veh_s_actionarray, _action];
-				} forEach TW_Vehicle_Shop_West;
-				
-				_veh_s_action		= true;
-			};
-		} else {
-			if(_veh_s_action && TW_playerside == "west") then {
-				{
-					player removeAction _x;
-				} forEach _veh_s_actionarray;
-				
-				_veh_s_actionarray = [];
-				_veh_s_action = false;
 			};
 		};
 
-
-		
-		//West Weapon
-		if((player distance west_shop_weapons) < 3 && !_invehicle) then {
-			if(TW_playerside == "west" && !_weap_action) then {
+		//Shop Vehicle
+		if((player distance _side_shop_veh)	< 3) then {
+			if (!_invehicle) then {
+				if(!_veh_s_action) then {
 			
-				titleText[localize "STRS_action_weaponshop", "PLAIN DOWN"];	//Msg
+					titleText[localize "STRS_action_vehicelshop", "PLAIN DOWN"];	//Msg
 			
-				//Actions
-				{
-									
-					if(TW_BoxShop) then {
+					//Actions
+					{
 						_text 			= format [localize "STRS_action_buy",_x call Tee_GetVeh_Name,_x call Tee_GetVeh_Price];
 						_actioncode		= format ["[%1] call Tee_CreateVehicle;",_x];
-					} else {
-					
-						_text 		= format [localize "STRS_action_buy",_x call Tee_GetWeap_Name,_x call Tee_GetWeap_Price];	
-						_weap_typ 	= _x call Tee_GetWeap_Typ;
-						
-						if(_weap_typ == "wep") then {
-							_actioncode	= format ["[%1] call Tee_AddWeapon;",_x];
-						};
-						if(_weap_typ == "mag") then {
-							_actioncode	= format ["[%1] call Tee_AddMag;",_x];	
-						};
-					};
-					
-					_action 	= player addAction [_text, AddActionCode,_actioncode];
-					_weap_actionarray set [count _weap_actionarray, _action];
-				} forEach TW_Weapon_Shop_West;
-				
-				_weap_action = true;
-			};
-		} else {
-			if(_weap_action && TW_playerside == "west") then {
-				{
-					player removeAction _x;
-				} forEach _weap_actionarray;
-				
-				_weap_actionarray 	= [];
-				_weap_action 		= false;
-			};
-		};
+						_action = player addAction [_text, AddActionCode,_actioncode];
+						_veh_s_actionarray set [count _veh_s_actionarray, _action];
+					} forEach _Vehicle_Shop_side;
 
-		
-
-		
-		//West AI Shop
-		if((player distance west_shop_ai) < 4 && !_invehicle) then {
-			if(TW_playerside == "west" && !_ai_action) then {
-			
-				titleText[localize "STRS_action_aishop", "PLAIN DOWN"];	//Msg
-			
-				//Actions
-				{
-					_text 		= format [localize "STRS_action_buy",_x call Tee_GetUnit_Name,_x call Tee_GetUnit_Price];
-					_actioncode	= format ["[%1] call Tee_BuyUnit;",_x];
-					_action 	= player addAction [_text, AddActionCode,_actioncode];
-					_ai_actionarray set [count _ai_actionarray, _action];
-				} forEach TW_AI_Shop_West;
-				
-				_ai_action = true;
+					_veh_s_action		= true;
+				};	
 			};
 		} else {
-			if(_ai_action && TW_playerside == "west") then {
-				{
-					player removeAction _x;
-				} forEach _ai_actionarray;
-				
-				_ai_actionarray 	= [];
-				_ai_action 		= false;
-			};
-		};
-	
-		
-		
-		//West Repair Station
-		if((player distance hq_west) < 40 && _invehicle) then {//modif siskojay pour reparer
-			if(TW_playerside == "west" && !_repairaction) then {
-			
-				//titleText["Repair Station", "PLAIN DOWN"];	//Msg
-			
-				//Repair
-				_text 			= format [localize "STRS_action_repair",TW_Repair_Cost];
-				_actioncode		= format ["[] spawn Tee_Sup_Repair;"];
-				_action 		= player addAction [_text, AddActionCode,_actioncode];
-				_repairactionarray set [count _repairactionarray, _action];
-				
-				//Refuel
-				_text 			= format [localize "STRS_action_refuel",TW_Sup_Fuel_Cost];
-				_actioncode		= format ["[] spawn Tee_Sup_Refuel;"];
-				_action 		= player addAction [_text, AddActionCode,_actioncode];
-				_repairactionarray set [count _repairactionarray, _action];
-				
-				//Reammo
-				_text 			= format [localize "STRS_action_reammo",TW_Sup_Reammo_Cost];
-				_actioncode		= format ["[] spawn Tee_Sup_Reammo;"];
-				_action 		= player addAction [_text, AddActionCode,_actioncode];
-				_repairactionarray set [count _repairactionarray, _action];
-				
-				
-				_repairaction		= true;
-			};
-		} else {
-			if(_repairaction && TW_playerside == "west") then {
-				{
-					player removeAction _x;
-				} forEach _repairactionarray;
-				
-				_repairactionarray 	= [];
-				_repairaction 		= false;
-			};
-		};
-
-		//*******************
-		//East
-		//*******************
-
-		//East HQ
-		if(player distance hq_east < 4 && !_invehicle && !(alive driver hq_east) && TW_Para_MobilBase) then {
-			if(TW_playerside == "east" && !_hq_action) then {
-			
-				//Actions
-				_text 			= format [localize "STRS_action_mobilzehq"];
-				_actioncode		= format ["[%1] spawn Tee_Client_Base_DeMobHQ;"];
-				_action = player addAction [_text, AddActionCode,_actioncode];
-				_hq_actionarray set [count _hq_actionarray, _action];
-				
-				_hq_action		= true;
-			};
-		} else {
-			if(_hq_action && TW_playerside == "east") then {
-				{
-					player removeAction _x;
-				} forEach _hq_actionarray;
-				
-				_hq_actionarray = [];
-				_hq_action = false;
-			};
-		};
-		
-		
-		//EastHQ SetUp
-		if(player == driver hq_east) then {
-				//Check Side
-				if(TW_playerside != "east") then {
-					moveOut player;
-				};
-				
-				//Actions
-				_text 			= format [localize "STRS_action_buildhq"];
-				_actioncode		= format ["[%1] call Tee_Client_Base_HQ_setUp;"];
-				_action = player addAction [_text, AddActionCode,_actioncode];
-				_hq_actionarray set [count _hq_actionarray, _action];
-				
-				_hq_action		= true;
-		};
-		
-		
-		//East Vehicle Shop
-		if(player distance east_shop_veh < 3 && !_invehicle) then {
-			if(TW_playerside == "east" && !_veh_s_action) then {
-			
-				titleText[localize "STRS_action_vehicelshop", "PLAIN DOWN"];	//Msg
-			
-				//Actions
-				{
-					_text 			= format [localize "STRS_action_buy",_x call Tee_GetVeh_Name,_x call Tee_GetVeh_Price];
-					_actioncode		= format ["[%1] call Tee_CreateVehicle;",_x];
-					_action = player addAction [_text, AddActionCode,_actioncode];
-					_veh_s_actionarray set [count _veh_s_actionarray, _action];
-				} forEach TW_Vehicle_Shop_East;
-				
-				_veh_s_action		= true;
-				
-			};
-		} else {
-			if(_veh_s_action && TW_playerside == "east") then {
+			if(_veh_s_action) then {
 				{
 					player removeAction _x;
 				} forEach _veh_s_actionarray;
-				_veh_s_action = false;
+				
 				_veh_s_actionarray = [];
+				_veh_s_action = false;
 			};
 		};
-		
 
-		//East Weapon
-		if((player distance east_shop_weapons) < 3 && !_invehicle) then {
-			if(TW_playerside == "east" && !_weap_action) then {
+
+		
+		// Weapon
+		if((player distance _side_shop_weapons) < 3) then {
+			if (!_invehicle) then {
+				if(!_weap_action) then {
 			
-				titleText[localize "STRS_action_weaponshop", "PLAIN DOWN"];	//Msg
+					titleText[localize "STRS_action_weaponshop", "PLAIN DOWN"];	//Msg
 			
-				//Actions
-				{
-					_text 		= format [localize "STRS_action_buy",_x call Tee_GetWeap_Name,_x call Tee_GetWeap_Price];
-					_weap_typ 	= _x call Tee_GetWeap_Typ;
-										
-					if(_weap_typ == "wep") then {
-						_actioncode	= format ["[%1] call Tee_AddWeapon;",_x];
-					};
-					if(_weap_typ == "mag") then {
-						_actioncode	= format ["[%1] call Tee_AddMag;",_x];	
-					};
+					//Actions
+					{
+						if(TW_BoxShop) then {
+							_text 			= format [localize "STRS_action_buy",_x call Tee_GetVeh_Name,_x call Tee_GetVeh_Price];
+							_actioncode		= format ["[%1] call Tee_CreateVehicle;",_x];
+						} else {
+		
+							_text 		= format [localize "STRS_action_buy",_x call Tee_GetWeap_Name,_x call Tee_GetWeap_Price];	
+							_weap_typ 	= _x call Tee_GetWeap_Typ;
 					
-					_action 	= player addAction [_text, AddActionCode,_actioncode];
-					_weap_actionarray set [count _weap_actionarray, _action];
-				} forEach TW_Weapon_Shop_East;
-				
-				_weap_action = true;
+							if(_weap_typ == "wep") then {
+								_actioncode	= format ["[%1] call Tee_AddWeapon;",_x];
+							};
+							if(_weap_typ == "mag") then {
+								_actioncode	= format ["[%1] call Tee_AddMag;",_x];	
+							};
+						};
+					
+						_action 	= player addAction [_text, AddActionCode,_actioncode];
+						_weap_actionarray set [count _weap_actionarray, _action];
+					} forEach _Weapon_Shop_side;
+					_weap_action = true;
+				};
 			};
 		} else {
-			if(_weap_action && TW_playerside == "east") then {
+			if(_weap_action) then {
 				{
 					player removeAction _x;
 				} forEach _weap_actionarray;
@@ -539,26 +336,27 @@ Tee_ActionLoop = {
 			};
 		};
 
+
 		
-		
-		//East AI Shop
-		if((player distance east_shop_ai) < 3 && !_invehicle) then {
-			if(TW_playerside == "east" && !_ai_action) then {
-			
-				titleText[localize "STRS_action_aishop", "PLAIN DOWN"];	//Msg
-			
-				//Actions
-				{
-					_text 		= format [localize "STRS_action_buy",_x call Tee_GetUnit_Name,_x call Tee_GetUnit_Price];
-					_actioncode	= format ["[%1] call Tee_BuyUnit;",_x];
-					_action 	= player addAction [_text, AddActionCode,_actioncode];
-					_ai_actionarray set [count _ai_actionarray, _action];
-				} forEach TW_AI_Shop_East;
-				
-				_ai_action = true;
+		//AI Shop
+		if((player distance _side_shop_ai) < 4) then { 
+			if (!_invehicle) then {
+				if(!_ai_action) then {
+
+					titleText[localize "STRS_action_aishop", "PLAIN DOWN"];	//Msg
+
+					//Actions
+					{
+						_text 		= format [localize "STRS_action_buy",_x call Tee_GetUnit_Name,_x call Tee_GetUnit_Price];
+						_actioncode	= format ["[%1] call Tee_BuyUnit;",_x];
+						_action 	= player addAction [_text, AddActionCode,_actioncode];
+						_ai_actionarray set [count _ai_actionarray, _action];
+					} forEach _AI_Shop_side;
+					_ai_action = true;
+				};
 			};
 		} else {
-			if(_ai_action && TW_playerside == "east") then {
+			if(_ai_action) then {
 				{
 					player removeAction _x;
 				} forEach _ai_actionarray;
@@ -567,38 +365,39 @@ Tee_ActionLoop = {
 				_ai_action 		= false;
 			};
 		};
+	
 		
 		
-		
-		//East Repair Station
-		if((player distance hq_east) < 40 && _invehicle) then {
-			if(TW_playerside == "east" && !_repairaction) then {
+		// Repair Station
+		if((player distance _hq_side) < 40) then {
+			if (_invehicle) then {//modif siskojay pour reparer
+				if(!_repairaction) then {
 			
-				//titleText["Repair Station", "PLAIN DOWN"];	//Msg
+					//titleText["Repair Station", "PLAIN DOWN"];	//Msg
 			
-				//Repair
-				_text 			= format [localize "STRS_action_repair",TW_Repair_Cost];
-				_actioncode		= format ["[] spawn Tee_Sup_Repair;"];
-				_action 		= player addAction [_text, AddActionCode,_actioncode];
-				_repairactionarray set [count _repairactionarray, _action];
+					//Repair
+					_text 			= format [localize "STRS_action_repair",TW_Repair_Cost];
+					_actioncode		= "[] spawn Tee_Sup_Repair;";
+					_action 		= player addAction [_text, AddActionCode,_actioncode];
+					_repairactionarray set [count _repairactionarray, _action];
 				
-				//Refuel
-				_text 			= format [localize "STRS_action_refuel",TW_Sup_Fuel_Cost];
-				_actioncode		= format ["[] spawn Tee_Sup_Refuel;"];
-				_action 		= player addAction [_text, AddActionCode,_actioncode];
-				_repairactionarray set [count _repairactionarray, _action];
+					//Refuel
+					_text 			= format [localize "STRS_action_refuel",TW_Sup_Fuel_Cost];
+					_actioncode		= "[] spawn Tee_Sup_Refuel;";
+					_action 		= player addAction [_text, AddActionCode,_actioncode];
+					_repairactionarray set [count _repairactionarray, _action];
 				
-				//Reammo
-				_text 			= format [localize "STRS_action_reammo",TW_Sup_Reammo_Cost];
-				_actioncode		= format ["[] spawn Tee_Sup_Reammo;"];
-				_action 		= player addAction [_text, AddActionCode,_actioncode];
-				_repairactionarray set [count _repairactionarray, _action];
+					//Reammo
+					_text 			= format [localize "STRS_action_reammo",TW_Sup_Reammo_Cost];
+					_actioncode		= "[] spawn Tee_Sup_Reammo;";
+					_action 		= player addAction [_text, AddActionCode,_actioncode];
+					_repairactionarray set [count _repairactionarray, _action];
 				
-				
-				_repairaction		= true;
+					_repairaction		= true;
+				};
 			};
 		} else {
-			if(_repairaction && TW_playerside == "east") then {
+			if(_repairaction) then {
 				{
 					player removeAction _x;
 				} forEach _repairactionarray;
@@ -607,10 +406,8 @@ Tee_ActionLoop = {
 				_repairaction 		= false;
 			};
 		};
-		
-		
 	
 		//End
-		sleep 5;
+		sleep 0.5;
 	};
 };
