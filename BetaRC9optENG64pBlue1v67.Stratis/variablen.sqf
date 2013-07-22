@@ -114,12 +114,6 @@ TW_West_Respawn = "tw_west_respawn";
 TW_East_Respawn = "tw_east_respawn";
 
 
-TW_BasePosArray = [
-["respawn_east",		"respawn_west"]///////////as enlever si jamais erreur siskojay
-
-];
-
-
 //******************************************
 //Towns
 //******************************************

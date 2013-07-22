@@ -50,8 +50,10 @@
 Contact & Bugreport: cwadensten@gmail.com
 Ported for new update "call compile" by SPJESTER: mhowell34@gmail.com
 ================================================================================================================== */
+
 if (!isServer) exitWith {};
 diag_log "vehicle.sqf running ...";
+private["_unit","_delay","_deserted","_respawns","_explode","_dynamic","_unitinit","_haveinit","_hasname","_unitname","_noend","_run","_rounds","_dir","_position","_type","_dead","_nodelay","_side","_timeout"];
 // Define variables
 _unit = _this select 0;
 _delay = if (count _this > 1) then {_this select 1} else {30};
@@ -64,7 +66,7 @@ _haveinit = if (count _this > 6) then {true} else {false};
 
 _hasname = false;
 _unitname = vehicleVarName _unit;
-if (isNil _unitname) then {_hasname = false;} else {_hasname = true;};
+// if (isNil _unitname) then {_hasname = false;} else {_hasname = true;};
 _noend = true;
 _run = true;
 _rounds = 0;
@@ -79,12 +81,20 @@ _position = getPosASL _unit;
 _type = typeOf _unit;
 _dead = false;
 _nodelay = false;
+if (_position distance getMarkerPos "ProtectOpfor" < 100) then {_side = "Opfor"};
+if (_position distance getMarkerPos "ProtectBluefor" < 100) then {_side = "Bluefor"};
 
+_unit removeAllEventHandlers "HandleDamage";
+if (_unitname == "Opfor") then {
+		_unit addEventHandler ["HandleDamage","_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0"];
+	} else {
+		_unit addEventHandler ["HandleDamage","_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0"];
+	};
 
 // Start monitoring the vehicle
 while {_run} do 
 {	
-	sleep (2 + random 10);
+	sleep (_delay + random 10);
       if ((getDammage _unit > 0.8) and ({alive _x} count crew _unit == 0)) then {_dead = true};
 
 	// Check if the vehicle is deserted.
@@ -114,21 +124,15 @@ while {_run} do
 		_unit = _type createVehicle _position;
 		_unit setPosASL _position;
 		_unit setDir _dir;
+		_unit removeAllEventHandlers "HandleDamage";
+		if (_side == "Opfor") then {
+			_unit addEventHandler ["HandleDamage","_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0"];
+		} else {
+			_unit addEventHandler ["HandleDamage","_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0"];
+		};
 
-		if (_haveinit) then 
-		{
-			_unit call compile format ["%1=_This; PublicVariable '%1'",_unitinit];
-			};
-		
-		if (_hasname) then 
-		{
-			_unit setVehicleVarName _unitname;
-			_unit call compile format ["%1=_This; PublicVariable '%1'",_unitname];
-			};					
 		_dead = false;
 
 		// Check respawn amount
-		if !(_noend) then {_rounds = _rounds + 1};
-		if ((_rounds == _respawns) and !(_noend)) then {_run = false;};
 	};
 };
