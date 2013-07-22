@@ -153,7 +153,6 @@ if((isServer && !TW_ServerStarted) || (TW_HC_Client && TW_HC_Activ)) then {	//Nu
 	[] call compile preprocessFileLineNumbers "functions_HC.sqf";
 };
 
-
 //init loadout
 getLoadout = compile preprocessFileLineNumbers 'loadout\fnc_get_loadout.sqf';
 setLoadout = compile preprocessFileLineNumbers 'loadout\fnc_set_loadout.sqf';
@@ -162,7 +161,7 @@ setLoadout = compile preprocessFileLineNumbers 'loadout\fnc_set_loadout.sqf';
 if((paramsArray select 22) == 1) then {call compile preprocessFile "=BTC=_revive\=BTC=_revive_init.sqf";}; // disabled fred41 (uninitialized variable _obj ???)
 
 // init suppress
-if((paramsArray select 23) == 1) then {_h = [2] execvm "tpwcas\tpwcas_script_init.sqf";waitUntil{(scriptDone _h)};};
+// if((paramsArray select 23) == 1) then {_h = [2] execvm "tpwcas\tpwcas_script_init.sqf";waitUntil{(scriptDone _h)};}; // kann wech, fred41
 
 //mission message
 [TW_welcome_message,"Blue1s Teetime Warfare",nil,true] spawn BIS_fnc_guiMessage;
@@ -186,20 +185,20 @@ if(X_Client) then {
 	};
 
 	//[] execVM "client\init.sqf";
+	execVM "softProtect.sqf"; // replacement for grenadeStop, fred41
+
 };
 
 //loadPlayerMenu = compile preprocessFile "client\systems\playerMenu\init.sqf";
 
 execVM "briefing.sqf";
-execVM "grenadeStop.sqf";
 //execvm "Tee_Server_Town_CreateAIDefBUYexec.sqf";
 //call compile preprocessFile "=BTC=_TK_punishment\=BTC=_tk_init.sqf";
-[] execVM "INSLimitedAdmin\initAH.sqf";
+//[] execVM "INSLimitedAdmin\initAH.sqf";
 //[player] execVM "spawnProtectionO.sqf";
 //[player] execVM "spawnProtectionB.sqf";
 //[player] execVM "protectionzones.sqf";
 //[] execVM "protectionzones.sqf"; // disabled (reason for heli crash and performance probs), fred41
-
 
 
 //Server
@@ -227,6 +226,16 @@ if(isServer && !TW_ServerStarted) then {
 	
 	HQ_placed = true;
 	publicVariable "HQ_placed";
+	
+	// nur debug um object-stau zu erforschen
+	[] spawn {
+		while{true} do { 
+			sleep 1200; // 20 min
+			{
+				diag_log format ["obj: %1", typeOf _x];
+			} foreach allMissionObjects "";
+	};
+};
 	
 	if(isDedicated || debug) then {diag_log "Report: ServerInit Done";};
 };

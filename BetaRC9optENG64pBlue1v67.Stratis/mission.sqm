@@ -110,7 +110,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}]; ";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}]; ";
 					description="GRENADIER ( MX3 GL Aco )";
 				};
 			};
@@ -131,7 +131,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ASSAULT ( MX 6.5 Rco X12 )";
 				};
 			};
@@ -152,7 +152,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="MEDIC ( MX 6.5 Aco )";
 				};
 			};
@@ -173,7 +173,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="SNIPER (LRR SOS RF)";
 				};
 			};
@@ -194,7 +194,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ASSAULT AT ( MX 6.5 Aco )";
 				};
 			};
@@ -215,7 +215,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="MEDIC ( MX 6.5 Aco )";
 				};
 			};
@@ -236,7 +236,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="SNIPER (LRR SOS RF)";
 				};
 			};
@@ -257,7 +257,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="GRENADIER ( MX3 GL Aco )";
 				};
 			};
@@ -278,7 +278,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="MEDIC ( MX 6.5 Aco )";
 				};
 			};
@@ -299,7 +299,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ENGINEER ( MXC 6.5 Aco )";
 				};
 			};
@@ -320,7 +320,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="GRENADIER ( Katiba GL 6.5 Aco ) ";
 				};
 			};
@@ -341,7 +341,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ASSAULT ( Katiba 6.5 Arco )";
 				};
 			};
@@ -362,7 +362,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="MEDIC ( Katiba 6.5 Holo )";
 				};
 			};
@@ -383,7 +383,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="SNIPER ( GM6 SOS RF )";
 				};
 			};
@@ -404,7 +404,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ASSAULT AT ( Katiba 6.5 Aco )";
 				};
 			};
@@ -425,7 +425,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="MEDIC ( Katiba 6.5 Holo )";
 				};
 			};
@@ -446,7 +446,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="SNIPER ( GM6 SOS RF )";
 				};
 			};
@@ -467,7 +467,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="GRENADIER ( Katiba GL 6.5 Aco )";
 				};
 			};
@@ -488,7 +488,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="MEDIC ( Katiba 6.5 Holo )";
 				};
 			};
@@ -509,7 +509,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ENGINEER ( Katiba 6.5 Holo )";
 				};
 			};
@@ -530,7 +530,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ASSAULT ( MX 6.5 Rco X12 )";
 				};
 			};
@@ -551,7 +551,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="MEDIC ( MX 6.5 Aco )";
 				};
 			};
@@ -572,7 +572,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ASSAULT AT ( MX 6.5 Aco )";
 				};
 			};
@@ -593,7 +593,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="SNIPER (LRR SOS RF)";
 				};
 			};
@@ -614,7 +614,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="MEDIC ( MX 6.5 Aco )";
 				};
 			};
@@ -635,7 +635,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ASSAULT ( Katiba 6.5 Arco X12 )";
 				};
 			};
@@ -656,7 +656,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="MEDIC ( Katiba 6.5 Holo )";
 				};
 			};
@@ -677,7 +677,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ASSAULT AT ( Katiba 6.5 Aco )";
 				};
 			};
@@ -698,7 +698,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="SNIPER ( GM6 SOS RF )";
 				};
 			};
@@ -719,7 +719,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ENGINEER ( MXC 6.5 Aco )";
 				};
 			};
@@ -740,7 +740,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ASSAULT AT ( MX 6.5 Aco )";
 				};
 			};
@@ -761,7 +761,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="MEDIC ( MX 6.5 Aco )";
 				};
 			};
@@ -782,7 +782,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ASSAULT AT ( MX 6.5 Aco )";
 				};
 			};
@@ -803,7 +803,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="SNIPER (LRR SOS RF)";
 				};
 			};
@@ -824,7 +824,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ASSAULT AT ( Katiba 6.5 Aco )";
 				};
 			};
@@ -845,7 +845,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="SNIPER ( GM6 SOS RF )";
 				};
 			};
@@ -866,7 +866,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ENGINEER ( Katiba 6.5 Holo )";
 				};
 			};
@@ -887,7 +887,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="MEDIC ( Katiba 6.5 Holo )";
 				};
 			};
@@ -908,7 +908,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ASSAULT AT ( Katiba 6.5 Aco )";
 				};
 			};
@@ -929,7 +929,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ENGINEER ( MXC 6.5 Aco )";
 				};
 			};
@@ -950,7 +950,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="SNIPER (LRR SOS RF)";
 				};
 			};
@@ -971,7 +971,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="SNIPER ( GM6 SOS RF )";
 				};
 			};
@@ -992,7 +992,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ENGINEER ( Katiba 6.5 Holo )";
 				};
 			};
@@ -1013,7 +1013,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ASSAULT ( MX 6.5 Rco X12 )";
 				};
 			};
@@ -1034,7 +1034,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="MEDIC ( MX 6.5 Aco )";
 				};
 			};
@@ -1055,7 +1055,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="SNIPER (LRR SOS RF)";
 				};
 			};
@@ -1076,7 +1076,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="MEDIC ( Katiba 6.5 Holo )";
 				};
 			};
@@ -1097,7 +1097,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="SNIPER ( GM6 SOS RF )";
 				};
 			};
@@ -1118,7 +1118,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ASSAULT ( Katiba 6.5 Arco X12 )";
 				};
 			};
@@ -1140,7 +1140,7 @@ class Mission
 					leader=1;
 					lock="UNLOCKED";
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="MEDIC ( Katiba 6.5 Holo )";
 				};
 			};
@@ -1161,7 +1161,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="GRENADIER ( MX3 GL Aco )";
 				};
 			};
@@ -1182,7 +1182,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="GRENADIER ( MX3 GL Aco )";
 				};
 			};
@@ -1203,7 +1203,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ENGINEER ( MXC 6.5 Aco )";
 				};
 			};
@@ -1224,7 +1224,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ENGINEER ( MXC 6.5 Aco )";
 				};
 			};
@@ -1245,7 +1245,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="SNIPER (LRR SOS RF)";
 				};
 			};
@@ -1266,7 +1266,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="SNIPER (LRR SOS RF)";
 				};
 			};
@@ -1287,7 +1287,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ASSAULT ( MX 6.5 Rco X12 )";
 				};
 			};
@@ -1308,7 +1308,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="MEDIC ( MX 6.5 Aco )";
 				};
 			};
@@ -1329,7 +1329,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="GRENADIER ( Katiba GL 6.5 Aco )";
 				};
 			};
@@ -1350,7 +1350,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="GRENADIER ( Katiba GL 6.5 Aco )";
 				};
 			};
@@ -1371,7 +1371,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ASSAULT ( Katiba 6.5 Arco X12 )";
 				};
 			};
@@ -1392,7 +1392,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ENGINEER ( Katiba 6.5 Holo )";
 				};
 			};
@@ -1413,7 +1413,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ASSAULT AT ( Katiba 6.5 Aco )";
 				};
 			};
@@ -1434,7 +1434,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="SNIPER ( GM6 SOS RF )";
 				};
 			};
@@ -1455,7 +1455,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="MEDIC ( Katiba 6.5 Holo )";
 				};
 			};
@@ -1476,7 +1476,7 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}];";
+					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0}];";
 					description="ASSAULT ( Katiba 6.5 Arco )";
 				};
 			};
@@ -1484,11 +1484,12 @@ class Mission
 	};
 	class Vehicles
 	{
-		items=540;
+		items=538;
 		class Item0
 		{
-			position[]={6318.1899,10.09784,5369.3232};
+			position[]={6312.1514,10.554197,5366.2461};
 			azimut=-228.884;
+			special="NONE";
 			id=66;
 			side="EMPTY";
 			vehicle="Land_CashDesk_F";
@@ -1540,7 +1541,7 @@ class Mission
 		};
 		class Item5
 		{
-			position[]={1978.019,5.7418604,5827.7422};
+			position[]={1965.8208,5.5282497,5827.0854};
 			azimut=-438.89099;
 			id=71;
 			side="EMPTY";
@@ -1595,6 +1596,7 @@ class Mission
 		{
 			position[]={6308.3335,11.220267,5359.2222};
 			azimut=-138.884;
+			special="NONE";
 			id=76;
 			side="EMPTY";
 			vehicle="Land_CashDesk_F";
@@ -1604,7 +1606,7 @@ class Mission
 		};
 		class Item11
 		{
-			position[]={1961.141,5.5110726,5802.147};
+			position[]={1955.511,5.5,5807.5894};
 			azimut=282.33981;
 			id=77;
 			side="EMPTY";
@@ -1658,7 +1660,7 @@ class Mission
 		class Item16
 		{
 			position[]={1973.5212,5.6800518,5808.4146};
-			azimut=104.67935;
+			azimut=104.679;
 			id=82;
 			side="EMPTY";
 			vehicle="O_MRAP_02_F";
@@ -2319,7 +2321,7 @@ class Mission
 			lock="UNLOCKED";
 			skill=0.60000002;
 			fuel=0.45578918;
-			init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}]; veh = [this, 15, 120] execVM ""vehicle.sqf""";
+			init="veh=[this, 2, 120] execVM ""vehicle.sqf""";
 		};
 		class Item81
 		{
@@ -2556,19 +2558,19 @@ class Mission
 			vehicle="B_Heli_Light_01_F";
 			lock="UNLOCKED";
 			skill=0.60000002;
-			init="this addEventHandler[""HandleDamage"",   {   _unit = _this select 0;   _damage = _this select 2;     if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage   }   ]; veh = [this, 15, 120] execVM ""vehicle.sqf"";";
+			init="veh=[this, 2, 120] execVM ""vehicle.sqf""";
 		};
 		class Item105
 		{
 			position[]={6343.418,8.1283007,5317.752};
-			azimut=-575.95734;
+			azimut=-575.95697;
 			id=171;
 			side="EMPTY";
 			vehicle="C_Offroad_01_F";
 			lock="UNLOCKED";
 			skill=0.60000002;
 			fuel=0.43266708;
-			init="veh = [this, 15, 120] execVM ""vehicle.sqf""";
+			init="veh=[this, 2, 120] execVM ""vehicle.sqf""";
 		};
 		class Item106
 		{
@@ -2580,7 +2582,7 @@ class Mission
 			lock="UNLOCKED";
 			skill=0.60000002;
 			fuel=0.48816097;
-			init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage}]; veh = [this, 15, 120] execVM ""vehicle.sqf"";";
+			init="veh=[this, 2, 120] execVM ""vehicle.sqf""";
 		};
 		class Item107
 		{
@@ -3364,7 +3366,7 @@ class Mission
 			lock="UNLOCKED";
 			skill=0.60000002;
 			fuel=0.45578918;
-			init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}]; veh = [this, 15, 120] execVM ""vehicle.sqf""";
+			init="veh=[this, 2, 120] execVM ""vehicle.sqf""";
 		};
 		class Item185
 		{
@@ -3376,7 +3378,7 @@ class Mission
 			lock="UNLOCKED";
 			skill=0.60000002;
 			fuel=0.48816097;
-			init="veh = [this, 15, 120] execVM ""vehicle.sqf""";
+			init="veh=[this, 2, 120] execVM ""vehicle.sqf""";
 		};
 		class Item186
 		{
@@ -3992,7 +3994,7 @@ class Mission
 			vehicle="O_Heli_Light_02_unarmed_F";
 			lock="UNLOCKED";
 			skill=0.60000002;
-			init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}]; veh = [this, 15, 120] execVM ""vehicle.sqf""";
+			init="veh=[this, 2, 120] execVM ""vehicle.sqf""";
 		};
 		class Item247
 		{
@@ -4058,7 +4060,7 @@ class Mission
 			vehicle="B_Heli_Transport_01_F";
 			lock="UNLOCKED";
 			skill=0.60000002;
-			init="this addEventHandler[""HandleDamage"",   {   _unit = _this select 0;   _damage = _this select 2;     if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage   }   ]; veh = [this, 15, 120] execVM ""vehicle.sqf"";";
+			init="veh=[this, 2, 120] execVM ""vehicle.sqf""";
 		};
 		class Item253
 		{
@@ -4880,12 +4882,13 @@ class Mission
 		{
 			position[]={1993.0793,5.486289,5877.3711};
 			azimut=-166.849;
+			special="NONE";
 			id=399;
 			side="EMPTY";
 			vehicle="O_Heli_Light_02_unarmed_F";
 			lock="UNLOCKED";
 			skill=0.60000002;
-			init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}]; veh = [this, 15, 120] execVM ""vehicle.sqf"";";
+			init="veh=[this, 2, 120] execVM ""vehicle.sqf""";
 		};
 		class Item334
 		{
@@ -5505,7 +5508,7 @@ class Mission
 			lock="UNLOCKED";
 			skill=0.60000002;
 			fuel=0.44654033;
-			init="this addEventHandler[""HandleDamage"",   {   _unit = _this select 0;   _damage = _this select 2;     if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage   }   ]; veh = [this, 15, 120] execVM ""vehicle.sqf"";";
+			init="veh=[this, 2, 120] execVM ""vehicle.sqf""";
 		};
 		class Item393
 		{
@@ -5956,7 +5959,6 @@ class Mission
 			leader=1;
 			lock="UNLOCKED";
 			skill=0.60000002;
-			init="this addEventHandler[""HandleDamage"",   {   _unit = _this select 0;   _damage = _this select 2;     if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage   }   ]; veh = [this, 15, 120] execVM ""vehicle.sqf"";";
 		};
 		class Item434
 		{
@@ -6015,7 +6017,6 @@ class Mission
 			side="EMPTY";
 			vehicle="Land_HelipadSquare_F";
 			skill=0.60000002;
-			init="this addEventHandler[""HandleDamage"",   {   _unit = _this select 0;   _damage = _this select 2;     if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage   }   ]; veh = [this, 15, 120] execVM ""vehicle.sqf"";";
 		};
 		class Item439
 		{
@@ -6683,43 +6684,19 @@ class Mission
 		};
 		class Item503
 		{
-			position[]={3912.1055,166.29312,4781.2612};
-			azimut=-216.57401;
-			id=569;
-			side="EMPTY";
-			vehicle="Sign_Sphere25cm_F";
-			leader=1;
-			lock="UNLOCKED";
-			skill=0.60000002;
-			text="_objcleaner1";
-		};
-		class Item504
-		{
-			position[]={3921.186,164.32217,4777.7466};
-			azimut=-216.57401;
-			id=570;
-			side="EMPTY";
-			vehicle="Sign_Sphere25cm_F";
-			leader=1;
-			lock="UNLOCKED";
-			skill=0.60000002;
-			text="_objcleaner2";
-		};
-		class Item505
-		{
 			position[]={6432.6528,8.0498571,5332.4429};
 			azimut=-47.867165;
-			id=571;
+			id=569;
 			side="EMPTY";
 			vehicle="Land_HBarrierBig_F";
 			leader=1;
 			skill=0.60000002;
 		};
-		class Item506
+		class Item504
 		{
 			position[]={6346.2373,3.0190308,5453.9277};
 			azimut=-204.22354;
-			id=572;
+			id=570;
 			side="EMPTY";
 			vehicle="Land_CashDesk_F";
 			leader=1;
@@ -6727,11 +6704,11 @@ class Mission
 			text="west_shop_heli1";
 			init="this addEventHandler['handledamage', {false}]; this setPos(getMarkerPos 'Heli-Shop_1');";
 		};
-		class Item507
+		class Item505
 		{
 			position[]={2016.7395,5.8058662,5863.0566};
 			azimut=-171.17531;
-			id=573;
+			id=571;
 			side="EMPTY";
 			vehicle="Land_CashDesk_F";
 			leader=1;
@@ -6739,43 +6716,43 @@ class Mission
 			text="east_shop_heli1";
 			init="this allowDamage false;";
 		};
-		class Item508
+		class Item506
 		{
 			position[]={6311.7124,10.41195,5368.1362};
 			azimut=133.696;
-			id=574;
+			id=572;
 			side="EMPTY";
 			vehicle="Sign_Sphere10cm_F";
 			skill=0.60000002;
 			text="west_shop_weapons";
 			init="this allowdamage false;";
 		};
-		class Item509
+		class Item507
 		{
 			position[]={1971.2976,5.6646209,5814.7651};
 			azimut=-79.198601;
-			id=575;
+			id=573;
 			side="EMPTY";
 			vehicle="Land_CargoBox_V1_F";
 			skill=0.60000002;
 			text="gunStore2";
 			init="this addEventHandler['handledamage', {false}]; this setPos(getMarkerPos 'Store_Gun_2');";
 		};
-		class Item510
+		class Item508
 		{
 			position[]={6364.0923,8.1915941,5310.7212};
 			azimut=186.386;
-			id=576;
+			id=574;
 			side="EMPTY";
 			vehicle="B_Truck_01_transport_F";
 			skill=0.60000002;
-			init="this addEventHandler[""HandleDamage"",   {   _unit = _this select 0;   _damage = _this select 2;     if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage   }   ]; veh = [this, 15, 120] execVM ""vehicle.sqf"";";
+			init="veh=[this, 2, 120] execVM ""vehicle.sqf""";
 		};
-		class Item511
+		class Item509
 		{
 			position[]={6412.5269,8.9736576,5461.4868};
 			azimut=15.7382;
-			id=577;
+			id=575;
 			side="EMPTY";
 			vehicle="Land_MetalBarrel_empty_F";
 			leader=1;
@@ -6783,11 +6760,11 @@ class Mission
 			init="this inflame true";
 			description="SNIPER ( GM6 SOS RF )";
 		};
-		class Item512
+		class Item510
 		{
 			position[]={6353.1792,8.0648794,5373.623};
 			azimut=15.7382;
-			id=578;
+			id=576;
 			side="EMPTY";
 			vehicle="Land_MetalBarrel_empty_F";
 			leader=1;
@@ -6795,40 +6772,58 @@ class Mission
 			init="this inflame true";
 			description="SNIPER ( GM6 SOS RF )";
 		};
-		class Item513
+		class Item511
 		{
 			position[]={6368.6636,8.0600004,5352.728};
 			azimut=43.763817;
-			id=579;
+			id=577;
 			side="EMPTY";
 			vehicle="Land_HelipadSquare_F";
 			skill=0.60000002;
 		};
-		class Item514
+		class Item512
 		{
 			position[]={6355.2993,8.1070528,5312.478};
 			azimut=186.386;
-			id=580;
+			id=578;
 			side="EMPTY";
 			vehicle="B_Truck_01_covered_F";
 			skill=0.60000002;
-			init="this addEventHandler[""HandleDamage"",   {   _unit = _this select 0;   _damage = _this select 2;     if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage   }   ]; veh = [this, 15, 120] execVM ""vehicle.sqf"";";
+			init="veh=[this, 2, 120] execVM ""vehicle.sqf""";
 		};
-		class Item515
+		class Item513
 		{
 			position[]={6356.0283,8.1432295,5309.7847};
 			azimut=-256.44901;
 			offsetY=4;
-			id=581;
+			id=579;
 			side="EMPTY";
 			vehicle="Sign_Pointer_Yellow_F";
 			leader=1;
 			lock="UNLOCKED";
 			skill=0.60000002;
 		};
-		class Item516
+		class Item514
 		{
 			position[]={6363.7295,8.727109,5296.6753};
+			azimut=183.27385;
+			id=580;
+			side="EMPTY";
+			vehicle="Sign_Arrow_Direction_Blue_F";
+			skill=0.60000002;
+		};
+		class Item515
+		{
+			position[]={6393.8848,22.704205,5249.2891};
+			azimut=155.25389;
+			id=581;
+			side="EMPTY";
+			vehicle="Sign_Arrow_Direction_Blue_F";
+			skill=0.60000002;
+		};
+		class Item516
+		{
+			position[]={6296.6191,6.8949804,5378.6973};
 			azimut=183.27385;
 			id=582;
 			side="EMPTY";
@@ -6837,8 +6832,8 @@ class Mission
 		};
 		class Item517
 		{
-			position[]={6393.8848,22.704205,5249.2891};
-			azimut=155.25389;
+			position[]={6313.9629,10.150821,5348.6953};
+			azimut=173.56259;
 			id=583;
 			side="EMPTY";
 			vehicle="Sign_Arrow_Direction_Blue_F";
@@ -6846,8 +6841,8 @@ class Mission
 		};
 		class Item518
 		{
-			position[]={6296.6191,6.8949804,5378.6973};
-			azimut=183.27385;
+			position[]={6314.333,13.289448,5310.1099};
+			azimut=527.34088;
 			id=584;
 			side="EMPTY";
 			vehicle="Sign_Arrow_Direction_Blue_F";
@@ -6855,77 +6850,81 @@ class Mission
 		};
 		class Item519
 		{
-			position[]={6313.9629,10.150821,5348.6953};
-			azimut=173.56259;
-			id=585;
-			side="EMPTY";
-			vehicle="Sign_Arrow_Direction_Blue_F";
-			skill=0.60000002;
-		};
-		class Item520
-		{
-			position[]={6314.333,13.289448,5310.1099};
-			azimut=527.34088;
-			id=586;
-			side="EMPTY";
-			vehicle="Sign_Arrow_Direction_Blue_F";
-			skill=0.60000002;
-		};
-		class Item521
-		{
 			position[]={6394.9858,27.129438,5202.0049};
 			azimut=147.66299;
-			id=587;
+			id=585;
 			side="EMPTY";
 			vehicle="Sign_Arrow_Large_Blue_F";
 			skill=0.60000002;
 		};
-		class Item522
+		class Item520
 		{
 			position[]={2017.2822,6.3672304,5783.9438};
 			azimut=5.27525;
-			id=588;
+			id=586;
 			side="EMPTY";
 			vehicle="O_Truck_02_covered_F";
 			skill=0.60000002;
-			init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}]; veh = [this, 15, 120] execVM ""vehicle.sqf""";
+			init="veh=[this, 2, 120] execVM ""vehicle.sqf""";
 		};
-		class Item523
+		class Item521
 		{
 			position[]={2002.345,6.2560897,5785.8662};
 			azimut=16.3598;
-			id=589;
+			id=587;
 			side="EMPTY";
 			vehicle="O_Truck_02_transport_F";
 			skill=0.60000002;
-			init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}]; veh = [this, 15, 120] execVM ""vehicle.sqf""";
+			init="veh=[this, 2, 120] execVM ""vehicle.sqf""";
 		};
-		class Item524
+		class Item522
 		{
 			position[]={1992.1404,5.9989748,5788.3711};
 			azimut=16.3598;
-			id=590;
+			id=588;
 			side="EMPTY";
 			vehicle="O_APC_Wheeled_02_rcws_F";
 			skill=0.60000002;
-			init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance safeZoneRed < 100) exitWith {_unit setDamage 0}; _damage}]; veh = [this, 15, 120] execVM ""vehicle.sqf""";
+			init="veh=[this, 2, 120] execVM ""vehicle.sqf""";
 		};
-		class Item525
+		class Item523
 		{
 			position[]={1992.4296,6.0142822,5788.8174};
 			azimut=-256.44901;
 			offsetY=4;
-			id=591;
+			id=589;
 			side="EMPTY";
 			vehicle="Sign_Pointer_Yellow_F";
 			leader=1;
 			lock="UNLOCKED";
 			skill=0.60000002;
 		};
-		class Item526
+		class Item524
 		{
 			position[]={2001.9231,6.2448425,5785.1992};
 			azimut=-256.44901;
+			offsetY=4;
+			id=590;
+			side="EMPTY";
+			vehicle="Sign_Pointer_Yellow_F";
+			leader=1;
+			lock="UNLOCKED";
+			skill=0.60000002;
+		};
+		class Item525
+		{
+			position[]={6388.4824,11.151917,5297.3901};
+			azimut=214.33501;
+			id=591;
+			side="EMPTY";
+			vehicle="B_APC_Wheeled_01_cannon_F";
+			skill=0.60000002;
+			init="veh=[this, 2, 120] execVM ""vehicle.sqf""";
+		};
+		class Item526
+		{
+			position[]={6387.3296,11.120465,5296.8828};
+			azimut=-345.91278;
 			offsetY=4;
 			id=592;
 			side="EMPTY";
@@ -6936,58 +6935,56 @@ class Mission
 		};
 		class Item527
 		{
-			position[]={6388.4824,11.151917,5297.3901};
-			azimut=214.33455;
-			id=593;
-			side="EMPTY";
-			vehicle="B_APC_Wheeled_01_cannon_F";
-			skill=0.60000002;
-			init="this addEventHandler[""HandleDamage"",   {   _unit = _this select 0;   _damage = _this select 2;     if (_unit distance safeZoneBlu < 100) exitWith {_unit setDamage 0}; _damage   }   ]; veh = [this, 15, 120] execVM ""vehicle.sqf"";";
-		};
-		class Item528
-		{
-			position[]={6387.3296,11.120465,5296.8828};
-			azimut=-345.91278;
-			offsetY=4;
-			id=594;
-			side="EMPTY";
-			vehicle="Sign_Pointer_Yellow_F";
-			leader=1;
-			lock="UNLOCKED";
-			skill=0.60000002;
-		};
-		class Item529
-		{
 			position[]={1997.6157,5.8783507,5846.5688};
 			azimut=98.501839;
-			id=595;
+			id=593;
 			side="EMPTY";
 			vehicle="Land_HelipadSquare_F";
 			skill=0.60000002;
 		};
-		class Item530
+		class Item528
 		{
 			position[]={3352.3704,234.48616,2908.6162};
-			id=596;
+			id=594;
 			side="EMPTY";
 			vehicle="I_Heli_Transport_02_F";
 			skill=0.60000002;
 			init="veh = [this, 15, 120] execVM ""vehicle.sqf"";";
 		};
-		class Item531
+		class Item529
 		{
 			position[]={3286.0288,229.17999,2933.6499};
 			azimut=85.583725;
-			id=597;
+			id=595;
 			side="EMPTY";
 			vehicle="I_MRAP_03_hmg_F";
 			skill=0.60000002;
 			init="veh = [this, 15, 120] execVM ""vehicle.sqf"";";
 		};
-		class Item532
+		class Item530
 		{
 			position[]={1966.3828,5.5,5879.4961};
 			azimut=284.35602;
+			id=596;
+			side="EMPTY";
+			vehicle="Land_HBarrierBig_F";
+			leader=1;
+			skill=0.60000002;
+		};
+		class Item531
+		{
+			position[]={2064.3452,5.5865479,5753.541};
+			azimut=371.99942;
+			id=597;
+			side="EMPTY";
+			vehicle="Land_HBarrierBig_F";
+			leader=1;
+			skill=0.60000002;
+		};
+		class Item532
+		{
+			position[]={2060.2034,5.3899999,5814.2876};
+			azimut=13.77394;
 			id=598;
 			side="EMPTY";
 			vehicle="Land_HBarrierBig_F";
@@ -6996,8 +6993,8 @@ class Mission
 		};
 		class Item533
 		{
-			position[]={2064.3452,5.5865479,5753.541};
-			azimut=371.99942;
+			position[]={2071.3643,5.5,5785.103};
+			azimut=-257.83875;
 			id=599;
 			side="EMPTY";
 			vehicle="Land_HBarrierBig_F";
@@ -7006,8 +7003,8 @@ class Mission
 		};
 		class Item534
 		{
-			position[]={2060.2034,5.3899999,5814.2876};
-			azimut=13.77394;
+			position[]={2070.2056,5.5332108,5754.3047};
+			azimut=371.99942;
 			id=600;
 			side="EMPTY";
 			vehicle="Land_HBarrierBig_F";
@@ -7016,8 +7013,8 @@ class Mission
 		};
 		class Item535
 		{
-			position[]={2071.3643,5.5,5785.103};
-			azimut=-257.83875;
+			position[]={1968.9681,5.5,5881.0132};
+			azimut=284.13287;
 			id=601;
 			side="EMPTY";
 			vehicle="Land_HBarrierBig_F";
@@ -7026,8 +7023,8 @@ class Mission
 		};
 		class Item536
 		{
-			position[]={2070.2056,5.5332108,5754.3047};
-			azimut=371.99942;
+			position[]={1969.3633,5.5,5885.6968};
+			azimut=284.13287;
 			id=602;
 			side="EMPTY";
 			vehicle="Land_HBarrierBig_F";
@@ -7036,29 +7033,9 @@ class Mission
 		};
 		class Item537
 		{
-			position[]={1968.9681,5.5,5881.0132};
-			azimut=284.13287;
-			id=603;
-			side="EMPTY";
-			vehicle="Land_HBarrierBig_F";
-			leader=1;
-			skill=0.60000002;
-		};
-		class Item538
-		{
-			position[]={1969.3633,5.5,5885.6968};
-			azimut=284.13287;
-			id=604;
-			side="EMPTY";
-			vehicle="Land_HBarrierBig_F";
-			leader=1;
-			skill=0.60000002;
-		};
-		class Item539
-		{
 			position[]={1969.8207,5.5,5888.186};
 			azimut=369.05188;
-			id=605;
+			id=603;
 			side="EMPTY";
 			vehicle="Land_HBarrierBig_F";
 			leader=1;
@@ -7067,24 +7044,8 @@ class Mission
 	};
 	class Markers
 	{
-		items=54;
+		items=34;
 		class Item0
-		{
-			position[]={6306.7065,10.916788,5363.499};
-			name="respawn_west";
-			text="Respawn";
-			type="Empty";
-			angle=-221.84627;
-		};
-		class Item1
-		{
-			position[]={1966.3204,5.5817957,5809.1162};
-			name="respawn_east";
-			text="Respawn";
-			type="Empty";
-			angle=-256.70218;
-		};
-		class Item2
 		{
 			position[]={1956.0995,1.0222254,2716.8091};
 			name="bato_2";
@@ -7093,7 +7054,7 @@ class Mission
 			colorName="ColorOrange";
 			angle=-0.69681454;
 		};
-		class Item3
+		class Item1
 		{
 			position[]={1857.5436,-0.0093279621,3529.0449};
 			name="bato_2_1";
@@ -7102,7 +7063,7 @@ class Mission
 			colorName="ColorOrange";
 			angle=-1.2608025;
 		};
-		class Item4
+		class Item2
 		{
 			position[]={2170.6514,0.021491313,5898.5352};
 			name="bato_2_2";
@@ -7111,7 +7072,7 @@ class Mission
 			colorName="ColorOrange";
 			angle=0.092565879;
 		};
-		class Item5
+		class Item3
 		{
 			position[]={4263.5435,-0.00054097694,2612.1011};
 			name="bato_1_1_1";
@@ -7120,7 +7081,7 @@ class Mission
 			colorName="ColorOrange";
 			angle=-0.06243369;
 		};
-		class Item6
+		class Item4
 		{
 			position[]={3114.5039,-0.012487263,6893};
 			name="bato_2_1_1";
@@ -7129,7 +7090,7 @@ class Mission
 			colorName="ColorOrange";
 			angle=-1.2608025;
 		};
-		class Item7
+		class Item5
 		{
 			position[]={2115.1575,4.1863189,5912.8281};
 			name="Helico1";
@@ -7138,7 +7099,7 @@ class Mission
 			colorName="ColorCivilian";
 			angle=-77.87355;
 		};
-		class Item8
+		class Item6
 		{
 			position[]={1966.5468,5.5885997,5810.7061};
 			name="tw_east_respawn";
@@ -7146,7 +7107,7 @@ class Mission
 			type="Empty";
 			angle=99.996597;
 		};
-		class Item9
+		class Item7
 		{
 			position[]={6308.8257,10.870881,5364.0977};
 			name="tw_west_respawn";
@@ -7154,31 +7115,7 @@ class Mission
 			type="Empty";
 			angle=-219.46721;
 		};
-		class Item10
-		{
-			position[]={6320.8257,9.9358759,5359.4077};
-			name="basefixe_west";
-			markerType="RECTANGLE";
-			type="flag_NATO";
-			colorName="ColorBLUFOR";
-			fillName="BDiagonal";
-			a=200;
-			b=200;
-			angle=-1.9978132;
-		};
-		class Item11
-		{
-			position[]={1977.2087,5.5940986,5835.2593};
-			name="basefixe_east";
-			markerType="RECTANGLE";
-			type="flag_NATO";
-			colorName="ColorOPFOR";
-			fillName="BDiagonal";
-			a=200;
-			b=200;
-			angle=1.4891101;
-		};
-		class Item12
+		class Item8
 		{
 			position[]={6413.6353,7.3543239,5437.1294};
 			name="Helico1_1";
@@ -7187,7 +7124,7 @@ class Mission
 			colorName="ColorCivilian";
 			angle=-230.75397;
 		};
-		class Item13
+		class Item9
 		{
 			position[]={3708.8018,-0.026353892,8015.7354};
 			name="bato_2_1_1_1";
@@ -7196,7 +7133,7 @@ class Mission
 			colorName="ColorOrange";
 			angle=-3.237323;
 		};
-		class Item14
+		class Item10
 		{
 			position[]={6481.3247,3.2807641e-006,5488.2524};
 			name="bato_2_2_1";
@@ -7205,7 +7142,7 @@ class Mission
 			colorName="ColorOrange";
 			angle=2.1653259;
 		};
-		class Item15
+		class Item11
 		{
 			position[]={2378.1284,0,1119.9954};
 			name="bato_2_3";
@@ -7214,7 +7151,7 @@ class Mission
 			colorName="ColorOrange";
 			angle=361.3197;
 		};
-		class Item16
+		class Item12
 		{
 			position[]={6414.1421,7.3651867,5436.5811};
 			name="Helico1_2";
@@ -7223,7 +7160,7 @@ class Mission
 			colorName="ColorBlue";
 			angle=-45.860802;
 		};
-		class Item17
+		class Item13
 		{
 			position[]={1044.2843,0.14954402,7591.9492};
 			name="cercle bleu";
@@ -7231,7 +7168,7 @@ class Mission
 			type="mil_circle";
 			colorName="ColorBlue";
 		};
-		class Item18
+		class Item14
 		{
 			position[]={1041.9174,0.1667842,7415.4497};
 			name="cercle ville a prendre";
@@ -7239,7 +7176,7 @@ class Mission
 			type="mil_circle";
 			colorName="ColorOrange";
 		};
-		class Item19
+		class Item15
 		{
 			position[]={1042.4276,0.10461081,7235.8687};
 			name="cercle rouge east";
@@ -7247,7 +7184,7 @@ class Mission
 			type="mil_circle";
 			colorName="ColorRed";
 		};
-		class Item20
+		class Item16
 		{
 			position[]={1047.5554,0.19743538,7763.1152};
 			name="ville civil ou non visiter";
@@ -7255,7 +7192,7 @@ class Mission
 			type="mil_circle";
 			colorName="ColorBlack";
 		};
-		class Item21
+		class Item17
 		{
 			position[]={1364.2069,-0.16883627,7502.0435};
 			name="LEGENDE";
@@ -7265,7 +7202,7 @@ class Mission
 			a=500;
 			b=500;
 		};
-		class Item22
+		class Item18
 		{
 			position[]={1153.8143,-107.67155,7930.4697};
 			name="NOMLEGENDE";
@@ -7273,33 +7210,33 @@ class Mission
 			type="group_7";
 			colorName="ColorBlack";
 		};
-		class Item23
+		class Item19
 		{
 			position[]={5726.9932,-0.20262207,8053.4541};
 			name="ts";
 			text="Teetimes modified by KKZ.FR, English adapted by Blue1";
 			type="mil_marker";
 		};
-		class Item24
+		class Item20
 		{
 			position[]={5735.1099,-0.1343677,7779.0532};
 			name="SITE";
 			text="SITE : WWW.KKZ.FR";
 			type="mil_marker";
 		};
-		class Item25
+		class Item21
 		{
 			position[]={6351.2026,2.767307,5467.2959};
 			name="heliw";
 			type="Empty";
 		};
-		class Item26
+		class Item22
 		{
 			position[]={2022.761,5.7226334,5874.5366};
 			name="helie";
 			type="Empty";
 		};
-		class Item27
+		class Item23
 		{
 			position[]={2017.9764,5.8152924,5861.4272};
 			name="Heli-Shop";
@@ -7307,7 +7244,7 @@ class Mission
 			type="mil_dot";
 			colorName="ColorRed";
 		};
-		class Item28
+		class Item24
 		{
 			position[]={6348.0137,3.1395385,5452.6045};
 			name="Heli-Shop_1";
@@ -7316,7 +7253,7 @@ class Mission
 			colorName="ColorBlue";
 			angle=24.6604;
 		};
-		class Item29
+		class Item25
 		{
 			position[]={6315.2256,10.514077,5363.0376};
 			name="Store_Gun_1";
@@ -7325,7 +7262,7 @@ class Mission
 			a=4;
 			b=4;
 		};
-		class Item30
+		class Item26
 		{
 			position[]={1971.214,5.6635838,5814.9355};
 			name="Store_Gun_2";
@@ -7334,19 +7271,7 @@ class Mission
 			a=4;
 			b=4;
 		};
-		class Item31
-		{
-			position[]={1976.6781,5.6397858,5799.3076};
-			name="botse";
-			type="Empty";
-		};
-		class Item32
-		{
-			position[]={6331.9619,8.1318092,5355.7026};
-			name="safeZoneBlu";
-			type="Empty";
-		};
-		class Item33
+		class Item27
 		{
 			position[]={6362.0176,8.0600004,5347.3696};
 			name="HpadBlu1";
@@ -7354,7 +7279,7 @@ class Mission
 			type="hd_pickup";
 			colorName="ColorBlue";
 		};
-		class Item34
+		class Item28
 		{
 			position[]={6313.0713,10.475449,5366.3423};
 			name="shophq";
@@ -7362,7 +7287,7 @@ class Mission
 			type="hd_warning";
 			colorName="ColorBlue";
 		};
-		class Item35
+		class Item29
 		{
 			position[]={1993.8007,5.8400083,5846.5};
 			name="HpadRed1";
@@ -7370,7 +7295,7 @@ class Mission
 			type="hd_pickup";
 			colorName="ColorRed";
 		};
-		class Item36
+		class Item30
 		{
 			position[]={1969.7448,5.6355186,5818.0059};
 			name="shophq_1";
@@ -7378,7 +7303,7 @@ class Mission
 			type="hd_warning";
 			colorName="ColorRed";
 		};
-		class Item37
+		class Item31
 		{
 			position[]={2115.5615,4.1832886,5912.5859};
 			name="hrepred";
@@ -7386,202 +7311,34 @@ class Mission
 			type="mil_dot";
 			colorName="ColorRed";
 		};
-		class Item38
+		class Item32
 		{
-			position[]={1992.405,5.5122461,5875.4536};
-			name="pzoneOpfor";
+			position[]={2038.0138,5.7292466,5840.7969};
+			name="ProtectOpfor";
+			text="ProtectOpfor";
 			markerType="ELLIPSE";
 			type="Empty";
-			colorName="ColorGrey";
-			fillName="Border";
-			a=25;
-			b=25;
-			drawBorder=1;
+			colorName="ColorOPFOR";
+			fillName="FDiagonal";
+			a=500;
+			b=500;
 		};
-		class Item39
+		class Item33
 		{
-			position[]={2003.3611,5.4920135,5924.7466};
-			name="pzoneOpfor_1";
+			position[]={6376.4585,8.0299997,5380.252};
+			name="ProtectBluefor";
+			text="ProtectBluefor";
 			markerType="ELLIPSE";
 			type="Empty";
-			colorName="ColorGrey";
-			fillName="Border";
-			a=25;
-			b=25;
-			drawBorder=1;
-		};
-		class Item40
-		{
-			position[]={2119.4946,3.9883313,5917.8091};
-			name="pzoneOpfor_2";
-			markerType="ELLIPSE";
-			type="Empty";
-			colorName="ColorGrey";
-			fillName="Border";
-			a=25;
-			b=25;
-			drawBorder=1;
-		};
-		class Item41
-		{
-			position[]={2096.6697,5.4099998,5824.1533};
-			name="pzoneOpfor_4";
-			markerType="ELLIPSE";
-			type="Empty";
-			colorName="ColorGrey";
-			fillName="Border";
-			a=25;
-			b=25;
-			drawBorder=1;
-		};
-		class Item42
-		{
-			position[]={2088.4524,5.5020485,5775.5903};
-			name="pzoneOpfor_5";
-			markerType="ELLIPSE";
-			type="Empty";
-			colorName="ColorGrey";
-			fillName="Border";
-			a=25;
-			b=25;
-			drawBorder=1;
-		};
-		class Item43
-		{
-			position[]={2076.2183,5.6673279,5727.7583};
-			name="pzoneOpfor_6";
-			markerType="ELLIPSE";
-			type="Empty";
-			colorName="ColorGrey";
-			fillName="Border";
-			a=25;
-			b=25;
-			drawBorder=1;
-		};
-		class Item44
-		{
-			position[]={2027.8295,5.6999998,5737.7993};
-			name="pzoneOpfor_7";
-			markerType="ELLIPSE";
-			type="Empty";
-			colorName="ColorGrey";
-			fillName="Border";
-			a=25;
-			b=25;
-			drawBorder=1;
-		};
-		class Item45
-		{
-			position[]={1979.4407,5.6698875,5748.0225};
-			name="pzoneOpfor_8";
-			markerType="ELLIPSE";
-			type="Empty";
-			colorName="ColorGrey";
-			fillName="Border";
-			a=25;
-			b=25;
-			drawBorder=1;
-		};
-		class Item46
-		{
-			position[]={2014.0708,6.7471056,5795.5186};
-			name="pzoneOpfor_9";
-			markerType="ELLIPSE";
-			type="Empty";
-			colorName="ColorGrey";
-			fillName="Border";
-			a=25;
-			b=25;
-			drawBorder=1;
-		};
-		class Item47
-		{
-			position[]={1972.8668,5.6927032,5816.1196};
-			name="pzoneOpfor_10";
-			markerType="ELLIPSE";
-			type="Empty";
-			colorName="ColorGrey";
-			fillName="Border";
-			a=25;
-			b=25;
-			drawBorder=1;
-		};
-		class Item48
-		{
-			position[]={6373.8638,11.741738,5285.71};
-			name="pzoneBlufor";
-			markerType="ELLIPSE";
-			type="Empty";
-			colorName="ColorGrey";
-			fillName="Border";
-			a=25;
-			b=25;
-			drawBorder=1;
-		};
-		class Item49
-		{
-			position[]={6343.7383,8.5622463,5307.1499};
-			name="pzoneBlufor_1";
-			markerType="ELLIPSE";
-			type="Empty";
-			colorName="ColorGrey";
-			fillName="Border";
-			a=25;
-			b=25;
-			drawBorder=1;
-		};
-		class Item50
-		{
-			position[]={6348.3784,2.7285144,5464.3784};
-			name="pzoneBlufor_11";
-			markerType="ELLIPSE";
-			type="Empty";
-			colorName="ColorGrey";
-			fillName="Border";
-			a=25;
-			b=25;
-			drawBorder=1;
-		};
-		class Item51
-		{
-			position[]={6314.6387,10.580022,5362.2192};
-			name="pzoneBlufor_14";
-			markerType="ELLIPSE";
-			type="Empty";
-			colorName="ColorGrey";
-			fillName="Border";
-			a=25;
-			b=25;
-			drawBorder=1;
-		};
-		class Item52
-		{
-			position[]={6396.5601,7.8952746,5329.5103};
-			name="pzoneBlufor_15";
-			markerType="ELLIPSE";
-			type="Empty";
-			colorName="ColorGrey";
-			fillName="Border";
-			a=25;
-			b=25;
-			drawBorder=1;
-		};
-		class Item53
-		{
-			position[]={6414.8794,7.3108411,5438.3672};
-			name="pzoneBlufor_16";
-			markerType="ELLIPSE";
-			type="Empty";
-			colorName="ColorGrey";
-			fillName="Border";
-			a=25;
-			b=25;
-			drawBorder=1;
+			colorName="ColorBLUFOR";
+			fillName="FDiagonal";
+			a=500;
+			b=500;
 		};
 	};
 	class Sensors
 	{
-		items=17;
+		items=8;
 		class Item0
 		{
 			position[]={2115.3708,4.1847186,5912.8491};
@@ -7602,36 +7359,6 @@ class Mission
 		};
 		class Item1
 		{
-			position[]={1939.9784,5.5,5937.1401};
-			a=400;
-			b=400;
-			angle=13.2745;
-			activationBy="WEST";
-			activationType="WEST D";
-			repeating=1;
-			age="UNKNOWN";
-			expActiv="{_x setDamage 1} foreach thislist;";
-			class Effects
-			{
-			};
-		};
-		class Item2
-		{
-			position[]={1904.5763,5.5,5940.2964};
-			a=600;
-			b=600;
-			angle=13.2745;
-			activationBy="WEST";
-			interruptable=1;
-			age="UNKNOWN";
-			name="alarmeast";
-			expActiv="hint Format [""ATTENTION %1 , SAFETY ZONE - TURN AROUND"",(name (thislist select 0))] ;";
-			class Effects
-			{
-			};
-		};
-		class Item3
-		{
 			position[]={6414.0947,7.3660083,5436.5273};
 			a=20;
 			b=20;
@@ -7648,37 +7375,7 @@ class Mission
 			{
 			};
 		};
-		class Item4
-		{
-			position[]={6303.062,10.442316,5271.1597};
-			a=400;
-			b=400;
-			angle=-138.97;
-			activationBy="EAST";
-			activationType="EAST D";
-			repeating=1;
-			age="UNKNOWN";
-			expActiv="{_x setDamage 1} foreach thislist;";
-			class Effects
-			{
-			};
-		};
-		class Item5
-		{
-			position[]={6345.1279,18.320198,5251.3535};
-			a=700;
-			b=700;
-			angle=-138.97;
-			activationBy="EAST";
-			interruptable=1;
-			age="UNKNOWN";
-			name="alarmwest";
-			expActiv="hint Format [""ATTENTION %1 , BLUFOR SAFETY ZONE - TURN AROUND OR DIE"",(name (thislist select 0))] ;";
-			class Effects
-			{
-			};
-		};
-		class Item6
+		class Item2
 		{
 			position[]={1980.2053,5.7795424,5810.8818};
 			a=30;
@@ -7696,7 +7393,7 @@ class Mission
 			{
 			};
 		};
-		class Item7
+		class Item3
 		{
 			position[]={6311.0835,11.022716,5359.1865};
 			a=25;
@@ -7713,47 +7410,7 @@ class Mission
 			{
 			};
 		};
-		class Item8
-		{
-			position[]={3903.1226,167.29016,4789.3384};
-			a=1;
-			b=1;
-			interruptable=1;
-			age="UNKNOWN";
-			name="trigclean";
-			class Effects
-			{
-			};
-		};
-		class Item9
-		{
-			position[]={6321.7554,8.8662233,5346.0234};
-			a=100;
-			b=100;
-			interruptable=1;
-			age="UNKNOWN";
-			name="safeZoneBlu";
-			expCond="time > 0";
-			expActiv="objectsList = nearestObjects [getPos safeZoneBlu, [""All""], 100]; {if (!(_x isKindOf ""Man"") && !(_x isKindOf ""Air"") && !(_x isKindOf ""LandVehicle"")) then {_x allowDamage false}} forEach objectsList;";
-			class Effects
-			{
-			};
-		};
-		class Item10
-		{
-			position[]={1982.405,5.8553424,5817.3018};
-			a=100;
-			b=100;
-			interruptable=1;
-			age="UNKNOWN";
-			name="safeZoneRed";
-			expCond="time > 0";
-			expActiv="objectsList = nearestObjects [getPos safeZoneRed, [""All""], 100]; {if (!(_x isKindOf ""Man"") && !(_x isKindOf ""Air"") && !(_x isKindOf ""LandVehicle"")) then {_x allowDamage false}} forEach objectsList;";
-			class Effects
-			{
-			};
-		};
-		class Item11
+		class Item4
 		{
 			position[]={6344.0117,3.1247718,5452.3267};
 			angle=24.660448;
@@ -7767,7 +7424,7 @@ class Mission
 			{
 			};
 		};
-		class Item12
+		class Item5
 		{
 			position[]={6342.7944,2.9436486,5454.6626};
 			angle=24.660448;
@@ -7781,9 +7438,11 @@ class Mission
 			{
 			};
 		};
-		class Item13
+		class Item6
 		{
 			position[]={2018.6643,5.8448529,5862.7925};
+			a=20;
+			b=20;
 			repeating=1;
 			interruptable=1;
 			age="UNKNOWN";
@@ -7794,45 +7453,17 @@ class Mission
 			{
 			};
 		};
-		class Item14
+		class Item7
 		{
 			position[]={2018.2135,5.8220739,5861.7783};
+			a=20;
+			b=20;
 			repeating=1;
 			interruptable=1;
 			age="UNKNOWN";
 			name="EastheliOFF";
 			expCond="player distance east_shop_heli1 > 10 or !alive east_shop_heli1";
 			expActiv="If (playerSide==east) then{ east_shop_heli1  removeaction id1; east_shop_heli1  removeaction id2; east_shop_heli1  removeaction id3; east_shop_heli1  removeaction id4;};";
-			class Effects
-			{
-			};
-		};
-		class Item15
-		{
-			position[]={6317.1167,10.36395,5321.7168};
-			a=400;
-			b=400;
-			angle=-138.97;
-			activationBy="GUER";
-			activationType="GUER D";
-			repeating=1;
-			age="UNKNOWN";
-			expActiv="{_x setDamage 1} foreach thislist;";
-			class Effects
-			{
-			};
-		};
-		class Item16
-		{
-			position[]={6316.5244,13.15416,5312.8223};
-			a=400;
-			b=400;
-			angle=-138.97;
-			activationBy="CIV";
-			activationType="CIV D";
-			repeating=1;
-			age="UNKNOWN";
-			expActiv="{_x setDamage 1} foreach thislist;";
 			class Effects
 			{
 			};

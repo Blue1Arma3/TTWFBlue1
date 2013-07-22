@@ -246,7 +246,7 @@ BTC_player_killed =
 				_lifes = "";
 				if (BTC_active_lifes == 1) then {_lifes = format ["Lifes remaining: %1",BTC_lifes];};
 				if (BTC_black_screen == 1) then {titleText [format ["%1\n%2\n%3", round (_timeout - time),_healer,_lifes], "BLACK FADED"]} else {hintSilent format ["%1\n%2\n%3", round (_timeout - time),_healer,_lifes];};
-				sleep 0.5;
+				sleep 4;
 			};
 			closedialog 0;
 			if (time > _timeout && format ["%1", player getVariable "BTC_need_revive"] == "1") then 
@@ -272,9 +272,9 @@ BTC_player_killed =
 BTC_check_healer =
 {
 	_pos = getpos player;
-	_men = [];_dist = 501;_healer = objNull;_healers = [];
-	_msg = "No healer in 500 m";
-	_men = nearestObjects [_pos, BTC_who_can_revive, 500];
+	_men = [];_dist = 201;_healer = objNull;_healers = [];
+	_msg = "No healer in 200 m";
+	_men = nearestObjects [_pos, BTC_who_can_revive, 200];
 	if (count _men > 0) then
 	{
 		{if (Alive _x && format ["%1",_x getVariable "BTC_need_revive"] != "1" && ([_x,player] call BTC_can_revive) && isPlayer _x && side _x == BTC_side) then {_healers = _healers + [_x];};} foreach _men;
