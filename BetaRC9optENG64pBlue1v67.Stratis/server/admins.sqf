@@ -11,9 +11,9 @@ moderators = [];
 publicVariable "moderators"; 
            
 administrators = [];
-publicVariable "administrators";
+publicVariable "administrators"; 
 
-serverAdministrators = ["76561197979724311",				 //Blue1 (stablebranch)
-           				"76561197979724311"		 //Blue1 (DEVBranch)
+serverAdministrators = [//"76561197979724311",				 //Blue1 (stablebranch)
+           				//"76561197979724311"		 //Blue1 (DEVBranch)
                     ]; 
 publicVariable "serverAdministrators";

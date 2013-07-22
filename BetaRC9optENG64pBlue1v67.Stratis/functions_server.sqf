@@ -382,8 +382,6 @@ Tee_Server_Restart = {
 	publicVariable "TW_Mission_End";
 };
 
-
-
 //Server Loops
 Tee_Server_CleanUp = {
 	private ["_i","_w","_basicvehicles","_shops","_shoploc","_wspawn_loc","_espawn_loc","_vehiclearray","_vehiclearraynew","_found"];
@@ -403,7 +401,7 @@ Tee_Server_CleanUp = {
 	{
 		_shoploc = _shoploc + [[_x,getPos _x]];
 	} forEach _shops;
-
+	
 		
 	while {true} do {
 	
