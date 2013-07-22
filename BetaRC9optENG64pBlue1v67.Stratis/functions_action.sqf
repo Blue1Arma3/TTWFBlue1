@@ -84,7 +84,7 @@ Tee_ActionLoop = {
 
 
 		//Lock Unlock Vehicle
-		if (!_invehicle)	then {
+		if (!_invehicle) then {
 			if (!_is_lock_action) then {
 				if ((cursorTarget in TW_Vehicle_Client)&&(player distance cursorTarget < 5)) then {
 					_text			= localize "STRS_action_lock";
