@@ -1,4 +1,4 @@
-// soft protect by fred41, based on grenadeStop from 
+// softProtect by fred41, based on grenadeStop from ?
 
 
 #define SAFETY_INFANTRY_ZONES [["ProtectOpfor", east, 100, 500, 1000], ["ProtectBluefor", west, 100, 500, 1000]] // Syntax: [["marker1", friendlyside, radius1friendly, radius1enemy, radius1warning], ["marker2", friendlyside, radius2friendly, radius2enemy, radius2warning]]
