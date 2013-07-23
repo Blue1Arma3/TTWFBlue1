@@ -1374,10 +1374,23 @@ Tee_PlayerMarker_Loop = {
 		TW_East_Respawn setMarkerPosLocal [((getPos east_shop_veh) select 0) + 5,((getPos east_shop_veh) select 1) - 10,(getPos east_shop_veh) select 2];	//TeeTimeTest	Marker ist Lokal
 	
 		//Basic Values
-		if(playerside == west) 	then { TW_playerside = "west"; TW_playerside_colour = "ColorBlue";};
-		if(playerside == east) 	then { TW_playerside = "east"; TW_playerside_colour = "ColorRed";};
+		if(playerside == west) 	then { 
+			TW_playerside = "west"; 
+			TW_playerside_colour = "ColorBlue";
+			if (player distance getMarkerPos "BlueforHello" < 25) then {
+				hint parseText (format["<t color='#ff0000'>Welcome to the Server %1<br/> Please see Map-Menu for Briefing and FAQs</t>", name player]);
+			};	
+		};
+		if(playerside == east) 	then { 
+			TW_playerside = "east"; 
+			TW_playerside_colour = "ColorRed";
+			if (player distance getMarkerPos "OpforHello" < 25) then {
+				hint parseText (format["<t color='#ff0000'>Welcome to the Server %1<br/> Please see Map-Menu for Briefing and FAQs</t>", name player]);
+			};	
+		};
 		
-		sleep 10;
+		
+		sleep 8;
 	};
 };
 
