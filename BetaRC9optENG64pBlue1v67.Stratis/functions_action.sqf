@@ -7,7 +7,7 @@
 
 //modif siskojay team kkz// optimized by fred41
 Tee_ActionLoop = {
-	private ["_side","_hq_side","_side_shop_veh","_side_shop_weapons","_side_shop_ai","_Vehicle_Shop_side","_Weapon_Shop_side","_AI_Shop_side","_invehicle","_action","_lock_action","_is_lock_action","_savegear_action","_is_savegear_action","_grp_leaveaction","_is_grp_leaveaction","_grp_joinaction","_is_grp_joinaction","_townaction","_town_actionarray","_neartown","_nearowntown","_hq_action","_hq_actionarray","_veh_s_action","_veh_s_actionarray","_weap_action","_weap_actionarray","_ai_action","_ai_actionarray","_repairaction","_repairactionarray","_count","_object","_weap_typ","_text","_actioncode"];
+	private ["_nextslowrefresh","_side","_hq_side","_side_shop_veh","_side_shop_weapons","_side_shop_ai","_Vehicle_Shop_side","_Weapon_Shop_side","_AI_Shop_side","_invehicle","_action","_lock_action","_is_lock_action","_savegear_action","_is_savegear_action","_grp_leaveaction","_is_grp_leaveaction","_grp_joinaction","_is_grp_joinaction","_townaction","_town_actionarray","_neartown","_nearowntown","_hq_action","_hq_actionarray","_veh_s_action","_veh_s_actionarray","_weap_action","_weap_actionarray","_ai_action","_ai_actionarray","_repairaction","_repairactionarray","_count","_object","_weap_typ","_text","_actioncode"];
 	
 	_is_lock_action 	= false;
 	_townaction			= false;
@@ -36,7 +36,7 @@ Tee_ActionLoop = {
 	if (playerSide == west) then { _hq_side = hq_west; _side_shop_veh = west_shop_veh; _side_shop_weapons = west_shop_weapons; _side_shop_ai = west_shop_ai; _Vehicle_Shop_side = TW_Vehicle_Shop_West; _Weapon_Shop_side = TW_Weapon_Shop_West; _AI_Shop_side = TW_AI_Shop_West}; 
 	if (playerSide == east) then { _hq_side = hq_east; _side_shop_veh = east_shop_veh; _side_shop_weapons = east_shop_weapons; _side_shop_ai = east_shop_ai; _Vehicle_Shop_side = TW_Vehicle_Shop_East; _Weapon_Shop_side = TW_Weapon_Shop_East; _AI_Shop_side = TW_AI_Shop_East};
 	_side = str(playerSide);
-
+	_nextslowrefresh = time + 10;
 	//Loop
 	while{true} do {
 
@@ -76,13 +76,7 @@ Tee_ActionLoop = {
 				player addAction ["Teleport", AddActionCode,'[] call Tee_Debug_Teleport;'];
 			};
 
-		
-		//Money//////////////modifier 10 par 5000 siskojay, marche niquel afficher tjr en haut a droite///
-		// if ((player distance _hq_side) < 5000 ) then {[] call Tee_ShowMoney;};
-		[] call Tee_ShowMoney;
-		
-
-
+			
 		//Lock Unlock Vehicle
 		if (!_invehicle) then {
 			if (!_is_lock_action) then {
@@ -406,7 +400,13 @@ Tee_ActionLoop = {
 				_repairaction 		= false;
 			};
 		};
-	
+		//Money//////////////modifier 10 par 5000 siskojay, marche niquel afficher tjr en haut a droite///
+		// if ((player distance _hq_side) < 5000 ) then {[] call Tee_ShowMoney;};
+		if (time > _nextslowrefresh) then {
+			[] call Tee_ShowMoney;
+			_nextslowrefresh = time + 10;
+		};
+
 		//End
 		sleep 0.5;
 	};

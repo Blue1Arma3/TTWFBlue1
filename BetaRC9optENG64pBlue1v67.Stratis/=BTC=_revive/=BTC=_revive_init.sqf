@@ -68,7 +68,7 @@ BTC_respawn_cond = false;
 	"BTC_killed_pveh" addPublicVariableEventHandler BTC_fnc_PVEH;
 	player addRating 9999;
 	BTC_side = side player;
-	BTC_respawn_marker = format ["respawn_%1",side player];
+	BTC_respawn_marker = format ["tw_%1_respawn",side player];
 	if (BTC_respawn_gear == 1) then {player addEventHandler ["HandleDamage", BTC_fnc_handledamage];};
 	player addEventHandler ["Killed", BTC_player_killed];
 	player setVariable ["BTC_need_revive",0,true];
