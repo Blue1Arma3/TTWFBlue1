@@ -77,6 +77,14 @@
 finishMissionInit;
 enableSaving [false,false];
 
+if(isServer) then { X_Server = true;} else { X_Server = false;};
+if(!isDedicated) then { X_Client = true;} else { X_Client = false;};
+
+if(X_Client) then {
+	//[] execVM "client\init.sqf";
+	execVM "softProtect.sqf"; // replacement for grenadeStop, fred41
+};
+
 west setFriend [resistance, 0];
 west setFriend [civilian, 0];
 
@@ -166,8 +174,6 @@ if((paramsArray select 22) == 1) then {call compile preprocessFile "=BTC=_revive
 //mission message
 [TW_welcome_message,"Blue1s Teetime Warfare",nil,true] spawn BIS_fnc_guiMessage;
 
-if(isServer) then { X_Server = true;} else { X_Server = false;};
-if(!isDedicated) then { X_Client = true;} else { X_Client = false;};
 
 //Init
 "BIS_fnc_MP_packet" addPublicVariableEventHandler {};
@@ -214,7 +220,7 @@ if(isServer && !TW_ServerStarted) then {
 		[] spawn Tee_Server_CleanUp;
 	};
 	
-	[] execVM "cleanUp.sqf"; // optimized cleanUp, replacing clearItem&clearBody, fred41
+	[] execVM "cleanUp.sqf"; // cleanUp, replacing clearItem&clearBody, have to be checked for efficience, fred41
 
 	//Towns
 	[] call Tee_Server_CreateTownMarker;
@@ -227,15 +233,15 @@ if(isServer && !TW_ServerStarted) then {
 	HQ_placed = true;
 	publicVariable "HQ_placed";
 	
-	// nur debug um object-stau zu erforschen
+	// nur debug um object-stau zu erforschen, schnelle log-partition !!!!
 	[] spawn {
 		while{true} do { 
 			sleep 1200; // 20 min
 			{
 				diag_log format ["obj: %1", typeOf _x];
 			} foreach allMissionObjects "";
+		};
 	};
-};
 	
 	if(isDedicated || debug) then {diag_log "Report: ServerInit Done";};
 };
