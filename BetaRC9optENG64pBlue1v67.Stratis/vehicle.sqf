@@ -51,12 +51,45 @@ Contact & Bugreport: cwadensten@gmail.com
 Ported for new update "call compile" by SPJESTER: mhowell34@gmail.com
 ================================================================================================================== */
 
+// optimized and softProtect added by fred41
+#define SAFETY_VEHICLE_ZONE 150
+ProtectVehicleGlobal = {
+	private["_unit","_side"];
+	_unit = _this select 0;
+	_side = _this select 1;
+	if ( _side == "Bluefor") then {	
+		_unit addEventHandler ["HandleDamage",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos "ProtectBluefor" < SAFETY_VEHICLE_ZONE) exitWith {_unit setDamage 0; 0}; _damage}];
+		_unit addEventHandler ["Killed",{_unit = _this select 0; if (_unit distance getMarkerPos "ProtectBluefor" < SAFETY_VEHICLE_ZONE) then {_unit setDamage 0;};}];
+	};
+	if ( _side == "Opfor") then { 
+		_unit addEventHandler ["HandleDamage",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos "ProtectOpfor" < SAFETY_VEHICLE_ZONE) exitWith {_unit setDamage 0; 0}; _damage}];
+		_unit addEventHandler ["Killed",{_unit = _this select 0; if (_unit distance getMarkerPos "ProtectOpfor" < SAFETY_VEHICLE_ZONE) then {_unit setDamage 0;};}];
+	};
+	ProtectVehicle = [netId _unit, _side];
+	publicVariable "ProtectVehicle";
+	true
+};
+
+DeProtectVehicleGlobal = {
+	private["_unit"];
+	_unit = _this select 0;
+	_unit removeAllEventHandlers "HandleDamage";
+	_unit removeAllEventHandlers "Killed";
+	DeProtectVehicle = [netId _unit];
+	publicVariable "DeProtectVehicle";
+	false
+};
+
+
 if (!isServer) exitWith {};
+waitUntil {!isNil {TW_BasicVehicles}};
 diag_log "vehicle.sqf running ...";
-private["_unit","_delay","_deserted","_respawns","_explode","_dynamic","_unitinit","_haveinit","_hasname","_unitname","_noend","_run","_rounds","_dir","_position","_type","_dead","_nodelay","_side","_timeout"];
+private["_unitIndex","_unit","_unitprotected","_delay","_deserted","_respawns","_explode","_dynamic","_unitinit","_haveinit","_hasname","_unitname","_noend","_run","_rounds","_dir","_position","_type","_dead","_nodelay","_side","_timeout"];
+
 // Define variables
 _unit = _this select 0;
-_delay = if (count _this > 1) then {_this select 1} else {30};
+_unitIndex = TW_BasicVehicles find _unit;
+_delay = if (count _this > 1) then {_this select 1} else {2};
 _deserted = if (count _this > 2) then {_this select 2} else {120};
 _respawns = if (count _this > 3) then {_this select 3} else {0};
 _explode = if (count _this > 4) then {_this select 4} else {false};
@@ -73,66 +106,68 @@ _rounds = 0;
 
 if (_delay < 0) then {_delay = 0};
 if (_deserted < 0) then {_deserted = 0};
-if (_respawns <= 0) then {_respawns= 0; _noend = true;};
+if (_respawns <= 0) then {_respawns = 0; _noend = true;};
 if (_respawns > 0) then {_noend = false};
 
 _dir = getDir _unit;
 _position = getPosASL _unit;
 _type = typeOf _unit;
 _dead = false;
-_nodelay = false;
-if (_position distance getMarkerPos "ProtectOpfor" < 100) then {_side = "Opfor"};
-if (_position distance getMarkerPos "ProtectBluefor" < 100) then {_side = "Bluefor"};
+_nodelay = true;
+_timeout = 0;
 
+_side = "neutral";
+if ((_position distance getMarkerPos "ProtectBluefor") < SAFETY_VEHICLE_ZONE) then {_side = "Bluefor";};
+if ((_position distance getMarkerPos "ProtectOpfor") < SAFETY_VEHICLE_ZONE) then {_side = "Opfor";};
 _unit removeAllEventHandlers "HandleDamage";
-if (_unitname == "Opfor") then {
-		_unit addEventHandler ["HandleDamage","_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0"];
-	} else {
-		_unit addEventHandler ["HandleDamage","_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0"];
-	};
+_unit removeAllEventHandlers "Killed";
+_unitprotected = false;
+
 
 // Start monitoring the vehicle
 while {_run} do 
 {	
 	sleep (_delay + random 10);
-      if ((getDammage _unit > 0.8) and ({alive _x} count crew _unit == 0)) then {_dead = true};
-
-	// Check if the vehicle is deserted.
-	if (_deserted > 0) then
-	{
-		if ((getPosASL _unit distance _position > 10) and ({alive _x} count crew _unit == 0) and (getDammage _unit < 0.8)) then 
-		{
-			_timeout = time + _deserted;
-			sleep 0.1;
-		 	waitUntil {_timeout < time or !alive _unit or {alive _x} count crew _unit > 0};
-			if ({alive _x} count crew _unit > 0) then {_dead = false}; 
-			if ({alive _x} count crew _unit == 0) then {_dead = true; _nodelay =true}; 
-			if !(alive _unit) then {_dead = true; _nodelay = false}; 
+	// Check if deleted
+	if (!isNull _unit) then {
+		if(!_unitprotected) then {
+			_unitprotected = [_unit, _side] call ProtectVehicleGlobal;
 		};
+		
+	
+		if ((getDammage _unit > 0.8) and ({alive _x} count crew _unit == 0)) then {
+			_dead = true
+		} else {
+			// Check if the vehicle is deserted.
+			if (_deserted > 0) then	{
+				if ((getPosASL _unit distance _position > 10) and ({alive _x} count crew _unit == 0) and (getDammage _unit <= 0.8)) then {
+					if (_timeout > 0) then {
+						if (time >= _timeout) then {_dead = true; _timeout = 0;};
+					} else {
+						_timeout = time + _deserted;
+					};
+				} else {_timeout = 0;};
+			};
+		};	
+		
+	} else {
+		_dead = true;
 	};
-
+	
 	// Respawn vehicle
-      if (_dead) then 
+	if (_dead) then 
 	{	
-		if (_nodelay) then {sleep 0.1; _nodelay = false;} else {sleep _delay;};
-		if (_dynamic) then {_position = getPosASL _unit; _dir = getDir _unit;};
-		if (_explode) then {_effect = "M_AT" createVehicle getPosASL _unit; _effect setPosASL getPosASL _unit;};
-		sleep 0.1;
-
-		deleteVehicle _unit;
-		sleep 2;
+		sleep _delay + random 10;
+		if (!isNull _unit) then {
+			_unitprotected = [_unit] call DeProtectVehicleGlobal;
+			deleteVehicle _unit;
+		};
 		_unit = _type createVehicle _position;
+		TW_BasicVehicles set [_unitIndex, _unit];
 		_unit setPosASL _position;
 		_unit setDir _dir;
-		_unit removeAllEventHandlers "HandleDamage";
-		if (_side == "Opfor") then {
-			_unit addEventHandler ["HandleDamage","_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectOpfor"" < 100) exitWith {_unit setDamage 0}; 0"];
-		} else {
-			_unit addEventHandler ["HandleDamage","_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 100) exitWith {_unit setDamage 0}; 0"];
-		};
+		_unitprotected = [_unit, _side] call ProtectVehicleGlobal;
 
 		_dead = false;
-
-		// Check respawn amount
 	};
 };
