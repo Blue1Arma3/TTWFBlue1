@@ -7038,7 +7038,7 @@ class Mission
 		{
 			position[]={1966.5468,5.5885997,5810.7061};
 			name="tw_east_respawn";
-			text="Respawn";
+			text="respawn east";
 			type="Empty";
 			angle=99.996597;
 		};
@@ -7046,9 +7046,9 @@ class Mission
 		{
 			position[]={6308.8257,10.870881,5364.0977};
 			name="tw_west_respawn";
-			text="Respawn";
+			text="respawn west";
 			type="Empty";
-			angle=-219.46721;
+			angle=-219.467;
 		};
 		class Item8
 		{
