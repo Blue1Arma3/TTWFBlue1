@@ -384,12 +384,12 @@ Tee_Server_Restart = {
 
 //Server Loops
 Tee_Server_CleanUp = {
-	private ["_i","_w","_basicvehicles","_shops","_shoploc","_wspawn_loc","_espawn_loc","_vehiclearray","_vehiclearraynew","_found"];
+	private ["_i","_w","_shops","_shoploc","_wspawn_loc","_espawn_loc","_vehiclearray","_vehiclearraynew","_found"];
 	if(isDedicated) then {diag_log "Report: CleanUp Started";};
 	if(TW_HC_Client) then {diag_log "Report: HC Server Loop Started";};
 	
 	_i 					= 0;
-	_basicvehicles 		= vehicles;	//List of all Vehicles at Missionstart
+	TW_BasicVehicles 	= vehicles;	//List of all Vehicles at Missionstart
 	_shops 				= [hq_west,west_shop_veh,west_shop_heli1,west_shop_weapons,west_shop_ai,hq_east,east_shop_veh,east_shop_weapons,east_shop_ai];
 	_shoploc 			= [];
 	_vehiclearray		= [];
@@ -478,14 +478,14 @@ Tee_Server_CleanUp = {
 	
 			//Vehicles
 			{
-				if(!alive _x && !(_x in _basicvehicles)) then {deleteVehicle _x; sleep 0.1};
+				if(!alive _x && !(_x in TW_BasicVehicles)) then {deleteVehicle _x; sleep 0.1};
 			} forEach vehicles;
 			
 			//Inaktiv Vehicles
 			_vehiclearray 		= _vehiclearraynew;
 			_vehiclearraynew 	= [];
 			{
-				if(alive _x && count (crew _x) == 0 && !(_x in _basicvehicles)) then {
+				if(alive _x && count (crew _x) == 0 && !(_x in TW_BasicVehicles)) then {
 					_found = false;
 					for [{_w=0},{_w<= count _vehiclearray},{_w=_w+1}] do {
 						if(_x == ((_vehiclearray select _w) select 0)) then {
