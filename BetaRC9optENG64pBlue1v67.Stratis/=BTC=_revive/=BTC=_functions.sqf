@@ -21,7 +21,7 @@ BTC_fnc_handledamage =
 	_enemy  = _this select 3;
 	_damage = _this select 2;
 	_part   = _this select 1;
-	if (Alive _player) then
+	if (alive _player) then
 	{
 		//BTC_gear = [] call BTC_get_gear;
 		loadout = [player] call getLoadout;

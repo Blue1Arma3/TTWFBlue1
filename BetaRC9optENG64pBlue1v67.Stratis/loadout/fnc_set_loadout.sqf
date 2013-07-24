@@ -20,7 +20,6 @@
 
 
 private ["_target","_data","_loadedMagazines","_currentWeapon","_currentMode","_weapon","_magazine","_magazines","_muzzles","_outfit","_placeholderCount"];
-
 // addAction support
 if(count _this == 2) then {
 	_target = _this select 0;

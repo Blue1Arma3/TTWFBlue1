@@ -52,18 +52,27 @@ Ported for new update "call compile" by SPJESTER: mhowell34@gmail.com
 ================================================================================================================== */
 
 // optimized and softProtect added by fred41
+#define MARKER_WEST "ProtectWest"
+#define MARKER_EAST "ProtectEast"
 #define SAFETY_VEHICLE_ZONE 150
+#define SAFETY_PLAYER_ZONE 150
+#define ENEMY_PLAYER_WARNING_ZONE 300
+#define ENEMY_VEHICLE_KILLING_ZONE 300
+#define ENEMY_VEHICLE_WARNING_ZONE 500
+
+
+
 ProtectVehicleGlobal = {
 	private["_unit","_side"];
 	_unit = _this select 0;
 	_side = _this select 1;
-	if ( _side == "Bluefor") then {	
-		_unit addEventHandler ["HandleDamage",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos "ProtectBluefor" < SAFETY_VEHICLE_ZONE) exitWith {_unit setDamage 0; 0}; _damage}];
-		_unit addEventHandler ["Killed",{_unit = _this select 0; if (_unit distance getMarkerPos "ProtectBluefor" < SAFETY_VEHICLE_ZONE) then {_unit setDamage 0;};}];
+	if ( _side == "west") then {	
+		_unit addEventHandler ["HandleDamage",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos MARKER_WEST < SAFETY_VEHICLE_ZONE) exitWith {_unit setDamage 0; 0}; _damage}];
+		_unit addEventHandler ["Killed",{_unit = _this select 0; if (_unit distance getMarkerPos MARKER_WEST < SAFETY_VEHICLE_ZONE) then {_unit setDamage 0;};}];
 	};
-	if ( _side == "Opfor") then { 
-		_unit addEventHandler ["HandleDamage",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos "ProtectOpfor" < SAFETY_VEHICLE_ZONE) exitWith {_unit setDamage 0; 0}; _damage}];
-		_unit addEventHandler ["Killed",{_unit = _this select 0; if (_unit distance getMarkerPos "ProtectOpfor" < SAFETY_VEHICLE_ZONE) then {_unit setDamage 0;};}];
+	if ( _side == "east") then { 
+		_unit addEventHandler ["HandleDamage",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos MARKER_EAST < SAFETY_VEHICLE_ZONE) exitWith {_unit setDamage 0; 0}; _damage}];
+		_unit addEventHandler ["Killed",{_unit = _this select 0; if (_unit distance getMarkerPos MARKER_EAST < SAFETY_VEHICLE_ZONE) then {_unit setDamage 0;};}];
 	};
 	ProtectVehicle = [netId _unit, _side];
 	publicVariable "ProtectVehicle";
@@ -117,8 +126,8 @@ _nodelay = true;
 _timeout = 0;
 
 _side = "neutral";
-if ((_position distance getMarkerPos "ProtectBluefor") < SAFETY_VEHICLE_ZONE) then {_side = "Bluefor";};
-if ((_position distance getMarkerPos "ProtectOpfor") < SAFETY_VEHICLE_ZONE) then {_side = "Opfor";};
+if ((_position distance getMarkerPos MARKER_WEST) < SAFETY_VEHICLE_ZONE) then {_side = "west";};
+if ((_position distance getMarkerPos "ProtectOpfor") < SAFETY_VEHICLE_ZONE) then {_side = "east";};
 _unit removeAllEventHandlers "HandleDamage";
 _unit removeAllEventHandlers "Killed";
 _unitprotected = false;
@@ -157,9 +166,9 @@ while {_run} do
 	// Respawn vehicle
 	if (_dead) then 
 	{	
-		sleep _delay + random 10;
 		if (!isNull _unit) then {
 			_unitprotected = [_unit] call DeProtectVehicleGlobal;
+			sleep _delay + random 10;
 			deleteVehicle _unit;
 		};
 		_unit = _type createVehicle _position;

@@ -110,7 +110,6 @@ class Mission
 					player="PLAY CDG";
 					leader=1;
 					skill=0.60000002;
-					init="this addEventHandler[""HandleDamage"",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos ""ProtectBluefor"" < 150) exitWith {_unit setDamage 0; 0}; _damage}]; ";
 					description="GRENADIER ( MX3 GL Aco )";
 				};
 			};
@@ -6637,7 +6636,7 @@ class Mission
 			leader=1;
 			skill=0.60000002;
 			text="west_shop_heli1";
-			init="this addEventHandler['handledamage', {false}]; this setPos(getMarkerPos 'Heli-Shop_1');";
+			init="this allowDamage false;";
 		};
 		class Item505
 		{
@@ -7249,26 +7248,26 @@ class Mission
 		class Item32
 		{
 			position[]={2038.0138,5.7292466,5840.7969};
-			name="ProtectOpfor";
-			text="ProtectOpfor";
+			name="ProtectEast";
+			text="ProtectEast";
 			markerType="ELLIPSE";
 			type="Empty";
 			colorName="ColorOPFOR";
 			fillName="FDiagonal";
-			a=500;
-			b=500;
+			a=300;
+			b=300;
 		};
 		class Item33
 		{
 			position[]={6376.4585,8.0299997,5380.252};
-			name="ProtectBluefor";
-			text="ProtectBluefor";
+			name="ProtectWest";
+			text="ProtectWest";
 			markerType="ELLIPSE";
 			type="Empty";
 			colorName="ColorBLUFOR";
 			fillName="FDiagonal";
-			a=500;
-			b=500;
+			a=300;
+			b=300;
 		};
 		class Item34
 		{
