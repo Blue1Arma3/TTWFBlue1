@@ -194,7 +194,7 @@ TWB1_Reinforce_Cost = 15000;	// Town AI reinforcement price at flagpoles
 // will give same rights as the admin
 // uncomment line below
 TW_Teammembers = [
-		"76561197979724311"	//Blue1
+		""	//Blue1
 		];
 
 //***********************************************
