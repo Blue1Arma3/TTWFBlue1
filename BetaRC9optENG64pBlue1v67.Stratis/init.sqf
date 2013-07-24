@@ -234,7 +234,7 @@ if(isServer && !TW_ServerStarted) then {
 	publicVariable "HQ_placed";
 	
 	// nur debug um object-stau zu erforschen, schnelle log-partition !!!!
-	[] spawn {
+/*	[] spawn {
 		while{true} do { 
 			sleep 1200; // 20 min
 			{
@@ -245,7 +245,7 @@ if(isServer && !TW_ServerStarted) then {
 	
 	if(isDedicated || debug) then {diag_log "Report: ServerInit Done";};
 };
-
+*/
 
 //HC
 if(TW_HC_Client) then {
