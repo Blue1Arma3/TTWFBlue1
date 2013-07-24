@@ -69,7 +69,7 @@ BTC_respawn_cond = false;
 	player addRating 9999;
 	BTC_side = side player;
 	BTC_respawn_marker = format ["tw_%1_respawn",side player];
-	if (BTC_respawn_gear == 1) then {player addEventHandler ["HandleDamage", BTC_fnc_handledamage];};
+	// if (BTC_respawn_gear == 1) then {player addEventHandler ["HandleDamage", BTC_fnc_handledamage];};
 	player addEventHandler ["Killed", BTC_player_killed];
 	player setVariable ["BTC_need_revive",0,true];
 		if ([player] call BTC_is_class_can_revive) then {player addAction [("<t color=""#ED2744"">") + ("FIRST AID") + "</t>","=BTC=_revive\=BTC=_addAction.sqf",[[],BTC_first_aid], 8, true, true, "", "[] call BTC_check_action_first_aid"];};
