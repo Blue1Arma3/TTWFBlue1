@@ -234,7 +234,7 @@ if(isServer && !TW_ServerStarted) then {
 	publicVariable "HQ_placed";
 	
 	// nur debug um object-stau zu erforschen, schnelle log-partition !!!!
-	[] spawn {
+/*	[] spawn {
 		while{true} do { 
 			sleep 1200; // 20 min
 			{
@@ -245,7 +245,7 @@ if(isServer && !TW_ServerStarted) then {
 	
 	if(isDedicated || debug) then {diag_log "Report: ServerInit Done";};
 };
-
+*/
 
 //HC
 if(TW_HC_Client) then {
@@ -279,17 +279,6 @@ if(! isDedicated) then {
 	//Player specific
 	[] spawn Tee_SetPlayer;
 
-/*
-	// Save loadout every 2 seconds
-	[] spawn {
-	while{true} do {
-		if(alive player) then {
-		loadout = [player] call getLoadout;
-		};
-		sleep 20;  
-		};
-	};
-*/
 	
 	//Save gear
 	loadout = [player] call getLoadout;		
@@ -300,5 +289,3 @@ if(isDedicated || debug) then {diag_log "Report: Init Done";};
 
 [] execVM "client\init.sqf";
 [] execVM "config.sqf";
-
-

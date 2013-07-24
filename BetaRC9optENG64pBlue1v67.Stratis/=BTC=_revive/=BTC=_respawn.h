@@ -97,8 +97,8 @@ class BTC_respawn_button_dialog
 			idc = 9;
 			text = "Respawn"; 
 			action = "closeDialog 0;_respawn = [] spawn BTC_player_respawn;";
-			x = 0.7;
-			y = 0.6;
+			x = 0.5;
+			y = 0.5;
 			default = true;
 		};
 	};
