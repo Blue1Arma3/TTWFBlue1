@@ -1,0 +1,23 @@
+? tee_konto >= 14000 : goto "next"
+~1
+goto "poor"
+
+#next
+
+_veh = " O_Heli_Light_02_unarmed_F" createVehicle (getMarkerPos "helie")
+
+tee_konto = tee_konto - 14000
+~1
+hint format ["You have now %1 $ on your Account", tee_konto]
+
+
+exit
+
+
+
+
+#poor
+Hint "You don't have enough Money to buy this!"
+
+
+exit
