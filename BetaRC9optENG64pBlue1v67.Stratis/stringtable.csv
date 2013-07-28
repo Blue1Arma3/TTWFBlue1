@@ -48,6 +48,7 @@ STRS_action_reammo, "Rearm your Vehicle (%1$)", "Fahrzeug neu bewaffnen (%1$)", 
 STRS_action_mobilzehq, "Mobilize HQ", "Hauptquartier mobilisieren","Déplacer le HQ"
 STRS_action_buildhq, "Erect HQ", "Hauptquartier aufbauen","Monter le HQ"
 STRS_action_vehicelshop, "Vehicle depot", "Fahrzeugdepot","Dépot de véhicule"
+STRS_action_helishop, "Helicopter depot", "Hubschrauberdepot","Dépot de véhicule"
 STRS_action_weaponshop, "Weapon Depot - Press E key to open at RED BOX", "Ausrüstungsdepot","Dépôt d'arme"
 STRS_action_aishop, "Recruitment center", "Rekrutierungsbüro","Centre de recrutement"
 

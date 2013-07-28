@@ -23,133 +23,60 @@
   Like this:  
   veh = [this, 15, 10] execVM "vehicle.sqf"
 
-  By default the number of respawns is infinite. To set a limit first set preceding values then the number of respawns you want (0 = infinite).
-  Like this:
-  veh = [this, 15, 10, 5] execVM "vehicle.sqf"
+  Private vehicles (non basic) are protected and monitored too  
+  Like this:  
+  veh = [this, 15, 0, true, "side"] execVM "vehicle.sqf"
 
-  Set this value to TRUE to add a special explosion effect to the wreck when respawning.
-  Default value is FALSE, which will simply have the wreck disappear.
-  Like this:
-  veh = [this, 15, 10, 5, TRUE] execVM "vehicle.sqf"
   
-  By default the vehicle will respawn to the point where it first was when the mission started (static). 
-  This can be changed to dynamic. Then the vehicle will respawn to the position where it was destroyed. 
-  First set all preceding values then set TRUE for dynamic or FALSE for static.
-  Like this:
-  veh = [this, 15, 10, 5, TRUE, TRUE] execVM "vehicle.sqf"
-  
-  If you you want to set the INIT field of the respawned vehicle, first set all other values, then set init commands. 
-  Those must be inside quotations.
-  Like this:
-  veh = [this, 15, 10, 5, TRUE, FALSE, "this setDammage 0.5"] execVM "vehicle.sqf"
-  
-  Default values of all settings are:
-  veh = [this, 30, 120, 0, FALSE, FALSE] execVM "vehicle.sqf"
-  
-	
 Contact & Bugreport: cwadensten@gmail.com
 Ported for new update "call compile" by SPJESTER: mhowell34@gmail.com
 ================================================================================================================== */
-
 // optimized and softProtect added by fred41
-#define MARKER_WEST "ProtectWest"
-#define MARKER_EAST "ProtectEast"
-#define SAFETY_VEHICLE_ZONE 150
-#define SAFETY_PLAYER_ZONE 150
-#define ENEMY_PLAYER_WARNING_ZONE 300
-#define ENEMY_VEHICLE_KILLING_ZONE 300
-#define ENEMY_VEHICLE_WARNING_ZONE 500
-
-
-
-ProtectVehicleGlobal = {
-	private["_unit","_side"];
-	_unit = _this select 0;
-	_side = _this select 1;
-	if ( _side == "west") then {	
-		_unit addEventHandler ["HandleDamage",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos MARKER_WEST < SAFETY_VEHICLE_ZONE) exitWith {_unit setDamage 0; 0}; _damage}];
-		_unit addEventHandler ["Killed",{_unit = _this select 0; if (_unit distance getMarkerPos MARKER_WEST < SAFETY_VEHICLE_ZONE) then {_unit setDamage 0;};}];
-	};
-	if ( _side == "east") then { 
-		_unit addEventHandler ["HandleDamage",{_unit = _this select 0; _damage = _this select 2; if (_unit distance getMarkerPos MARKER_EAST < SAFETY_VEHICLE_ZONE) exitWith {_unit setDamage 0; 0}; _damage}];
-		_unit addEventHandler ["Killed",{_unit = _this select 0; if (_unit distance getMarkerPos MARKER_EAST < SAFETY_VEHICLE_ZONE) then {_unit setDamage 0;};}];
-	};
-	ProtectVehicle = [netId _unit, _side];
-	publicVariable "ProtectVehicle";
-	true
-};
-
-DeProtectVehicleGlobal = {
-	private["_unit"];
-	_unit = _this select 0;
-	_unit removeAllEventHandlers "HandleDamage";
-	_unit removeAllEventHandlers "Killed";
-	DeProtectVehicle = [netId _unit];
-	publicVariable "DeProtectVehicle";
-	false
-};
-
-
+#include "softProtectDefines.hpp"
 if (!isServer) exitWith {};
-waitUntil {!isNil {TW_BasicVehicles}};
-diag_log "vehicle.sqf running ...";
-private["_unitIndex","_unit","_unitprotected","_delay","_deserted","_respawns","_explode","_dynamic","_unitinit","_haveinit","_hasname","_unitname","_noend","_run","_rounds","_dir","_position","_type","_dead","_nodelay","_side","_timeout"];
+waitUntil {!isNil{TW_BasicVehicles}&&!isNil{SP_InitDone}};
+private["_unitIndex","_unit","_unitprotected","_delay","_deserted","_private","_run","_dir","_position","_type","_dead","_side","_timeout"];
 
 // Define variables
-_unit = _this select 0;
-_unitIndex = TW_BasicVehicles find _unit;
-_delay = if (count _this > 1) then {_this select 1} else {2};
-_deserted = if (count _this > 2) then {_this select 2} else {120};
-_respawns = if (count _this > 3) then {_this select 3} else {0};
-_explode = if (count _this > 4) then {_this select 4} else {false};
-_dynamic = if (count _this > 5) then {_this select 5} else {false};
-_unitinit = if (count _this > 6) then {_this select 6} else {};
-_haveinit = if (count _this > 6) then {true} else {false};
+_unit 		= _this select 0;
+_delay 		= if (count _this > 1) then {_this select 1} else {2};
+_deserted 	= if (count _this > 2) then {_this select 2} else {120};
+_private 	= if (count _this > 3) then {_this select 3} else {false};
 
-_hasname = false;
-_unitname = vehicleVarName _unit;
-// if (isNil _unitname) then {_hasname = false;} else {_hasname = true;};
-_noend = true;
-_run = true;
-_rounds = 0;
+diag_log format["vehicle monitoring: %1|%2|%3|%4 ", typeOf _unit, _delay, _deserted, _private];
 
-if (_delay < 0) then {_delay = 0};
-if (_deserted < 0) then {_deserted = 0};
-if (_respawns <= 0) then {_respawns = 0; _noend = true;};
-if (_respawns > 0) then {_noend = false};
+if (_delay < 0) 	then {_delay = 0};
+if (_deserted < 0) 	then {_deserted = 0};
 
 _dir = getDir _unit;
 _position = getPosASL _unit;
 _type = typeOf _unit;
-_dead = false;
-_nodelay = true;
 _timeout = 0;
-
-_side = "neutral";
-if ((_position distance getMarkerPos MARKER_WEST) < SAFETY_VEHICLE_ZONE) then {_side = "west";};
-if ((_position distance getMarkerPos "ProtectOpfor") < SAFETY_VEHICLE_ZONE) then {_side = "east";};
-_unit removeAllEventHandlers "HandleDamage";
-_unit removeAllEventHandlers "Killed";
 _unitprotected = false;
+
+if (!_private) then {
+	_unitIndex = TW_BasicVehicles find _unit;
+};
+
+_dead = false;
 
 
 // Start monitoring the vehicle
+_run = true;
 while {_run} do 
-{	
+{
 	sleep (_delay + random 10);
 	// Check if deleted
 	if (!isNull _unit) then {
-		if(!_unitprotected) then {
-			_unitprotected = [_unit, _side] call ProtectVehicleGlobal;
-		};
 		
-	
+		if (!_unitprotected) then {_unitprotected = [_unit] call SP_ProtectVehicleGlobal;};
+
 		if ((getDammage _unit > 0.8) and ({alive _x} count crew _unit == 0)) then {
 			_dead = true
 		} else {
 			// Check if the vehicle is deserted.
 			if (_deserted > 0) then	{
-				if ((getPosASL _unit distance _position > 10) and ({alive _x} count crew _unit == 0) and (getDammage _unit <= 0.8)) then {
+				if ((getPosASL _unit distance _position > 3) and ({alive _x} count crew _unit == 0) and (getDammage _unit <= 0.8)) then {
 					if (_timeout > 0) then {
 						if (time >= _timeout) then {_dead = true; _timeout = 0;};
 					} else {
@@ -158,25 +85,25 @@ while {_run} do
 				} else {_timeout = 0;};
 			};
 		};	
-		
 	} else {
 		_dead = true;
 	};
-	
-	// Respawn vehicle
+	// Respawn basic vehicle or terminate loop for private vehicles
 	if (_dead) then 
 	{	
 		if (!isNull _unit) then {
-			_unitprotected = [_unit] call DeProtectVehicleGlobal;
+			_unitprotected = [_unit] call SP_UnProtectVehicleGlobal;
 			sleep _delay + random 10;
+			_unit allowDamage true;
 			deleteVehicle _unit;
 		};
-		_unit = _type createVehicle _position;
-		TW_BasicVehicles set [_unitIndex, _unit];
-		_unit setPosASL _position;
-		_unit setDir _dir;
-		_unitprotected = [_unit, _side] call ProtectVehicleGlobal;
-
-		_dead = false;
+		if (!_private) then {
+			_unit = _type createVehicle _position;
+			TW_BasicVehicles set [_unitIndex, _unit];
+			_unit setPosASL _position;
+			_unit setDir _dir;
+			_unitprotected = [_unit] call SP_ProtectVehicleGlobal;
+			_dead = false;
+		} else {_run = false};
 	};
 };

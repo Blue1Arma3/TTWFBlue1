@@ -3,14 +3,14 @@
 	
 	All Functions linked to player actions
 */
+#define FAST_INTERVAL 	2
+#define SLOW_INTERVAL 	10
+#define SHORT_DISTANCE 	5
+#define LONG_DISTANCE   20
 
-#define SLOW_INTERVAL 10
-#define FAST_INTERVAL 2
-
-
-//modif siskojay team kkz, optimized by fred41
+//modif siskojay team kkz, extended&optimized by fred41
 Tee_ActionLoop = {
-	private ["_actdistance","_nextslowrefresh","_side","_hq_side","_side_shop_veh","_side_shop_weapons","_side_shop_ai","_Vehicle_Shop_side","_Weapon_Shop_side","_AI_Shop_side","_invehicle","_action","_lock_action","_is_lock_action","_savegear_action","_is_savegear_action","_grp_leaveaction","_is_grp_leaveaction","_grp_joinaction","_is_grp_joinaction","_townaction","_town_actionarray","_neartown","_nearowntown","_hq_action","_hq_actionarray","_veh_s_action","_veh_s_actionarray","_weap_action","_weap_actionarray","_ai_action","_ai_actionarray","_repairaction","_repairactionarray","_count","_object","_weap_typ","_text","_actioncode"];
+	private ["_actdistance","_nextslowrefresh","_side","_hq_side","_heli_repair_side","_side_shop_veh","_side_shop_heli","_side_shop_weapons","_side_shop_ai","_Vehicle_Shop_side","_Heli_Shop_side","_Weapon_Shop_side","_AI_Shop_side","_invehicle","_action","_lock_action","_is_lock_action","_savegear_action","_is_savegear_action","_grp_leaveaction","_is_grp_leaveaction","_grp_joinaction","_is_grp_joinaction","_townaction","_town_actionarray","_neartown","_nearowntown","_hq_action","_hq_actionarray","_veh_s_action","_veh_s_actionarray","_heli_s_action","_heli_s_actionarray","_weap_action","_weap_actionarray","_ai_action","_ai_actionarray","_repairaction","_repairactionarray","_heli_repairaction","_heli_rep_actarray","_count","_object","_weap_typ","_text","_actioncode"];
 	
 	_is_lock_action 	= false;
 	_townaction			= false;
@@ -19,25 +19,29 @@ Tee_ActionLoop = {
 	
 	_hq_action			= false;
 	_veh_s_action		= false;
+	_heli_s_action		= false;
 	_weap_action 		= false;
 	_ai_action 			= false;
 	_repairaction		= false;
+	_heli_repairaction	= false;
 	_is_savegear_action	= false;
 	
 	_town_actionarray 	= [];
 	_hq_actionarray		= [];
 	_veh_s_actionarray	= [];
+	_heli_s_actionarray	= [];
 	_weap_actionarray 	= [];
 	_ai_actionarray 	= [];
 	_repairactionarray	= [];
+	_heli_rep_actarray	= [];
 	
 	//Group
 	_is_grp_leaveaction	= false;
 	_is_grp_joinaction	= false;
 	
 
-	if (playerSide == west) then { _hq_side = hq_west; _side_shop_veh = west_shop_veh; _side_shop_weapons = west_shop_weapons; _side_shop_ai = west_shop_ai; _Vehicle_Shop_side = TW_Vehicle_Shop_West; _Weapon_Shop_side = TW_Weapon_Shop_West; _AI_Shop_side = TW_AI_Shop_West}; 
-	if (playerSide == east) then { _hq_side = hq_east; _side_shop_veh = east_shop_veh; _side_shop_weapons = east_shop_weapons; _side_shop_ai = east_shop_ai; _Vehicle_Shop_side = TW_Vehicle_Shop_East; _Weapon_Shop_side = TW_Weapon_Shop_East; _AI_Shop_side = TW_AI_Shop_East};
+	if (playerSide == west) then { _hq_side = hq_west; _heli_repair_side = heli_repair_west; _side_shop_veh = west_shop_veh; _side_shop_heli = west_shop_heli; _side_shop_weapons = west_shop_weapons; _side_shop_ai = west_shop_ai; _Vehicle_Shop_side = TW_Vehicle_Shop_West; _Heli_Shop_side = TW_Heli_Shop_West; _Weapon_Shop_side = TW_Weapon_Shop_West; _AI_Shop_side = TW_AI_Shop_West}; 
+	if (playerSide == east) then { _hq_side = hq_east; _heli_repair_side = heli_repair_east; _side_shop_veh = east_shop_veh; _side_shop_heli = east_shop_heli; _side_shop_weapons = east_shop_weapons; _side_shop_ai = east_shop_ai; _Vehicle_Shop_side = TW_Vehicle_Shop_East; _Heli_Shop_side = TW_Heli_Shop_East; _Weapon_Shop_side = TW_Weapon_Shop_East; _AI_Shop_side = TW_AI_Shop_East};
 	_side = str(playerSide);
 	_nextslowrefresh = time + SLOW_INTERVAL;
 	//Loop
@@ -74,10 +78,10 @@ Tee_ActionLoop = {
 		//Check Vehicle
 		if(player == vehicle player) then {
 			_invehicle 	= false;
-			_actdistance = 5;
+			_actdistance = SHORT_DISTANCE;
 		} else {
 			_invehicle 	= true;
-			_actdistance = 15;
+			_actdistance = LONG_DISTANCE;
 		};
 		
 			
@@ -92,14 +96,14 @@ Tee_ActionLoop = {
 		//Lock Unlock Vehicle
 		if (!_invehicle) then {
 			if (!_is_lock_action) then {
-				if ((cursorTarget in TW_Vehicle_Client)&&(player distance cursorTarget < 5)) then {
+				if ((cursorTarget in TW_Vehicle_Client)&&(player distance cursorTarget < SHORT_DISTANCE)) then {
 					_text			= localize "STRS_action_lock";
 					_actioncode		= "[cursorTarget] call Tee_Vehicle_Lock;";
 					_lock_action 	= player addAction [_text, AddActionCode,_actioncode];
 					_is_lock_action = true;
 				};
 			} else {
-				if (!(cursorTarget in TW_Vehicle_Client)||(player distance cursorTarget > 5)) then {
+				if (!(cursorTarget in TW_Vehicle_Client)||(player distance cursorTarget > SHORT_DISTANCE)) then {
 					player removeAction _lock_action;
 					_is_lock_action = false;
 				};
@@ -112,23 +116,7 @@ Tee_ActionLoop = {
 				_is_lock_action = true;
 			};
 		};
-/*		
-		//Save Gear
-		if(((player distance _hq_side) < _actdistance) && !_invehicle ) then {
-			if (!_is_savegear_action) then {
-				//Actions
-				_text 			= format [localize "STRS_action_savegear"];
-				_actioncode		= "loadout = [player] call getLoadout;";
-				_savegear_action = player addAction [_text, AddActionCode,_actioncode];
-				_is_savegear_action	= true;
-			};
-		} else {
-			if (_is_savegear_action) then {
-				player removeAction _savegear_action;
-				_is_savegear_action = false;
-			};	
-		};
-*/		
+
 		//Townshops
 		_neartown = false;
 		_nearowntown = false;
@@ -146,21 +134,22 @@ Tee_ActionLoop = {
 					_action = player addAction [_text, AddActionCode,_actioncode];
 					_town_actionarray set [count _town_actionarray, _action];
 				} forEach TW_Vehicle_Shop_Town;
-
-			} else {
-				//Repair
-				_text 			= format [localize "STRS_action_repair",TW_Repair_Cost];
-				_actioncode		= "[] spawn Tee_Sup_Repair;";
-				_action 		= player addAction [_text, AddActionCode,_actioncode];
-				_town_actionarray = _town_actionarray + [_action];
+				_townaction = true;
+			} else { if (!(vehicle player isKindOf "Air")) then {
+					//Repair
+					_text 			= format [localize "STRS_action_repair",TW_Repair_Cost];
+					_actioncode		= "[] spawn Tee_Sup_Repair;";
+					_action 		= player addAction [_text, AddActionCode,_actioncode];
+					_town_actionarray = _town_actionarray + [_action];
 				
-				//Refuel
-				_text 			= format [localize "STRS_action_refuel",TW_Sup_Fuel_Cost];
-				_actioncode		= "[] spawn Tee_Sup_Refuel;";
-				_action 		= player addAction [_text, AddActionCode,_actioncode];
-				_town_actionarray set [count _town_actionarray, _action];
+					//Refuel
+					_text 			= format [localize "STRS_action_refuel",TW_Sup_Fuel_Cost];
+					_actioncode		= "[] spawn Tee_Sup_Refuel;";
+					_action 		= player addAction [_text, AddActionCode,_actioncode];
+					_town_actionarray set [count _town_actionarray, _action];
+					_townaction = true;
+				};
 			};
-			_townaction = true;
 		};
 		
 		if((!_nearowntown)&&(_townaction)) then {
@@ -179,7 +168,7 @@ Tee_ActionLoop = {
 		
 		
 		//Leave Group
-		if((player distance _hq_side) < _actdistance ) then { 
+		if((player distance _hq_side) < SHORT_DISTANCE ) then { 
 			if (player != leader (group player)) then {
 				if(!_is_grp_leaveaction) then {
 					_text 			= format [localize "STRS_action_grp_leave"];
@@ -220,8 +209,7 @@ Tee_ActionLoop = {
 		//*******************
 		//WEST & EAST
 		//*******************
-		
-		
+/*		
 		//HQ
 		if (TW_Para_MobilBase) then {
 			
@@ -262,11 +250,11 @@ Tee_ActionLoop = {
 				_hq_action		= true;
 			};
 		};
-
+*/
 		
 		
 		//Shop Vehicle
-		if((player distance _side_shop_veh)	< _actdistance) then {
+		if((player distance _side_shop_veh)	< SHORT_DISTANCE) then {
 			if (!_invehicle) then {
 				if(!_veh_s_action) then {
 			
@@ -295,9 +283,38 @@ Tee_ActionLoop = {
 		};
 
 
+		//Shop heli
+		if((player distance _side_shop_heli) < SHORT_DISTANCE) then {
+			if (!_invehicle) then {
+				if(!_heli_s_action) then {
+			
+					titleText[localize "STRS_action_helishop", "PLAIN DOWN"];	//Msg
+			
+					//Actions
+					{
+						_text 			= format [localize "STRS_action_buy",_x call Tee_GetVeh_Name,_x call Tee_GetVeh_Price];
+						_actioncode		= format ["[%1] call Tee_CreateVehicle;",_x];
+						_action 		= player addAction [_text, AddActionCode,_actioncode];
+						_heli_s_actionarray set [count _heli_s_actionarray, _action];
+					} forEach _Heli_Shop_side;
+
+					_heli_s_action = true;
+				};	
+			};
+		} else {
+			if(_heli_s_action) then {
+				{
+					player removeAction _x;
+				} forEach _heli_s_actionarray;
+				
+				_heli_s_actionarray = [];
+				_heli_s_action = false;
+			};
+		};
+		
 		
 		// Weapon
-		if((player distance _side_shop_weapons) < 3) then {
+		if((player distance _side_shop_weapons) < SHORT_DISTANCE) then {
 			if (!_invehicle) then {
 				if(!_weap_action) then {
 			
@@ -341,7 +358,7 @@ Tee_ActionLoop = {
 
 		
 		//AI Shop
-		if((player distance _side_shop_ai) < 4) then { 
+		if((player distance _side_shop_ai) < SHORT_DISTANCE) then { 
 			if (!_invehicle) then {
 				if(!_ai_action) then {
 
@@ -368,12 +385,10 @@ Tee_ActionLoop = {
 			};
 		};
 	
-		
-		
-		// Repair Station
-		if((player distance _hq_side) < 40) then {
-			if (_invehicle) then {//modif siskojay pour reparer
-				if(!_repairaction) then {
+		// Vehicle Repair Station
+		if((player distance _hq_side) < LONG_DISTANCE) then {
+			if (_invehicle) then {
+				if((!_repairaction)&&!((vehicle player) isKindOf "Air")) then {
 			
 					//titleText["Repair Station", "PLAIN DOWN"];	//Msg
 			
@@ -409,6 +424,45 @@ Tee_ActionLoop = {
 			};
 		};
 
+		// Heli Repair Station
+		if((player distance _heli_repair_side) < LONG_DISTANCE) then {
+			if (_invehicle) then {
+				if(!_heli_repairaction) then {
+			
+			
+					//Repair
+					_text 			= format [localize "STRS_action_repair",TW_Repair_Cost_Heli];
+					_actioncode		= "[] spawn Tee_Sup_Repair_Heli;";
+					_action 		= player addAction [_text, AddActionCode,_actioncode];
+					_heli_rep_actarray set [count _heli_rep_actarray, _action];
+				
+					//Refuel
+					_text 			= format [localize "STRS_action_refuel",TW_Sup_Fuel_Cost_Heli];
+					_actioncode		= "[] spawn Tee_Sup_Refuel_Heli;";
+					_action 		= player addAction [_text, AddActionCode,_actioncode];
+					_heli_rep_actarray set [count _heli_rep_actarray, _action];
+				
+					//Reammo
+					_text 			= format [localize "STRS_action_reammo",TW_Sup_Reammo_Cost_Heli];
+					_actioncode		= "[] spawn Tee_Sup_Reammo_Heli;";
+					_action 		= player addAction [_text, AddActionCode,_actioncode];
+					_heli_rep_actarray set [count _heli_rep_actarray, _action];
+				
+					_heli_repairaction	= true;
+				};
+			};
+		} else {
+			if(_heli_repairaction) then {
+				{
+					player removeAction _x;
+				} forEach _heli_rep_actarray;
+				
+				_heli_rep_actarray 	= [];
+				_heli_repairaction	= false;
+			};
+		};
+		
+		
 		//End
 		sleep FAST_INTERVAL;
 	};

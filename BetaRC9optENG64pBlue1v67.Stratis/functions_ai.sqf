@@ -100,14 +100,14 @@ CT_AI_CreateWaypoints = {
 	if(count (waypoints _guard) == x_AIDef_WP_Count && x_AIDef_WP_Count > 1 ) then  {
 		//_wp1		=	(waypoints _guard) select 1;		//Erster Wegpunkt der Gruppe
 		_wp1_pos	=	 _pos;
-		if(isserver) then {diag_log format["Report: wp1 %1 ", _wp1_pos];};
+//		if(isserver) then {diag_log format["Report: wp1 %1 ", _wp1_pos];};
 		_waypoint	= 	_guard addwaypoint [_wp1_pos,0];	//Erstellen des Letzten wegpunktes == position des ersten (wegen cycle)
 		_wp			=	[_guard,x_AIDef_WP_Count];
 
 	} else {
 		_waypoint= 		_guard addwaypoint [_pos,x_AIDef_WP_Radius];
 		_wp=			[_guard,(count waypoints _guard)-1];
-		if(isserver) then {diag_log format["Report: wp %1 - waypoint: %2 ",getWPPos _wp,(count waypoints _guard)-1 ];};
+//		if(isserver) then {diag_log format["Report: wp %1 - waypoint: %2 ",getWPPos _wp,(count waypoints _guard)-1 ];};
 	};
 	
 	if((_wp select 1)== x_AIDef_WP_Count) then {

@@ -1,4 +1,4 @@
-#define CLEANUP_INTERVAL 1200
+#define CLEANUP_INTERVAL 300
 private ["_i","_Type","_clearTypes","_count", "_delay", "_Objects"];
 
 _clearTypes = ["Weaponholder", "WeaponHolderSimulated", "GroundWeaponHolder", "Wreck_Base", "Wreck_Base_F", "crater", "craterlong"];
@@ -10,9 +10,10 @@ while{true} do {
 		sleep _delay;
 		_type = (_clearTypes select _i);
 		{
-			if (_x isKindOf _Type) then {
+			if (_x isKindOf _type) then {
 				deleteVehicle _x;
 				diag_log format ["deleted: %1", typeOf _x];
+				sleep 0.01;
 			};
 		} foreach allMissionObjects "All";
 	};
