@@ -2,6 +2,7 @@
 	Script written by TeeTime dont remove this comment
 */
 ///modif siskojay team kkz//de 50 a 80 enlever//
+
 //Functions
 Tee_Server_Init = {
 	"TW_Town_Taken_Server" addPublicVariableEventHandler {
@@ -44,7 +45,6 @@ Tee_Server_Init_Values = {
 Tee_Server_KickPlayer = {
 	serverCommand format["#kick %1",call compile _this];
 };
-
 
 
 //Base
@@ -93,7 +93,6 @@ Tee_Server_Base_Build_West = {
 	
 	//Set Veh Spawn
 	west_shop_veh setPosATL [(getPos _hq) select 0,((getPos _hq) select 1) + 10,(getPos _hq) select 2];
-	"west_vehspawn" setMarkerPos [((getPos _hq) select 0) - 10,((getPos _hq) select 1),(getPos _hq) select 2];	//Nicht genutzt	
 	
 	//Set Weapon Shop
 	west_shop_weapons setPosATL [(getPos _hq) select 0,((getPos _hq) select 1) + 5,(getPos _hq) select 2];
@@ -119,7 +118,6 @@ Tee_Server_Base_Build_East = {
 		
 	//Set Veh Spawn
 	east_shop_veh setPosATL [(getPos _hq) select 0,((getPos _hq) select 1) + 10,(getPos _hq) select 2];
-	"east_vehspawn" setMarkerPos [((getPos _hq) select 0) - 10,((getPos _hq) select 1),(getPos _hq) select 2];	//Nicht genutzt
 	
 	//Set Weapon Shop
 	east_shop_weapons setPosATL [(getPos _hq) select 0,((getPos _hq) select 1) + 5,(getPos _hq) select 2];
@@ -307,15 +305,16 @@ Tee_Server_Town_CreateAIDef = {
 	Must be spawned
 */
 Tee_Server_Town_Repair = {
-	private ["_town","_objects"];	
+	private ["_town","_objects", "_delay"];	
 
 	if(TW_HC_Activ && isDedicated) exitWith {};
 	if(isDedicated) then {diag_log "Report: Server Town Repairing started";};
 	if(TW_HC_Client) then {diag_log "Report: Town Repairing started";};
 	
 	_town = _this select 0;
+	if	(count _this > 1) then {_delay = _this select 1} else {_delay = 120};
 	
-	sleep 120;	//Wait 2 Minutes to let player leave the area
+	sleep _delay;	//Wait 2 Minutes to let player leave the area
 	
 	_objects = (getPos _town) nearObjects ["Building",150];
 	
@@ -323,7 +322,7 @@ Tee_Server_Town_Repair = {
 	{
 		if(damage _x > 0) then {
 			_x setDamage 0;
-			sleep 5;
+			sleep 1;
 		};
 	} forEach _objects;
 };
@@ -341,13 +340,21 @@ Tee_Server_Restart = {
 
 	if(TW_Server_Restart) exitWith {};
 	TW_Server_Restart = true;
+	
+	//Repair Everything around towns
+	{
+			[_x, 0] spawn Tee_Server_Town_Repair;
+	} forEach TW_TownArray;
 
-	//Repair Everything
+	//Repair Everything around hq
 	{
 		_x setDamage 0;
-	} forEach ((getPos hq_west) nearObjects 5000);
+	} forEach ((getPos hq_west) nearObjects 200);
+
+	{
+		_x setDamage 0;
+	} forEach ((getPos hq_east) nearObjects 200);
 	
-	sleep 2;
 	
 	//Kill all Units
 	{
@@ -361,7 +368,7 @@ Tee_Server_Restart = {
 
 	//Vehicles
 	{
-		if(!(_x in _basicvehicles)) then {deleteVehicle _x;};
+		if(!(_x in TW_BasicVehicles)) then {deleteVehicle _x;};
 	} forEach vehicles;
 	
 	//Bodies
@@ -390,7 +397,7 @@ Tee_Server_CleanUp = {
 	
 	_i 					= 0;
 	TW_BasicVehicles 	= vehicles;	//List of all Vehicles at Missionstart
-	_shops 				= [hq_west,west_shop_veh,west_shop_heli1,west_shop_weapons,west_shop_ai,hq_east,east_shop_veh,east_shop_weapons,east_shop_ai];
+	_shops 				= [hq_west,west_shop_veh,west_shop_heli,west_shop_weapons,west_shop_ai,hq_east,east_shop_veh,east_shop_heli,east_shop_weapons,east_shop_ai];
 	_shoploc 			= [];
 	_vehiclearray		= [];
 	_vehiclearraynew 	= [];
@@ -399,20 +406,14 @@ Tee_Server_CleanUp = {
 	waitUntil {HQ_placed};
 	//Save Shop Locations
 	{
-		_shoploc = _shoploc + [[_x,getPos _x]];
+		_shoploc set [count _shoploc, [_x,getPos _x]];
 	} forEach _shops;
 	
 		
 	while {true} do {
 	
-			//Check Shops
-		//	{
-		//		if((_x select 0) distance (_x select 1) > 2) then {
-		//			(_x select 0) setPos (_x select 1);
-		//		};
-		//	} forEach _shoploc;	
 	
-	
+/*	
 		//Check for Missionend
 		if(time > (3600 * TW_roundtime)) then {
 			TW_Mission_End = true;
@@ -424,8 +425,9 @@ Tee_Server_CleanUp = {
 				endMission "END1";
 			};
 		};
-	
-
+*/
+		
+/*
 		//Check for HC
 		if(time > 120) then {
 			if(isPlayer TW_HC_ClientSlot) then {
@@ -434,28 +436,7 @@ Tee_Server_CleanUp = {
 				//TW_HC_Activ	= false;	//TeeTimeTest	mal deaktiviert
 			};
 		};
-		
-		
-		//Check HQ Pos Anti Water Protection
-		if(surfaceIsWater (getPos hq_west)) then {
-			hq_west setPos (TW_Server_HQPos select 0);
-			hq_west setDir 90;
-			hq_west setFuel 0;
-			hq_west lock true;
-			
-			if(alive (driver hq_west)) then {
-				(driver hq_west) setDamage 1;
-			};
-		};
-		if(surfaceIsWater (getPos hq_east)) then {
-			hq_east setPos (TW_Server_HQPos select 1);
-			hq_east setDir 90;
-			hq_east setFuel 0;
-			hq_east lock true;
-			if(alive (driver hq_east)) then {
-				(driver hq_east) setDamage 1;
-			};
-		};
+*/		
 	
 	
 		//Clean
@@ -475,44 +456,22 @@ Tee_Server_CleanUp = {
 					sleep 0.1;
 				};
 			} forEach allGroups;
-	
-			//Vehicles
+
+			//Check Shops Posiion
 			{
-				if(!alive _x && !(_x in TW_BasicVehicles)) then {deleteVehicle _x; sleep 0.1};
-			} forEach vehicles;
-			
-			//Inaktiv Vehicles
-			_vehiclearray 		= _vehiclearraynew;
-			_vehiclearraynew 	= [];
-			{
-				if(alive _x && count (crew _x) == 0 && !(_x in TW_BasicVehicles)) then {
-					_found = false;
-					for [{_w=0},{_w<= count _vehiclearray},{_w=_w+1}] do {
-						if(_x == ((_vehiclearray select _w) select 0)) then {
-							if((getPos _x) distance ((_vehiclearray select _w) select 1) < 1) then {
-								deleteVehicle _x;
-								sleep 0.1;
-							} else {
-									_vehiclearraynew = _vehiclearraynew + [[_x,getPos _x]];
-							};
-							_found = true;	
-						};
-					};
-					if(!_found) then {
-						_vehiclearraynew = _vehiclearraynew + [[_x,getPos _x]];
-					};
+				if((_x select 0) distance (_x select 1) > 2) then {
+					(_x select 0) setPos (_x select 1);
 				};
-			} forEach vehicles;
+			} forEach _shoploc;	
 		};
-		
 		
 		//Report
 		if(isDedicated) then {diag_log format ["Report: Server FPS %1",diag_fps];};
 		if(TW_HC_Client) then {diag_log format ["Report: HC FPS %1",diag_fps];};
-
 		
 		//End
 		_i = _i + 1;
 		sleep 10;
 	};
 };
+

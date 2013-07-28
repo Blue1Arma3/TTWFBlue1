@@ -1066,14 +1066,14 @@ Tee_AttackTown = {
 				};
 			} else {
 				//Scout Town
-				_detected = _object getVariable "TownDetected";
+				_detected = _object getVariable ["TownDetected",[]];
 				if( !(TW_playerside in _detected) && (player distance _object <= TW_Town_DecDis) && !TW_Para_satintel) then {
 					
 					Tee_Konto = Tee_Konto + Tee_Money_TownScout;
 					_text = format [localize "STRS_town_scoutbonus",Tee_Money_TownScout];
 					titleText[_text, "PLAIN DOWN"];	//Msg
 	
-					_detected = _detected + [TW_playerside];
+					_detected set [count _detected, TW_playerside];
 					_object setVariable ["TownDetected", _detected , true];
 				};
 			};	
@@ -1159,11 +1159,6 @@ Tee_Stra_TowncanCap_Basic = {
 //Support and Supply Functions
 //**********************************************************
 
-
-/*
-	Repair Function
-	Must be spawned
-*/
 Tee_Sup_Repair = {
 	private ["_i","_vehicle","_pos","_damage","_text"];	
 
@@ -1200,12 +1195,6 @@ Tee_Sup_Repair = {
 	titleText[localize "STRS_repair_end", "PLAIN DOWN"];	//Msg
 };
 
-
-
-/*
-	Refuel Function
-	Must be spawned
-*/
 Tee_Sup_Refuel = {
 	private ["_i","_vehicle","_pos"];	
 
@@ -1239,14 +1228,6 @@ Tee_Sup_Refuel = {
 	titleText[localize "STRS_refuel_end", "PLAIN DOWN"];	//Msg	
 };
 
-
-
-/*
-	Reammo Function
-	Must be spawned
-	
-	
-*/
 Tee_Sup_Reammo = {
 	private ["_i","_vehicle","_pos","_text"];	
 
@@ -1273,6 +1254,167 @@ Tee_Sup_Reammo = {
 	titleText[localize "STRS_ammo_end", "PLAIN DOWN"];	//Msg
 };
 
+// Actions for Heli
+Tee_Sup_Repair_Heli = {
+	private ["_i","_vehicle","_pos","_damage","_text"];	
+
+	_vehicle = vehicle player;
+	_pos	= getPos _vehicle;
+	_damage = getDammage _vehicle;
+	
+	if(_damage == 0) exitWith {
+		titleText[localize "STRS_repair_cant", "PLAIN DOWN"];	//Msg
+	};
+	
+	if(Tee_Konto < TW_Repair_Cost_Heli) exitWith {
+		titleText[localize "STRS_repair_nomoney", "PLAIN DOWN"];	//Msg
+	};
+	
+	Tee_Konto = Tee_Konto - TW_Repair_Cost_Heli;
+	_vehicle engineOn false;
+	
+	_text = format [localize "STRS_repair_started", TW_Repair_Time_Heli];
+	titleText[_text, "PLAIN DOWN"];	//Msg
+	_vehicle vehicleChat "Repairing...";
+
+	for [{_i=0},{_i< TW_Repair_Time_Heli},{_i=_i+5}] do {
+		sleep 5;
+
+		if(getPos _vehicle distance _pos > 1) exitWith {
+			titleText[localize "STRS_repair_aborted", "PLAIN DOWN"];	//Msg
+		};
+		
+		_vehicle setDammage (getDammage _vehicle - (_damage / (TW_Repair_Time_Heli / 5))); 
+		titleText[localize "STRS_repair_msg", "PLAIN DOWN"];	//Msg
+	};
+	
+	_vehicle setDammage 0;
+	titleText[localize "STRS_repair_end", "PLAIN DOWN"];	//Msg
+	_vehicle vehicleChat format ["Repairing done."];
+};
+
+Tee_Sup_Refuel_Heli = {
+	private ["_i","_vehicle","_pos"];	
+
+	_vehicle = vehicle player;
+	_pos	= getPos _vehicle;
+	
+	if(fuel _vehicle == 1) exitWith {
+		titleText[localize "STRS_refuel_full", "PLAIN DOWN"];	//Msg
+	};
+	
+	if(Tee_Konto < TW_Sup_Fuel_Cost_Heli) exitWith {
+		titleText[localize "STRS_refuel_nomoney", "PLAIN DOWN"];	//Msg
+	};
+	
+	Tee_Konto = Tee_Konto - TW_Sup_Fuel_Cost_Heli;
+	_vehicle engineOn false;
+	
+	titleText[localize "STRS_refuel_started", "PLAIN DOWN"];	//Msg
+	_vehicle vehicleChat "Fueling...";
+
+	while {fuel _vehicle < 1} do {
+		sleep TW_Sup_Fuel_Time_Heli;
+
+		if(getPos _vehicle distance _pos > 1) exitWith {
+			titleText[localize "STRS_refuel_aborted", "PLAIN DOWN"];	//Msg
+		};
+		
+		_vehicle setFuel ((fuel _vehicle + 0.1) min 1);
+		titleText[localize "STRS_refuel_status", "PLAIN DOWN"];	//Msg
+	};
+
+	titleText[localize "STRS_refuel_end", "PLAIN DOWN"];	//Msg	
+	_vehicle vehicleChat format ["Fueling done."];
+};
+
+Tee_Sup_Reammo_Heli = {
+	private ["_i","_vehicle","_pos","_text","_magazines","_x_reload_time","_type","_removed","_count","_count_other","_config","_config2"];	
+
+	_vehicle 		= vehicle player;
+	_pos			= getPos _vehicle;
+	_x_reload_time 	= 1;
+	_type 			= typeOf _vehicle;
+	_vehicle setVehicleAmmo 1;
+	_magazines 		= getArray(configFile >> "CfgVehicles" >> _type >> "magazines");
+	
+	if(Tee_Konto < TW_Sup_Reammo_Cost_Heli) exitWith {
+		titleText[localize "STRS_ammo_nomoney", "PLAIN DOWN"];	//Msg
+	};
+	
+	Tee_Konto = Tee_Konto - TW_Sup_Reammo_Cost_Heli;
+	_vehicle engineOn false;
+	
+	_text = format [localize "STRS_ammo_started", TW_Sup_Reammo_Time_Heli];
+	titleText[_text, "PLAIN DOWN"];	//Msg
+	_vehicle vehicleChat format ["On Service %1... Wait %2 seconds, your ammo is on the way...", _type, TW_Sup_Reammo_Time_Heli];
+	
+	sleep TW_Sup_Reammo_Time_Heli;
+
+	if(getPos _vehicle distance _pos > 1) exitWith {titleText[localize "STRS_ammo_aborted", "PLAIN DOWN"];};
+
+	if (count _magazines > 0) then {
+		_removed = [];
+		{
+			if (!(_x in _removed)) then {
+				_vehicle removeMagazines _x;
+				_removed set [ count _removed , _x];
+			};
+		} forEach _magazines;
+		{
+			_vehicle vehicleChat format ["Recharge, %1", _x];
+			sleep _x_reload_time;
+			if(getPos _vehicle distance _pos > 1) exitWith { titleText[localize "STRS_ammo_aborted", "PLAIN DOWN"];};
+			_vehicle addMagazine _x;
+		} forEach _magazines;
+	};
+
+	_count = count (configFile >> "CfgVehicles" >> _type >> "Turrets");
+
+	if (_count > 0) then {
+		for "_i" from 0 to (_count - 1) do {
+			_config = (configFile >> "CfgVehicles" >> _type >> "Turrets") select _i;
+			_magazines = getArray(_config >> "magazines");
+			_removed = [];
+			{
+				if (!(_x in _removed)) then {
+					_vehicle removeMagazines _x;
+					_removed set [ count _removed , _x];
+				};
+			} forEach _magazines;
+			{
+				_vehicle vehicleChat format ["Recharge %1", _x];
+				sleep _x_reload_time;
+				if(getPos _vehicle distance _pos > 1) exitWith { titleText[localize "STRS_ammo_aborted", "PLAIN DOWN"];};
+				_vehicle addMagazine _x;
+			} forEach _magazines;
+			_count_other = count (_config >> "Turrets");
+			if (_count_other > 0) then {
+				for "_i" from 0 to (_count_other - 1) do {
+					_config2 = (_config >> "Turrets") select _i;
+					_magazines = getArray(_config2 >> "magazines");
+					_removed = [];
+					{
+						if (!(_x in _removed)) then {
+							_vehicle removeMagazines _x;
+							_removed set [ count _removed , _x];
+						};
+					} forEach _magazines;
+					{
+						_vehicle vehicleChat format ["Recharge %1", _x]; 
+						sleep _x_reload_time;
+						if(getPos _vehicle distance _pos > 1) exitWith { titleText[localize "STRS_ammo_aborted", "PLAIN DOWN"];};
+						_vehicle addMagazine _x;
+					} forEach _magazines;
+				};
+			};
+		};
+	};
+	_vehicle setVehicleAmmo 1;	// Reload turrets / drivers magazine
+
+	titleText[localize "STRS_ammo_end", "PLAIN DOWN"];	//Msg
+	_vehicle vehicleChat format ["%1 Done ...", _type];
+};
 
 
 //**********************************************************
@@ -1341,9 +1483,9 @@ Tee_PlayerMarker_Loop = {
 			_name 		= _x select 1;
 			_text		= _x select 2;
 			
-			_detected 	= _object getVariable "TownDetected";
-			_points 	= _object getVariable "TownPoints";
-			_side 		= _object getVariable "TownSide";
+			_detected 	= _object getVariable ["TownDetected",[]];
+			_points 	= _object getVariable ["TownPoints", 100];
+			_side 		= _object getVariable ["TownSide", "civ"];
 			
 			
 
@@ -1501,9 +1643,17 @@ Tee_CreateVehicle = {
 
 	[] call Tee_ShowMoney;
 	//Create
-	_veh = _class createVehicle (position player);
-	_veh setVehicleVarName format["veh_%1_%2",floor(time),floor(random(50))];
+	if (_typ == "Air") then {
+		_veh = _class createVehicle (getMarkerPos format["heli_spawn_%1", playerSide]);
+	}else {
+		_veh = _class createVehicle (position player);
+	};
 	
+	_veh setVehicleVarName format["veh_%1_%2",floor(time),floor(random(50))];
+
+	MonitorVehicleServer = [netid _veh];
+	publicVariableServer "MonitorVehicleServer";
+
 	//Lock/Unlock Action
 	if(_typ != "Box") then {
 		_veh lock true;
@@ -1522,7 +1672,6 @@ Tee_CreateVehicle = {
 		//player groupchat str weaponCargo _veh;	//Debug
 	};
 };
-
 
 
 /*

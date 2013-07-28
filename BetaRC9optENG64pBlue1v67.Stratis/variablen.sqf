@@ -4,14 +4,14 @@
 ///modif siskojay team kkz//
 //Ideen
 // ServicePoint Building : Military Cargo House V1 	(Cargo_House_V1_F)
-// Baracks		 : Military Cargo HQ V1 	(Cargo_HQ_V1_F)
-// ComandPost		 : Military Cargo OP V1 	(Cargo_Patrol_V1_F)!?! nicht sicher
+// Baracks		: Military Cargo HQ V1 	(Cargo_HQ_V1_F)
+// ComandPost	: Military Cargo OP V1 	(Cargo_Patrol_V1_F)!?! nicht sicher
 
 //***********************************************************************
 //Basic
 //***********************************************************************
 
-AddActionCode 	= compile preprocessFileLineNumbers "test.sqf";
+AddActionCode 	= compile preprocessFileLineNumbers "actionhook.sqf";
 if(isNil "HQ_placed") 			then {HQ_placed = false;};
 TW_HQ_Placed_Client = false;
 if(isNil "TW_ServerStarted") 	then {TW_ServerStarted = false;};
@@ -186,6 +186,16 @@ TW_Sup_Fuel_Time = 5;		//Time to fill up 10% of the tank
 TW_Sup_Reammo_Cost = 600;
 TW_Sup_Reammo_Time = 60;
 
+TW_Repair_Cost_Heli = 750;
+TW_Repair_Time_Heli = 60;
+
+TW_Sup_Fuel_Cost_Heli = 400;
+TW_Sup_Fuel_Time_Heli = 10;		//Time to fill up 10% of the tank
+
+TW_Sup_Reammo_Cost_Heli = 1200;//1200
+TW_Sup_Reammo_Time_Heli = 60;//60
+
+
 TWB1_Reinforce_Cost = 15000;	// Town AI reinforcement price at flagpoles
 
 //***********************************************************************
@@ -196,7 +206,7 @@ TWB1_Reinforce_Cost = 15000;	// Town AI reinforcement price at flagpoles
 // will give same rights as the admin
 // uncomment line below
 TW_Teammembers = [
-		""	//Blue1
+		"76561197979724311"	//Blue1
 		];
 
 //***********************************************
@@ -229,6 +239,22 @@ TW_Vehicle_Shop_East = [
 306,
 310,
 311
+];
+
+TW_Heli_Shop_West = [
+601,
+602,
+605,
+606
+];
+
+
+
+TW_Heli_Shop_East = [
+603,
+604,
+607,
+608
 ];
 
 
@@ -459,14 +485,14 @@ Tee_Veh_Array =
 	[301,		"Hunter",			"B_MRAP_01_F",					2000 * vehicle_price,			0,			"Car"],
 	[302,		"Hunter GMG",			"B_MRAP_01_gmg_F",			17000 * vehicle_price,			0,			"Car"],
 	[303,		"Hunter HMG",			"B_MRAP_01_hmg_F",			8000 * vehicle_price,			0,			"Car"],
-	[304,		"Pick Up Jeep",			"C_Offroad_01_F",				500 * vehicle_price,			0,			"Car"],
+	[304,		"Pick Up Jeep",			"C_Offroad_01_F",			500 * vehicle_price,			0,			"Car"],
 	[305,		"Ifrit",			"O_MRAP_02_F",					2000 * vehicle_price,			0,			"Car"],
 	[306,		"Ifrit GMG",			"O_MRAP_02_gmg_F",			17000 * vehicle_price,			0,			"Car"],
 	[307,		"Ifrit MG",			"O_MRAP_02_hmg_F",				8000 * vehicle_price,			0,			"Car"],
-	[308,		"HEMTT Transport",			"B_Truck_01_covered_F",			3500 * vehicle_price,			0,			"Car"],
+	[308,		"HEMTT Transport",			"B_Truck_01_covered_F",	3500 * vehicle_price,			0,			"Car"],
 	[309,		"AMV-7 Marshall",	"B_APC_Wheeled_01_cannon_F",	16000 * vehicle_price,			0,			"Car"],
 	[310,		"MSE-3 Marid",	"O_APC_Wheeled_02_rcws_F",			16000 * vehicle_price,			0,			"Car"],
-	[311,		"Zamak Tansport",	"O_Truck_02_covered_F",				3500 * vehicle_price,			0,			"Car"],
+	[311,		"Zamak Tansport",	"O_Truck_02_covered_F",			3500 * vehicle_price,			0,			"Car"],
 
 	
 	//Truck
@@ -475,11 +501,15 @@ Tee_Veh_Array =
 	//Tank
 	//[501,		"Hunter",			"MRAP_01_base_F",				1000 * vehicle_price,			0,			"Tank"],
 	
-	//Air
+	//Air																	//40000
 	[601,		"AH 9 Armed",			"B_Heli_Light_01_armed_F",			40000 * airvehicle_price,		0,			"Air"],
 	[602,		"MH 9 Transport",		"B_Heli_Light_01_F",				14000 * airvehicle_price,		0,			"Air"],
-	[603,		"KA 60 Transport",		"O_Heli_Light_02_unarmed_F",			14000 * airvehicle_price,		0,			"Air"],
-	[604,		"KA 60 Armed",		  	"O_Heli_Light_02_F",				40000 * airvehicle_price,		0,			"Air"]
+	[603,		"KA 60 Transport",		"O_Heli_Light_02_unarmed_F",		14000 * airvehicle_price,		0,			"Air"],
+	[604,		"KA 60 Armed",		  	"O_Heli_Light_02_F",				40000 * airvehicle_price,		0,			"Air"],
+	[605,		"AH-99 Blackfoot",		"B_Heli_Attack_01_F",				50000 * airvehicle_price,		0,			"Air"],
+	[606,		"UH-80 Ghosthawk",		"B_Heli_Transport_01_F",			25000 * airvehicle_price,		0,			"Air"],
+	[607,		"Mi-48 Kajman",			"O_Heli_Attack_02_F",				50000 * airvehicle_price,		0,			"Air"],
+	[608,		"Mi-48 Kajman B",		"O_Heli_Attack_02_black_F",			50000 * airvehicle_price,		0,			"Air"]
 	
 ];
 
