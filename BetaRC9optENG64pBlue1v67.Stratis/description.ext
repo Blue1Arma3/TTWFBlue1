@@ -18,7 +18,7 @@ class Header
 {
 	gameType   = CTI;          // DM, Team, Coop, CTI
 	minPlayers = 1;            // min # of players the mission supports
-	maxPlayers = 64;           // Max # of players the mission supports
+	maxPlayers = 66;           // Max # of players the mission supports
 };
 
 #include "client\systems\common.hpp"

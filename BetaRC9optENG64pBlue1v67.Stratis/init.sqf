@@ -73,7 +73,6 @@
 		-AI Spieler statt Spieler
 		-Startresourcen (500, 1000, 2000, 5000, 10000, 20000, 50000)
 */
-
 finishMissionInit;
 enableSaving [false,false];
 
@@ -81,8 +80,13 @@ if(isServer) then { X_Server = true;} else { X_Server = false;};
 if(!isDedicated) then { X_Client = true;} else { X_Client = false;};
 
 if(X_Client) then {
-	//[] execVM "client\init.sqf";
-	execVM "softProtect.sqf"; // replacement for grenadeStop, fred41
+	// client init for softProtect, by fred41
+	[] call compile preprocessFileLineNumbers "softProtectClientInit.sqf";
+};
+
+if(X_Server) then {
+	// server init for softProtect, by fred41
+	[] call compile preprocessFileLineNumbers "softProtectServerInit.sqf";
 };
 
 west setFriend [resistance, 0];
@@ -101,10 +105,11 @@ skipTime ((paramsArray select 0) - daytime + 24 ) % 24;
 setViewDistance (paramsArray select 1);
 setTerrainGrid (paramsArray select 2);
 
-waitUntil { (( (time > 1) && (alive player)) || isServer ) };
+waitUntil { (( (time > 1) && (alive player)) || X_Server ) };
+
 
 //Mission Variables
-debug 				= if(isServer && !isDedicated && name player == "TWHC") then {true} else {false};
+debug 				= if(X_Server && X_Client && name player == "TWHC") then {true} else {false};
 TW_restart			= if((paramsArray select 3) == 1) then {true} else {false};	//Restarts Mission without a Restart
 TW_roundtime		= (paramsArray select 9);									//Time Limit for each round
 TW_Addons_Active	= false;
@@ -129,7 +134,6 @@ TW_AI_Def_lvl		= (paramsArray select 4);	//AI Guards level normal is 1 -> 6 men
 TW_AI_max			= (paramsArray select 5);	//Max AI ammount per player
 TW_AI_Patrols		= if((paramsArray select 16) == 1) then {true} else {false};	//Will the AI Def stay static or will they randome patrol?
 
-
 TW_Strategic_Street	= if((paramsArray select 18) == 1) then {true} else {false};
 
 
@@ -149,39 +153,33 @@ TW_HC_Def_AI		= if((paramsArray select 15) == 0) then {false} else {true};		//Se
 TW_Skill_AICiv		= (paramsArray select 19) /100; 	//Skill Civil
 TW_Skill_AIDef		= (paramsArray select 20) /100;		//Skill Army Defense
 TW_Skill_AIOff		= (paramsArray select 21) /100;		//Skill Army offense
+
 //Functions and Variables
 [] call compile preprocessFileLineNumbers "variablen.sqf";
 [] call compile preprocessFileLineNumbers "functions.sqf";
 [] call compile preprocessFileLineNumbers "functions_action.sqf";
 [] call compile preprocessFileLineNumbers "functions_ai.sqf";
 [] call compile preprocessFileLineNumbers "functions_group.sqf";
+[] call compile preprocessFileLineNumbers "weaponArrays.sqf"; //Gunstore Weapon List - Gun Store Base List
 
-if((isServer && !TW_ServerStarted) || (TW_HC_Client && TW_HC_Activ)) then {	//Nur zum Test !TW_Server ... kann eigentlich raus
+
+if(X_Server || (TW_HC_Client && TW_HC_Activ)) then {	
 	[] call compile preprocessFileLineNumbers "functions_server.sqf";
 	[] call compile preprocessFileLineNumbers "functions_HC.sqf";
 };
 
-//init loadout
-getLoadout = compile preprocessFileLineNumbers 'loadout\fnc_get_loadout.sqf';
-setLoadout = compile preprocessFileLineNumbers 'loadout\fnc_set_loadout.sqf';
-
 // init revive
-if((paramsArray select 22) == 1) then {call compile preprocessFile "=BTC=_revive\=BTC=_revive_init.sqf";}; // disabled fred41 (uninitialized variable _obj ???)
+if((paramsArray select 22) == 1) then {call compile preprocessFile "=BTC=_revive\=BTC=_revive_init.sqf";}; // uninitialized variable _obj ???
 
-// init suppress
-// if((paramsArray select 23) == 1) then {_h = [2] execvm "tpwcas\tpwcas_script_init.sqf";waitUntil{(scriptDone _h)};}; // kann wech, fred41
-
-//mission message
-[TW_welcome_message,"Blue1s Teetime Warfare",nil,true] spawn BIS_fnc_guiMessage;
-
-
-//Init
-"BIS_fnc_MP_packet" addPublicVariableEventHandler {};
-
-if(X_Server) then {[] execVM "server\init.sqf";};
+if(X_Server) then {[] execVM "server\init.sqf";};// 
 
 if(X_Client) then {
-	waitUntil {player == player};
+	//mission message
+	[TW_welcome_message,"Blue1s Teetime Warfare",nil,true] spawn BIS_fnc_guiMessage;
+
+	//init loadout
+	getLoadout = compile preprocessFileLineNumbers 'loadout\fnc_get_loadout.sqf';
+	setLoadout = compile preprocessFileLineNumbers 'loadout\fnc_set_loadout.sqf';
 
 	//Wipe Group.
 	if(count units group player > 1) then
@@ -190,37 +188,24 @@ if(X_Client) then {
 		[player] join grpNull;    
 	};
 
-	//[] execVM "client\init.sqf";
-	execVM "softProtect.sqf"; // replacement for grenadeStop, fred41
-
+	execVM "briefing.sqf";
 };
-
-//loadPlayerMenu = compile preprocessFile "client\systems\playerMenu\init.sqf";
-
-execVM "briefing.sqf";
-//execvm "Tee_Server_Town_CreateAIDefBUYexec.sqf";
-//call compile preprocessFile "=BTC=_TK_punishment\=BTC=_tk_init.sqf";
-//[] execVM "INSLimitedAdmin\initAH.sqf";
-//[player] execVM "spawnProtectionO.sqf";
-//[player] execVM "spawnProtectionB.sqf";
-//[player] execVM "protectionzones.sqf";
-//[] execVM "protectionzones.sqf"; // disabled (reason for heli crash and performance probs), fred41
 
 
 //Server
-if(isServer && !TW_ServerStarted) then {
-	TW_ServerStarted = true;
-	publicVariable "TW_ServerStarted";
+if(X_Server) then {
+
 	if(isDedicated || debug) then {diag_log "Report: ServerInit Started";};
-	
+
 	//Basic
 	[] call Tee_Server_Init;
 	[] call Tee_Server_Init_Values;
 	if(!TW_HC_Activ) then {
+		
 		[] spawn Tee_Server_CleanUp;
 	};
 	
-	[] execVM "cleanUp.sqf"; // cleanUp, replacing clearItem&clearBody, have to be checked for efficience, fred41
+	[] execVM "cleanUp.sqf"; // cleanUp, fred41
 
 	//Towns
 	[] call Tee_Server_CreateTownMarker;
@@ -242,10 +227,11 @@ if(isServer && !TW_ServerStarted) then {
 			} foreach allMissionObjects "";
 		};
 	};
+*/
 	
 	if(isDedicated || debug) then {diag_log "Report: ServerInit Done";};
 };
-*/
+
 
 //HC
 if(TW_HC_Client) then {
@@ -260,7 +246,7 @@ if(TW_HC_Client) then {
 
 
 //Clients
-if(! isDedicated) then {
+if(X_Client) then {
 	[] call Tee_Init_Client;
 	[] call Tee_Player_Init_Values;
 
@@ -280,12 +266,9 @@ if(! isDedicated) then {
 	[] spawn Tee_SetPlayer;
 
 	
-	//Save gear
+	//Initial save gear
 	loadout = [player] call getLoadout;		
 };
 
 if(isDedicated || debug) then {diag_log "Report: Init Done";};
-
-
 [] execVM "client\init.sqf";
-[] execVM "config.sqf";
