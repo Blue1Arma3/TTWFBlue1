@@ -1,0 +1,92 @@
+///modif siskojay team kkz//
+LANGUAGE, English, German, French
+
+STRS_TW_dummy, "English", "German", "French"
+STRS_restart, "Mission finished, it will be restarted in 15 seconds.", "Die Mission ist zu Ende und wird in 15 Sekunden neu gestartet.", "Mission Terminée, elle sera relancée dans 15 secondes."
+STRS_restart2, "Mission restarted", "Mission wurde neu gestartet", "Mission relancéee"
+STRS_SS_Save_Geardone, "Gear saved", "Ausrüstung gespeichert","Armes sauvegardées"
+
+STRS_Vote_Running, "Please wait, a voting is already in progress.", "Bitte warten, es läuft bereits eine Abstimmung.", "Patientez, vote en cours !"
+STRS_Vote_Started, "You started a voting. The team has now %1 seconds to vote.", "Du hast eine Abstimmung gestartet. Dein Team hat jetzt %1 Sekunden Zeit zum Abzustimmen.", "Vous avez lancé un vote. L'équipe a %1 seconds pour voter."
+STRS_Vote_Result, "Voting finished. Results: %1 Yes %2 No", "Abstimmungsergebnis: %1 Ja %2 Nein", "Vote terminé. Resultat: %1 Yes %2 No"
+STRS_Vote_StartInformation, "%1 wants to mobilize the HQ. Please vote!", "%1 möchte das Hauptquartier mobilisieren. Bitte stimme ab!", "%1 veut déplacer le HQ. Merci de voter."
+STRS_Vote_Yes, "Vote Yes", "Stimme mit Ja", "Voter Oui"
+STRS_Vote_No, "Vote No", "Stimme mit Nein", "Voter Non"
+
+STRS_welcome_1, "READ THIS BEFORE YOU START PLEASE: Welcome to TeeTime's Warfare - BETA - KKZ-Mod reworked by Blue1", "Willkommen auf TeeTime's Warfare - ALPHA", "Bienvenue sur le serveur de la team [KKz]"
+STRS_welcome_2, "I hope that you will enjoy this mission and Arma III. Have in mind it's STILL BETA yet!", "Ich hoffe, dass Dir diese Mission sowie Arma III gefällt, bedenke bitte, es ist immer noch eine Alpha-Version!", "Nouvelle version 2.9A , plusieurs amélioration!!"
+STRS_welcome_3, "Here some hints: JOIN PLAYER GROUPS - press U for Menu - Communicate and SEE MAP to avoid TK / Friendly Fire!", "Hier ein paar Hinweise:","Voici quelques indiquations :"
+STRS_welcome_4, "1. Capture all Cities to win this mission! Increase your income by capturing and holding more cities.", "1. Erobere alle Städte, um die Mission zu gewinnen.","1. Capture toutes les villes pour gagner la partie"
+STRS_welcome_5, "2. The RED BOX IS THE NEW WEAPONSHOP (press E), Cashdesks in your base represent different supply depots for AI and vehicles.", "2. Die Kisten in Deiner Basis stellen verschiedene Versorgungsdepots dar. Du kannst dort KI, Fahrzeuge und Waffen kaufen." "2. Vous pouvez acheter des véhicules et IA à  votre base."
+STRS_welcome_6, "3. REPORT HACKERs/VEHICLESPAM/or people disturbing our Gameplay anyhow immediately to me: Blue1", "3. Erobere und halte mehr Städte, um Dein Einkommen zu steigern.","3 .Augmentez votre trésorerie en capturant plus de villes."
+STRS_welcome_7, "4. DO NOT SPAM, CRASH OR STEAL VEHICLES INTENTIONALLY - or you get banned!", "4. Sei vorsichtig mit Deinem Hauptquartier! Plaziere es nicht zu nah an feindlichen Positionen!","4. VENER CREER VOTRE CHANNEL PRIVER SUR LE TEAMSPEAK DE LA TEAM  !!!"
+STRS_welcome_8, "5. DO NOT BASERAPE (HQs), shooting towards the enemy Mainbase HQ is STRICTLY prohibited - or you get banned.", "5. Eigene KI hilft Dir, Städte schneller zu erobern.","5.  Tu peux créer une escouade et la quitter au QG !!!! "
+STRS_welcome_9, "6. FLAGPOLES in every Town are also SHOPs with AI-Defender-Reinforcements!", "6. Wenn Du eine Ammobox kaufst, kannst Du in ihrer Nähe mit I darauf zugreifen." "6. Tu peux maintenant trouver les ia avec divers objets armes ou autres dans leur sacs � dos!!!!"
+STRS_welcome_end, "PLEASE OPEN MAP and CHECK Briefing, FAQ and SERVER RULES - Good Luck and Have Fun!", "Viel Glück und viel Spaß","Ce serveur vous est proposés par la team Kkz, Version 636 v2.9A (en test)!!"
+
+STRS_kill_bonus, "You received %1$ for killing %2.", "Du hast %1$ erhalten, weil Du %2 getötet hast.","Prime de %1$ pour avoir tué %2."
+STRS_kill_TK_punish, "You killed a team member and lose %1$ as a punishment.", "Du hast ein Teammitglied getötet. Dir wurden %1$ zu Strafe abgezogen.","Vous avez tué un membre de la team et vous perdez %1$ en guise de punition."
+STRS_kill_TK_punishbase, "You killed a team member in the base area, thus you've been killed.", "Du hast einen Teamkameraden in der Basis umgebracht. Zur Strafe wurdest Du erschossen!","Vous avez tué un membre de l'équipe à la Base, vous avez donc été tué aussi."
+STRS_kill_TK_punish_ultiamte, "You have killed too many team members. You have to stay here for 5 minutes!", "Du hast zu viele Teamkameraden getötet. Zur Strafe musst du 5 Minuten hier bleiben!","Vous avez tué trop de membre de l'équipe. Vous resterez donc ici pour 5 minutes!"
+STRS_kill_TK_punish_ultiamte2, "Do not teamkill your brothers in arms! First identify, only then shoot your targets!", "Töte keine Kameraden! Erkenne Deine Ziele  nicht auf Eigene schießen!","Ne tuez pas vos frères d'armes! Identifiez d'abord la cible avant de tirer!"
+
+STRS_spawn_choosemsg, "Please choose your spawn location", "Wähle jetzt Deinen Wiedereinstiegspunkt","Choisissez un lieu de Respawn"
+STRS_spawn_choosemsg2, "Click on a friendly base or town to respawn there!", "Klicke dazu auf Deine Basis oder auf eine befreundete Stadt!","Clicker sur la base ou sur une ville amie pour ré-apparaitre dessus"
+
+STRS_Konto, "Your account balance: %1$", "Dein Kontostand: %1$","Compte: %1$"
+STRS_Konto2, "You now have %1$ on your account.", "Du hast jetzt %1$ auf Deinem Konto","Il vous reste maintenant  %1$ sur votre compte."
+
+STRS_died, "You died and will respawn in 30 seconds!", "Du bist gestorben und wirst in 30 Sekunden neu einsteigen!","Tu est mort au combat, prépare toi à rejoindre la bataille !!"
+
+STRS_action_konto, "Open Account", "Konto anzeigen","Voir le compte"
+STRS_action_lock, "Lock/Unlock", "Auf-/Abschließen","Ouvrir/Fermer"
+STRS_action_savegear, "Save Gear", "Ausrüstung speichern","Sauvegarde des Armes"
+STRS_action_buy, "Buy %1 (%2$)", "Kaufe %1 (%2$)", "Acheter %1 (%2$)"
+STRS_action_repair, "Repair your Vehicle (%1$)", "Fahrzeug reparieren (%1$)","Réparer le véhicule (%1$)"
+STRS_action_refuel, "Refuel your Vehicle (%1$)", "Fahrzeug auftanken (%1$)","Faire le plein du (%1$)"
+STRS_action_reammo, "Rearm your Vehicle (%1$)", "Fahrzeug neu bewaffnen (%1$)", "Réarmer le véhicule (%1$)"
+STRS_action_mobilzehq, "Mobilize HQ", "Hauptquartier mobilisieren","Déplacer le HQ"
+STRS_action_buildhq, "Erect HQ", "Hauptquartier aufbauen","Monter le HQ"
+STRS_action_vehicelshop, "Vehicle depot", "Fahrzeugdepot","Dépot de véhicule"
+STRS_action_helishop, "Helicopter depot", "Hubschrauberdepot","Dépot de véhicule"
+STRS_action_weaponshop, "Weapon Depot - Press E key to open at RED BOX", "Ausrüstungsdepot","Dépôt d'arme"
+STRS_action_aishop, "Recruitment center", "Rekrutierungsbüro","Centre de recrutement"
+
+STRS_B1reinforce_nomoney, "You don't have enough Money to reinforce this Town! "
+STRS_hq_towntoclose, "You cannot place your HQ within a radius of less then %1 metres to a town.", "Das Hauptquartier muss mindestens %1m von einer Stadt entfernt stehen.","Impossible d'installer le HQ à moins de %1 metres d'une ville."
+
+STRS_town_takenbonus, "Town captured! You have earned %1$", "Du hast diese Stadt erobert und %1$ als Belohnung erhalten.", "Ville capturée! Prime de  %1$"
+STRS_town_points, "%1 points left", "%1 Punkte verbleiben","Reste %1 points pour la capture"
+STRS_town_scoutbonus, "You have earned %1$ for scouting a town.", "Du hast %1$ dafür erhalten, dass Du diese Stadt aufgeklärt hast.", "Prime %1$ pour observation d'une ville."
+
+STRS_repair_cant, "There is nothing to be repaired at this vehicle!", "Dieses Fahrzeug ist in einem Top-Zustand, es gibt Nichts zu reparieren!","Aucune réparation nécessaire !"
+STRS_repair_nomoney, "You don't have enough money to repair this vehicle.", "Du hast nicht genug Geld, um das Fahrzeug zu reparieren.","Vous n'avez pas assez d'argent pour réparer le véhicule"
+STRS_repair_started, "You commenced repairing your vehicle. Please wait %1 seconds.", "Du hast damit begonnen, das Fahrzeug zu reparieren. Warte jetzt %1 Sekunden.","Réparation initialisée"
+STRS_repair_aborted, "Repairing cancelled", "Reparatur abgebrochen","Réparation annulée"
+STRS_repair_msg, "Repairing", "Reparatur läuft...","Réparation en cours!"
+STRS_repair_end, "Vehicle repaired", "Reparatur abgeschlossen","Véhicule réparé !"
+
+STRS_refuel_full, "Your fuel tank is full!", "Dein Tank ist schon voll, Du kannst nicht tanken.","Le plein est fait !"
+STRS_refuel_nomoney, "You don't have the money to refuel this vehicle!", "Du hast nicht genug Geld, um Dein Fahrzeug zu betanken!","Vous n'avez pas assez d'argent pour refiare le plein!"
+STRS_refuel_started, "You started to refuel your vehicle. Please wait here.", "Du hast mit dem Tanken begonnen. Warte hier!","Ravitaillement initialisé"
+STRS_refuel_aborted, "Refueling cancelled", "Tanken abgebrochen","Ravitaillment annulé"
+STRS_refuel_status, "Refueling", "Tanken läuft","Ravitaillement en cours"
+STRS_refuel_end, "Vehicle refuelled", "Tanken abgeschlossen","Véhicule ravitaillé"
+
+STRS_ammo_nomoney, "You don't have the money to rearm this vehicle!", "Du hast nicht das Geld, um neue Munition zu kaufen!","Vous n'avez pas assez d'argent pour réarmer le véhicule"
+STRS_ammo_started, "You started to reload ammunition. Please wait here for %1 seconds.", "Du hast damit begonnen, neue Munition zu laden. Warte hier %1 Sekunden.","Réarmement initialisé.  Attendez ici pendant %1 secondes."
+STRS_ammo_aborted, "You have moved the vehicle, thus ammunition could not be loaded.", "Du hast das Fahrzeug bewegt, das Nachladen der Munition musste abgebrochen werden.","Vous avez deplacé le véhicule, le réarmement a été annulé"
+STRS_ammo_end, "Amunition loaded!", "Munition geladen!","Réarmement terminé!"
+
+STRS_lock_closed, "Locked", "Geschlossen","Vérouillé"
+STRS_lock_open, "Unlocked", "Aufgeschlossen","Dévérouillé"
+STRS_buy_nomoney, "You don't have enough money to buy this!", "Du hast nicht genug Geld, um dies zu kaufen!","Vous n'avez pas assez d'argent pour acheter cela!"
+
+STRS_buy_vehicle_noserver, "You cannot buy vehicles. This feature has been restricted by the server parameters!", "Du kannst keine Fahrzeuge kaufen, da diese Funktion serverseitig deaktiviert wurde.","L'achat de véhicule est désactivé"
+
+STRS_buy_ai_noserver, "You cannot buy AI. This feature has been restricted by the server parameters!", "Du kannst keine KI kaufen, da diese Funktion serverseitig deaktiviert wurde.","L'achat d'IA est désactivé!"
+STRS_buy_ai_limit, "You cannot reinforce further, you have reached the AI limit!", "Du kannst keine weitere KI kaufen, Du hast die KI-Grenze erreicht!","le nombre d'IA max est atteint!"
+
+STRS_action_grp_leave, "Leave Group", "Gruppe verlassen","Quitter l'escouade"
+STRS_action_grp_join, "Join Player Group", "Gruppe des Spielers beitreten","Rejoindre l'escouade"
+STRS_buy_ai_notleader, "Only the group leader can buy AI!", "Nur der Gruppenführer kann KI-Einheiten kaufen!","Seul le leader de l'escouade peut acheter des IA"
