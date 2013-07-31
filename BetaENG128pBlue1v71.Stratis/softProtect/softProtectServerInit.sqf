@@ -1,7 +1,7 @@
 // softProtect server functions and PVEH, by fred41
 #include "softProtectDefines.hpp"
 
-if (isServer) exitWith {};
+if (!isServer) exitWith {};
 
 "MonitorVehicleServer" addPublicVariableEventHandler {
 	diag_log format["PVEH MonitorVehicleServer called: %1",_this];
