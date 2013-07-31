@@ -10,31 +10,32 @@ if (!isServer) exitWith {};
 	[_unit, 2, 600, true] execVM "vehicle.sqf";
 };
 
-
-SP_ProtectVehicleGlobal = {
-	diag_log format["SP_ProtectVehicleGlobal called: %1",_this];
-	private["_unit"];
+SP_ProtectVehicleGlobal = compileFinal "
+	diag_log format[""SP_ProtectVehicleGlobal called: %1"",_this];
+	private[""_unit""];
 	_unit = _this select 0;
-	_unit removeAllEventHandlers "GetOut";
+	_unit removeAllEventHandlers ""GetOut"";
 	_unit allowDamage false;
-	_unit addEventHandler ["GetOut",{_unit = _this select 0; if ((_unit distance getMarkerPos MARKER_WEST < SAFETY_VEHICLE_ZONE)||(_unit distance getMarkerPos MARKER_EAST < SAFETY_VEHICLE_ZONE)) then {_unit allowDamage false} else {_unit allowDamage true};}];
+	_unit addEventHandler [""GetOut"",{_unit = _this select 0; if ((_unit distance getMarkerPos ""ProtectWest"" < 150)||(_unit distance getMarkerPos ""ProtectEast"" < 150)) then {_unit allowDamage false} else {_unit allowDamage true};}];
 	LockVehicleFire = [netId _unit];
-	publicVariable "LockVehicleFire";
+	publicVariable ""LockVehicleFire"";
 	true
-};
+";
 
-SP_UnProtectVehicleGlobal = {
-	diag_log format["SP_UnProtectVehicleGlobal called: %1",_this];
-	private["_unit"];
+SP_UnProtectVehicleGlobal = compileFinal "
+	diag_log format[""SP_UnProtectVehicleGlobal called: %1"",_this];
+	private[""_unit""];
 	_unit = _this select 0;
-	_unit removeAllEventHandlers "GetOut";
+	_unit removeAllEventHandlers ""GetOut"";
 	_unit allowDamage true;
 	UnLockVehicleFire = [netId _unit];
-	publicVariable "UnLockVehicleFire";
+	publicVariable ""UnLockVehicleFire"";
 	false
-};
+";
 
 // server side loop of softProtect, by fred41
 execVM "softProtect\softProtectServerLoop.sqf"; 
+
+FpsAvg = 50; // average FPS
 
 SP_InitDone = true;

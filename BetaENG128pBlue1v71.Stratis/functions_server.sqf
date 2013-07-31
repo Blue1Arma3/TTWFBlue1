@@ -39,7 +39,6 @@ Tee_Server_Init_Values = {
 };
 
 
-
 //Kick Player
 Tee_Server_KickPlayer = {
 	serverCommand format["#kick %1",call compile _this];
@@ -250,7 +249,6 @@ Tee_Server_Town_CreateAIDef = {
 			6001,6005,6003
 		];
 	};
-	
 	
 	//Create Unit
 	for [{_i=0},{_i<TW_AI_Def_lvl},{_i=_i+1}] do {

@@ -80,7 +80,7 @@ class Params {
 		title = "AI Defence:";
 		values[] = {0,1,3,4,5};
 		texts[] = {"Disabled","Low","Normal","Strong","Extrem"};
-		default = 2;
+		default = 0;
 	};
 
 	class AILimit
@@ -107,7 +107,7 @@ class Params {
 		title = "Buyable AI:";
 		values[] = {1,0};
 		texts[] = {"On","Off"};
-		default = 1;
+		default = 0;
 	};
 
 	//Income and Prices
