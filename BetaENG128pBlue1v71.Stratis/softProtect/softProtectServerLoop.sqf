@@ -2,7 +2,7 @@
 // Protect saves and restores base objects position, dir and damage
 #include "softProtectDefines.hpp"
 
-if (isServer) exitWith {};
+if (!isServer) exitWith {};
 
 private["_BaseObjectsWest","_BaseObjectsEast","_BaseObjects","_FpsHist"];
 _BaseObjectsWest = getMarkerPos "ProtectWest" nearObjects SAFETY_VEHICLE_ZONE;
