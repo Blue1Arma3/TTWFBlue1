@@ -46,7 +46,7 @@ while {(true)} do {
 
 	FpsAvg = _FpsSum / 8;
 
-	if (FpsAvg > AIDEV_FPS_HIGH) then {TW_AI_Def_lvl = AIDEV_LVL_HIGH;} else {if (FpsAvg > AIDEV_FPS_LOW) then {TW_AI_Def_lvl = AIDEV_LVL_LOW;} else {TW_AI_Def_lvl = 0;};};
+	if (FpsAvg > AIDEV_FPS_HIGH) then {TW_AI_Def_lvl = AIDEV_LVL_HIGH; TW_ai = true;} else {if (FpsAvg > AIDEV_FPS_LOW) then {TW_AI_Def_lvl = AIDEV_LVL_LOW; TW_ai = false;} else {TW_AI_Def_lvl = 0; TW_ai = false;};};
 	diag_log format["FpsAvg: %1 AIDefLev: %2", FpsAvg, TW_AI_Def_lvl];
 
 
