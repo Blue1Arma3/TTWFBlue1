@@ -32,7 +32,6 @@ Contact & Bugreport: cwadensten@gmail.com
 Ported for new update "call compile" by SPJESTER: mhowell34@gmail.com
 ================================================================================================================== */
 // optimized and softProtect added by fred41
-#include "softProtect\softProtectDefines.hpp"
 if (!isServer) exitWith {};
 waitUntil {!isNil{TW_BasicVehicles}&&!isNil{SP_InitDone}};
 private["_unitIndex","_unit","_unitprotected","_delay","_deserted","_private","_run","_dir","_position","_type","_dead","_side","_timeout"];

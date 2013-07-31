@@ -19,6 +19,20 @@ if (isDedicated) exitWith {};
 	_unit removeAllEventHandlers "Fired";
 };
 
+softProtectVehicleFired = compileFinal "
+	if (((_this select 0) distance MarkerPosFriendly < 150)||((_this select 0) distance MarkerPosEnemy < 800)) then {
+		deleteVehicle (_this select 6); 
+		titleText [""Firing here, is STRICTLY PROHIBITED!"", ""PLAIN"", 1];
+	};
+";	
+
+softProtectPlayerFired = compileFinal "
+	if (((_this select 0) distance MarkerPosFriendly < 150)||((_this select 0) distance MarkerPosEnemy < 800)) then {
+		deleteVehicle (_this select 6); 
+		titleText [""Firing here, is STRICTLY PROHIBITED!"", ""PLAIN"", 1];
+	};
+";	
+
 // client loop of softProtect, by fred41
 execVM "softProtect\softProtectClientLoop.sqf"; 
 

@@ -80,7 +80,7 @@ class Params {
 		title = "AI Defence:";
 		values[] = {0,1,3,4,5};
 		texts[] = {"Disabled","Low","Normal","Strong","Extrem"};
-		default = 2;
+		default = 0;
 	};
 
 	class AILimit
