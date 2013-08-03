@@ -16,21 +16,6 @@ if (playerSide==east) then {
 	MarkerPosEnemy 		= getMarkerPos MARKER_WEST;
 };
 
-
-softProtectVehicleFired = {
-	if (((_this select 0) distance MarkerPosFriendly < SAFETY_VEHICLE_ZONE)||((_this select 0) distance MarkerPosEnemy < ENEMY_VEHICLE_NOSHOT_ZONE)) then {
-		deleteVehicle (_this select 6); 
-		titleText [MESSAGE, "PLAIN", 1];
-	};
-};	
-
-softProtectPlayerFired = {
-	if (((_this select 0) distance MarkerPosFriendly < SAFETY_PLAYER_ZONE)||((_this select 0) distance MarkerPosEnemy < ENEMY_PLAYER_NOSHOT_ZONE)) then {
-		deleteVehicle (_this select 6); 
-		titleText [MESSAGE, "PLAIN", 1];
-	};
-};	
-
 player removeAllEventHandlers "Fired";
 
 player addEventHandler ["Fired", {_this call softProtectPlayerFired;}];
