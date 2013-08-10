@@ -1,5 +1,4 @@
 // softProtect client, by fred41
-// Protect player and basic vehicles local on client, shoting enabled/disabled and damage allowed/disallowed
 #include "softProtectDefines.hpp"
 
 if (isDedicated) exitWith {};
@@ -17,8 +16,7 @@ if (playerSide==east) then {
 };
 
 player removeAllEventHandlers "Fired";
-
-player addEventHandler ["Fired", {_this call softProtectPlayerFired;}];
+player addEventHandler ["Fired", { if (player == _this select 0) then {_this call softProtectPlayerFired;};}];
 
 
 // safety & noshot zones
@@ -35,7 +33,11 @@ while {true} do {
 		} else {
 			player allowDamage true;
 			if (_enemydistance < ENEMY_PLAYER_NOSHOT_ZONE) then {
-				titleText [MESSAGE_WARNING, "PLAIN", 1];
+				if (_enemydistance < ENEMY_PLAYER_KILL_ZONE) then {
+					player setDammage 1;
+				} else {
+					titleText [MESSAGE_WARNING, "PLAIN", 1];
+				};
 			};
 		};
 	} else {
@@ -46,7 +48,11 @@ while {true} do {
 			vehicle player allowDamage true;
 			player allowDamage true;
 			if (_enemydistance < ENEMY_VEHICLE_NOSHOT_ZONE) then {
-				titleText [MESSAGE_WARNING, "PLAIN", 1];
+				if (_enemydistance < ENEMY_VEHICLE_KILL_ZONE) then {
+					vehicle player setDammage 1;
+				} else {
+					titleText [MESSAGE_WARNING, "PLAIN", 1];
+				};
 			};
 		};
 	};

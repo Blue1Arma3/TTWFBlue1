@@ -5,8 +5,8 @@
 if (!isServer) exitWith {};
 
 private["_BaseObjectsWest","_BaseObjectsEast","_BaseObjects","_FpsHist","_FpsInd","_FpsSum"];
-_BaseObjectsWest = getMarkerPos "ProtectWest" nearObjects SAFETY_BASE_ZONE;
-_BaseObjectsEast = getMarkerPos "ProtectEast" nearObjects SAFETY_BASE_ZONE;
+_BaseObjectsWest = getMarkerPos MARKER_WEST nearObjects SAFETY_BASE_ZONE;
+_BaseObjectsEast = getMarkerPos MARKER_EAST nearObjects SAFETY_BASE_ZONE;
 _BaseObjects = [];
 _FpsHist = [50,50,50,50,50,50,50,50];
 _FpsInd = 0;
