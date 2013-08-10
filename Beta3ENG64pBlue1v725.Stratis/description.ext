@@ -8,8 +8,8 @@ Debriefing = 1;
 
 #include "=BTC=_revive\=BTC=_respawn.h"
 author		= "TeeTime Warfare v636 Kkz V3 - reworked by Blue1";
-OnLoadName 	= "LOADTEST by Blue1 and Fred41";
-OnLoadMission 	= "ATTENTION PLEASE: THIS IS A PERFORMANCETEST! WE LOG, GET STATISTICS AND ANALYZE FOR MORE OPTIMIZATIONS - SO PLEASE DO RECONNECT AFTER RESTARTS";
+OnLoadName 	= "Beta v7.25 by Blue1 and Fred41";
+OnLoadMission 	= "Capture the Island - Take and hold all Bases to win. ALL PLAYERS HAVE TO READ the BRIEFING and FAQs please! Open the Map and see Briefing in Map-Menu before you start! Optimized by Fred41";
 
 
 ///modif siskojay team kkz//
@@ -18,7 +18,7 @@ class Header
 {
 	gameType   = CTI;          // DM, Team, Coop, CTI
 	minPlayers = 1;            // min # of players the mission supports
-	maxPlayers = 128;           // Max # of players the mission supports
+	maxPlayers = 64;           // Max # of players the mission supports
 };
 
 #include "client\systems\common.hpp"
@@ -80,7 +80,7 @@ class Params {
 		title = "AI Defence:";
 		values[] = {0,1,3,4,5};
 		texts[] = {"Disabled","Low","Normal","Strong","Extrem"};
-		default = 0;
+		default = 2;
 	};
 
 	class AILimit
@@ -107,7 +107,7 @@ class Params {
 		title = "Buyable AI:";
 		values[] = {1,0};
 		texts[] = {"On","Off"};
-		default = 0;
+		default = 1;
 	};
 
 	//Income and Prices
@@ -136,7 +136,7 @@ class Params {
 		title = "Towns:";
 		values[] = {100, 4, 8, 12, 17};
 		texts[] = {"All","4","8","12","17"};
-		default = 17;
+		default = 12;
 	};
 
 	//Should the base be mobil or static
@@ -165,8 +165,8 @@ class Params {
 		//paramsArray[13]
 		title = "Headless Client:";
 		values[] = {0, 1, 2, 3};
-		texts[] = {"Off","TWHC","BierAIG_HC","TeeTime"};
-		default = 3;
+		texts[] = {"Off","TWHC","BierAIG_HC","HC01"};
+		default = 0;
 	};
 	class headlessclientdefai
 	{

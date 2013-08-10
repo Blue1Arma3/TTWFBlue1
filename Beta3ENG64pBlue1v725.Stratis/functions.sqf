@@ -1429,9 +1429,8 @@ Tee_PlayerMarker_Loop = {
 	waitUntil {HQ_placed};
 	
 	_markerarray = [];
-	
+
 	while {true} do {
-		_i = 0;
 		
 		//Delete PlayerMarker
 		{
@@ -1440,7 +1439,9 @@ Tee_PlayerMarker_Loop = {
 		
 		_markerarray = []; // dringend notwendig, sonst platzt das array irgendwann :)
 		
+
 		//Create PlayerMarker
+		_i = 0;
 		{
 			_i = _i + 1;
 			_name = format ["PlMa_%1",_i];
@@ -1459,6 +1460,7 @@ Tee_PlayerMarker_Loop = {
 				
 				_markerarray set [count _markerarray, _marker];
 			};
+			sleep 0.01;
 		} forEach playableUnits;
 		
 		
@@ -1530,7 +1532,6 @@ Tee_PlayerMarker_Loop = {
 				hint parseText (format["<t color='#ff0000'>Welcome to the Server %1<br/> Please see Map-Menu for Briefing and FAQs</t>", name player]);
 			};	
 		};
-		
 		
 		sleep 8;
 	};
@@ -1650,7 +1651,7 @@ Tee_CreateVehicle = {
 	};
 	
 	_veh setVehicleVarName format["veh_%1_%2",floor(time),floor(random(50))];
-
+	_veh allowDamage false;
 	MonitorVehicleServer = [netid _veh];
 	publicVariableServer "MonitorVehicleServer";
 

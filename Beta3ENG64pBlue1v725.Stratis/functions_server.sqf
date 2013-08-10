@@ -149,19 +149,20 @@ Tee_Server_CreateTownMarker = {
 		
 	} forEach TW_TownArray;
 
-	[] spawn {
-		//Init Def
-		{
-			_object 	= _x select 0;
-			_text		= _x select 2;
-			if(!TW_HC_Activ) then {
+	if(!TW_HC_Activ) then {
+		[] spawn {
+			//Init Def
+			{
+				_object 	= _x select 0;
+				_text		= _x select 2;
 				_h = [_object] spawn Tee_Server_Town_InitAIDef;
 				waitUntil{scriptDone _h};
-				diag_log format ["Report: HC Defense created for %1",_text];
+				diag_log format ["Report: Defense created for %1",_text];
 				if(debug) then {player groupChat "AI Def Server Spawn";};
-			};
-		} forEach TW_TownArray;
+			} forEach TW_TownArray;
+		};
 	};
+
 };
 
 

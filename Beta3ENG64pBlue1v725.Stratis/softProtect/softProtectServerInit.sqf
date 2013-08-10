@@ -10,20 +10,22 @@ if (!isServer) exitWith {};
 	[_unit, 2, 600, true] execVM "vehicle.sqf";
 };
 
-SP_ProtectVehicleGlobal = compileFinal "
-	diag_log format[""SP_ProtectVehicleGlobal called: %1"",_this];
-	private[""_unit""];
+SP_ProtectVehicleGlobal = compileFinal format ["
+	private[""_unit"",""_type"",""_armed""];
 	_unit = _this select 0;
 	_unit removeAllEventHandlers ""GetOut"";
 	_unit allowDamage false;
-	_unit addEventHandler [""GetOut"",{_unit = _this select 0; if ((_unit distance getMarkerPos ""ProtectWest"" < 150)||(_unit distance getMarkerPos ""ProtectEast"" < 150)) then {_unit allowDamage false} else {_unit allowDamage true};}];
-	LockVehicleFire = [netId _unit];
-	publicVariable ""LockVehicleFire"";
+	_unit addEventHandler [""GetOut"",{_unit = _this select 0; if ((_unit distance getMarkerPos ""%2"" < %1)||(_unit distance getMarkerPos ""%3"" < %1)) then {_unit allowDamage false} else {_unit allowDamage true};}];
+	_type = typeOf _unit; 
+	_armed = if (((count (configFile >> ""CfgVehicles"" >> _type >> ""Turrets"")) > 0) || (count (configFile >> ""CfgVehicles"" >> _type >> ""magazines"")) > 0) then {true} else {false};
+	if (_armed) then {
+		LockVehicleFire = [netId _unit];
+		publicVariable ""LockVehicleFire"";
+	};	
 	true
-";
+", SAFETY_VEHICLE_ZONE, MARKER_WEST, MARKER_EAST];
 
 SP_UnProtectVehicleGlobal = compileFinal "
-	diag_log format[""SP_UnProtectVehicleGlobal called: %1"",_this];
 	private[""_unit""];
 	_unit = _this select 0;
 	_unit removeAllEventHandlers ""GetOut"";
