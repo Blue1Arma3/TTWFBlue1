@@ -129,16 +129,17 @@ TW_Strategic_Street	= if((paramsArray select 18) == 1) then {true} else {false};
 
 //Headless Client Variables HC Functions are defined in the Serverfunctions	
 //HC must be on the Server at mission Start!!
-TW_HC_Array		= ["Off","TWHC","BierAIG_HC","TeeTime","Administrator","TWHC_1"];
-TW_HC_Activ		= if((paramsArray select 13) == 0) then {true} else {false};		//Set to true if you want to use HC
+TW_HC_Array		= ["Off","TWHC","BierAIG_HC","HC01"];
+TW_HC_Activ		= if((paramsArray select 13) != 0) then {true} else {false};		//Set to true if you want to use HC
 TW_HC_ID		= TW_HC_Array select (paramsArray select 13);	//PlayerID OR Playername of the Headless Client
 TW_HC_Client	= if((((getPlayerUID player) == TW_HC_ID) || (name player == TW_HC_ID)) && TW_HC_Activ) then {true} else {false};	//Will be set to true if the Client is the HC
-//TW_HC_Client	= !(isServer) && !(hasInterface);	//in the future
 TW_HC_ClientSlot = objNull;	//Will be the playerobject who is the HC
 
-//Unused
-TW_HC_Def_AI		= if((paramsArray select 14) == 0) then {false} else {true};		//Set to true if you want to use HC
-TW_HC_Def_AI		= if((paramsArray select 15) == 0) then {false} else {true};		//Set to true if you want to use HC
+
+//try it out
+TW_HC_Def_AI = true; // switch HC on/off
+
+
 
 TW_Skill_AICiv		= (paramsArray select 19) /100; 	//Skill Civil
 TW_Skill_AIDef		= (paramsArray select 20) /100;		//Skill Army Defense
@@ -193,7 +194,6 @@ if(X_Server) then {
 	[] call Tee_Server_Init;
 	[] call Tee_Server_Init_Values;
 	if(!TW_HC_Activ) then {
-		
 		[] spawn Tee_Server_CleanUp;
 	};
 	
